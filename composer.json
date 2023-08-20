@@ -1,0 +1,29 @@
+{
+  "name": "hlis/slotsmate-models",
+  "type": "project",
+  "description": "Hlis Models API",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Bianca Draghici",
+      "email": "bianca.d@greentreemarketing.ro",
+      "role": "Developer"
+    }
+  ],
+  "repositories": [
+    { "name": "hlis/global-models", "type": "vcs", "url": "https://github.com/hliscorp/global_models" }
+  ],
+  "require": {
+    "hlis/global-models": "dev-master"
+  },
+  "autoload" : {
+    "psr-4" : {
+      "Hlis\\SlotsMateModels\\" : "src/"
+    }
+  },
+  "config": {
+    "platform": {
+      "php": "7.4"
+    }
+  }
+}
