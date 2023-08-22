@@ -2,26 +2,30 @@
 
 namespace Hlis\SlotsMateModels\Builders\Author\Info;
 
-use Hlis\SlotsMateModels\Entities\Author;
+use Hlis\GlobalModels\Builders\ExtendableBuilder;
+use Hlis\SlotsMateModels\Entities\Author\Author;
 
-class Basic
+class Basic extends ExtendableBuilder
 {
 
     public function build(array $row): \Entity
     {
 
-        $author = new Author();
+        $author = $this->getEntity();
 
         $author->id = $row['id'];
         $author->name = $row['first_name'].' '.$row['last_name'];
-        $author->avatar = $row['avatar'];
+        $author->avatar = '/upload/writers/' . str_replace(' ', '_', strtolower($author->full_name)) . '.jpg';
         $author->highlights = $row['highlights'];
-        $author->tagline = $row['tagline'];
-        $author->socials = $row['social_links'];
         $author->date_joined = $row['date_joined'];
 
         return $author;
 
+    }
+
+    protected function getEntity(): \Entity
+    {
+        return new Author();
     }
 
 }

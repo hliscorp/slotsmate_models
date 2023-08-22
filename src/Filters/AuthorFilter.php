@@ -21,13 +21,13 @@ class AuthorFilter extends Filter
         return $this->name;
     }
 
-    public function setID(int $value): self
+    public function setAuthorID(int $value): self
     {
         $this->id = $value;
         return $this;
     }
 
-    public function getID(): ?int
+    public function getAuthorID(): ?int
     {
         return $this->id;
     }

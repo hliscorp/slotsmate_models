@@ -2,19 +2,18 @@
 
 namespace Hlis\SlotsMateModels\DAOs\Author;
 
-use Hlis\SlotsMateModels\Entities\Author as AuthorEntity;
-use Hlis\SlotsMateModels\Builders\Author\Info\Basic as BasicAuthorBuilder;
-use Hlis\SlotsMateModels\Builders\Author\Info\Extended as ExtendedAuthorBuilder;
-use Hlis\SlotsMateModels\Queries\Author\AuthorQuery;
 use Hlis\GlobalModels\DAOs\AbstractEntityInfo;
+use Hlis\SlotsMateModels\Builders\Author\Info\Basic as BasicAuthorBuilder;
+use Hlis\SlotsMateModels\Entities\Author\Author as AuthorEntity;
+use Hlis\SlotsMateModels\Queries\Author\AuthorBaseQuery;
 
 class Author extends AbstractEntityInfo
 {
 
     protected function createTrunks(): ?AuthorEntity
     {
-        $builder = new AuthorBuilder();
-        $querier = new AuthorQuery($this->filter);
+        $builder = $this->getBuilder();
+        $querier = $this->getQuerier();
         $row = SQL($querier->getQuery(), $querier->getParameters())->toRow();
 
         if (empty($row)) {
@@ -26,30 +25,30 @@ class Author extends AbstractEntityInfo
 
     protected function appendBranches(): void
     {
-        $this->appendReviewedGames();
-        $this->appendLearningArticles();
-        $this->appendNewsArticles();
-        $this->appendGamesImpressions();
+        $this->appendSocialNetworks();
+        $this->appendTaglines();
     }
 
-    private function appendReviewedGames()
+    protected function getBuilder(): BasicAuthorBuilder
     {
-
+        return new BasicAuthorBuilder();
     }
 
-    private function appendLearningArticles()
+    protected function getQuerier(): AuthorBaseQuery
     {
-
+        return new AuthorBaseQuery($this->filter);
     }
 
-    private function appendNewsArticles()
+    protected function appendSocialNetworks(): void
     {
-
+        $social_networks = new SocialNetworks($this->filter);
+        $this->social_networks->taglines[] = $social_networks->getList();
     }
 
-    private function appendGamesImpressions()
+    protected function appendTaglines(): void
     {
-
+        $taglines = new Taglines($this->filter);
+        $this->entity->taglines[] = $taglines->getList();
     }
 
 }
