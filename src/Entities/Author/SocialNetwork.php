@@ -10,6 +10,6 @@ class SocialNetwork extends \Entity
     public ?string $name;
 //    public ?int $author_id;
 //    public ?int $social_network_id;
-//    public ?int $priority;
+    public ?int $priority;
 
 }

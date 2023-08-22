@@ -6,6 +6,7 @@ use Hlis\GlobalModels\Queries\AbstractFields;
 
 class AuthorFields extends AbstractFields
 {
+
     public function appendFields(Fields $fields): void
     {
         $fields->add("t1.id");
@@ -16,4 +17,5 @@ class AuthorFields extends AbstractFields
         $fields->add("t1.full_bio");
         $fields->add("t1.expertise");
     }
+
 }

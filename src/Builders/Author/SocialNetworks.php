@@ -16,6 +16,7 @@ class SocialNetworks extends ExtendableBuilder
         $social->id = $row['id'];
         $social->link = $row['link'];
         $social->name = $row['name'];
+        $social->priority = $row['priority'];
 
         return $social;
 

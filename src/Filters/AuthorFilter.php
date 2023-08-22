@@ -7,6 +7,7 @@ class AuthorFilter extends Filter
 {
 
     protected int $id;
+    protected int $locale_id;
     protected string $name;
     protected AuthorType $authorType;
 
@@ -41,6 +42,17 @@ class AuthorFilter extends Filter
     {
         $this->authorType = $value;
         return $this;
+    }
+
+    public function setLocaleID(int $value): self
+    {
+        $this->locale_id = $value;
+        return $this;
+    }
+
+    public function getLocaleID(): ?int
+    {
+        return $this->locale_id;
     }
 
 }

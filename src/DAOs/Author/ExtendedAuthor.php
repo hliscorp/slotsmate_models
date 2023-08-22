@@ -21,24 +21,28 @@ class ExtendedAuthor extends BasicAuthor
         $this->appendGameImpressions();
     }
 
-    private function appendGameReviews()
+    private function appendGameReviews(): void
     {
-
+        $game_reviews = new GameReviews($this->filter);
+        $this->entity->game_reviews[] = $game_reviews->getList();
     }
 
-    private function appendLearningArticles()
+    private function appendLearningArticles(): void
     {
-
+        $learning_articles = new LearningArticles($this->filter);
+        $this->entity->learning_articles[] = $learning_articles->getList();
     }
 
-    private function appendNewsArticles()
+    private function appendNewsArticles(): void
     {
-
+        $news_articles = new NewsArticles($this->filter);
+        $this->entity->news_articles[] = $news_articles->getList();
     }
 
-    private function appendGameImpressions()
+    private function appendGameImpressions(): void
     {
-
+        $game_impressions = new GameImpressions($this->filter);
+        $this->entity->game_impressions[] = $game_impressions->getList();
     }
 
     protected function getBuilder(): ExtendedAuthorBuilder

@@ -42,7 +42,7 @@ class Author extends AbstractEntityInfo
     protected function appendSocialNetworks(): void
     {
         $social_networks = new SocialNetworks($this->filter);
-        $this->social_networks->taglines[] = $social_networks->getList();
+        $this->entity->social_networks[] = $social_networks->getList();
     }
 
     protected function appendTaglines(): void
