@@ -6,7 +6,11 @@ use Hlis\SlotsMateModels\DAOs\Author\Author as BasicAuthor;
 use Hlis\SlotsMateModels\Builders\Author\Info\Extended as ExtendedAuthorBuilder;
 
 /*
+ *
  * Extended DAO is used for single author page
+ * We will have to extend global models for articles and games as well in the future
+ * For now this will not be used, but instead we use what we already have on the site (Author DAO) for appending these features
+ *
  * */
 
 class ExtendedAuthor extends BasicAuthor
