@@ -5,9 +5,9 @@ use Hlis\GlobalModels\Filters\Filter;
 class AuthorFilter extends Filter
 {
 
-    protected int $id;
-    protected int $locale_id;
-    protected string $name;
+    protected ?int $id = null;
+    protected ?int $locale_id = null;
+    protected ?string $name = null;
 
     public function setName(string $value): self
     {
