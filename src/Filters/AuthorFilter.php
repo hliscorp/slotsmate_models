@@ -1,7 +1,6 @@
 <?php
 
 use Hlis\GlobalModels\Filters\Filter;
-use Hlis\SlotsMateModels\Enums\AuthorType;
 
 class AuthorFilter extends Filter
 {
@@ -9,7 +8,6 @@ class AuthorFilter extends Filter
     protected int $id;
     protected int $locale_id;
     protected string $name;
-    protected AuthorType $authorType;
 
     public function setName(string $value): self
     {
@@ -31,17 +29,6 @@ class AuthorFilter extends Filter
     public function getAuthorID(): ?int
     {
         return $this->id;
-    }
-
-    public function getAuthorType(): ?AuthorType
-    {
-        return $this->authorType;
-    }
-
-    public function setAuthorType(AuthorType $value): self
-    {
-        $this->authorType = $value;
-        return $this;
     }
 
     public function setLocaleID(int $value): self
