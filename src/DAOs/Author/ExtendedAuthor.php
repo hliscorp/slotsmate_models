@@ -16,38 +16,38 @@ use Hlis\SlotsMateModels\Builders\Author\Info\Extended as ExtendedAuthorBuilder;
 class ExtendedAuthor extends BasicAuthor
 {
 
-    protected function appendBranches(): void
-    {
-        parent::appendBranches();
-        $this->appendGameReviews();
-        $this->appendLearningArticles();
-        $this->appendNewsArticles();
-        $this->appendGameImpressions();
-    }
+//    protected function appendBranches(): void
+//    {
+//        parent::appendBranches();
+//        $this->appendGameReviews();
+//        $this->appendLearningArticles();
+//        $this->appendNewsArticles();
+//        $this->appendGameImpressions();
+//    }
 
-    private function appendGameReviews(): void
-    {
-        $game_reviews = new GameReviews($this->filter);
-        $this->entity->game_reviews[] = $game_reviews->getList();
-    }
-
-    private function appendLearningArticles(): void
-    {
-        $learning_articles = new LearningArticles($this->filter);
-        $this->entity->learning_articles[] = $learning_articles->getList();
-    }
-
-    private function appendNewsArticles(): void
-    {
-        $news_articles = new NewsArticles($this->filter);
-        $this->entity->news_articles[] = $news_articles->getList();
-    }
-
-    private function appendGameImpressions(): void
-    {
-        $game_impressions = new GameImpressions($this->filter);
-        $this->entity->game_impressions[] = $game_impressions->getList();
-    }
+//    private function appendGameReviews(): void
+//    {
+//        $game_reviews = new GameReviews($this->filter);
+//        $this->entity->game_reviews[] = $game_reviews->getList();
+//    }
+//
+//    private function appendLearningArticles(): void
+//    {
+//        $learning_articles = new LearningArticles($this->filter);
+//        $this->entity->learning_articles[] = $learning_articles->getList();
+//    }
+//
+//    private function appendNewsArticles(): void
+//    {
+//        $news_articles = new NewsArticles($this->filter);
+//        $this->entity->news_articles[] = $news_articles->getList();
+//    }
+//
+//    private function appendGameImpressions(): void
+//    {
+//        $game_impressions = new GameImpressions($this->filter);
+//        $this->entity->game_impressions[] = $game_impressions->getList();
+//    }
 
     protected function getBuilder(): ExtendedAuthorBuilder
     {
