@@ -2,9 +2,9 @@
 
 namespace Hlis\SlotsMateModels\Queries;
 
-use Hlis\GlobalModels\Queries\AbstractFields;
-use Hlis\GlobalModels\Queries\AbstractConditions;
-use Hlis\GlobalModels\Queries\Query;
+use \Hlis\GlobalModels\Queries\AbstractFields;
+use \Hlis\GlobalModels\Queries\AbstractConditions;
+use \Hlis\GlobalModels\Queries\Query;
 
 abstract class AbstractGeneralQuery extends Query
 {

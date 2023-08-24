@@ -2,7 +2,7 @@
 
 namespace Hlis\SlotsMateModels\Builders\Author\Info;
 
-use Hlis\GlobalModels\Builders\ExtendableBuilder;
+use \Hlis\GlobalModels\Builders\ExtendableBuilder;
 use Hlis\SlotsMateModels\Entities\Author\Author;
 
 class Basic extends ExtendableBuilder

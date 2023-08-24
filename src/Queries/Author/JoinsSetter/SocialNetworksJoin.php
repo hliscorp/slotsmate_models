@@ -2,7 +2,7 @@
 
 namespace Hlis\SlotsMateModels\Queries\Author\JoinsSetter;
 
-use Hlis\GlobalModels\Queries\AbstractJoins;
+use \Hlis\GlobalModels\Queries\AbstractJoins;
 
 class SocialNetworksJoin extends AbstractJoins
 {

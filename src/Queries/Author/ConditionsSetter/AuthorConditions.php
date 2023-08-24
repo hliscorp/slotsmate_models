@@ -2,7 +2,7 @@
 
 namespace Hlis\SlotsMateModels\Queries\Author\ConditionsSetter;
 
-use Hlis\GlobalModels\Queries\AbstractConditions;
+use \Hlis\GlobalModels\Queries\AbstractConditions;
 
 class AuthorConditions extends AbstractConditions
 {

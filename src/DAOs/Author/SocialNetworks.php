@@ -2,7 +2,7 @@
 
 namespace Hlis\SlotsMateModels\DAOs\Author;
 
-use Hlis\GlobalModels\DAOs\AbstractEntityList;
+use \Hlis\GlobalModels\DAOs\AbstractEntityList;
 use Hlis\SlotsMateModels\Builders\Author\SocialNetwork as SocialNetworksBuilder;
 use Hlis\SlotsMateModels\Filters\Author\SocialNetworksFilter;
 use Hlis\SlotsMateModels\Queries\Author\SocialNetworksQuery;

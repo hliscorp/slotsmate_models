@@ -2,7 +2,7 @@
 
 namespace Hlis\SlotsMateModels\Queries\Author\FieldsSetter;
 
-use Hlis\GlobalModels\Queries\AbstractFields;
+use \Hlis\GlobalModels\Queries\AbstractFields;
 
 class SocialNetworksFields extends AbstractFields
 {

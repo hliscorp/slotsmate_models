@@ -2,7 +2,7 @@
 
 namespace Hlis\SlotsMateModels\DAOs\Author;
 
-use Hlis\GlobalModels\DAOs\AbstractEntityList;
+use \Hlis\GlobalModels\DAOs\AbstractEntityList;
 use Hlis\SlotsMateModels\Builders\Author\Taglines as TaglinesBuilder;
 use Hlis\SlotsMateModels\Filters\Author\TaglinesFilter;
 use Hlis\SlotsMateModels\Queries\Author\TaglinesQuery;
