@@ -6,10 +6,10 @@ use Hlis\SlotsMateModels\Builders\Author\Info\Basic as BasicAuthorBuilder;
 use Hlis\SlotsMateModels\Entities\Author\Author as AuthorEntity;
 use Hlis\SlotsMateModels\Queries\Author\AuthorBaseQuery;
 
-class Author extends \Hlis\GlobalModels\DAOs\AbstractEntityInfo
+class Author
 {
 
-    public function __construct(\Hlis\GlobalModels\Filters\Filter $filter, $parentSchema)
+    public function __construct($filter, $parentSchema)
     {
         var_dump('test');die;
         $this->filter = $filter;
