@@ -9,6 +9,14 @@ use Hlis\SlotsMateModels\Queries\Author\AuthorBaseQuery;
 class Author extends \Hlis\GlobalModels\DAOs\AbstractEntityInfo
 {
 
+    protected $parentSchema;
+
+    public function __construct(\Hlis\GlobalModels\Filters\Filter $filter, $parentSchema)
+    {
+        $this->parentSchema = $parentSchema;
+        parent::__construct();
+    }
+
     protected function createTrunk(): ?AuthorEntity
     {
         $builder = $this->getBuilder();
