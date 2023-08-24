@@ -13,7 +13,7 @@ class AuthorBaseQuery extends AbstractGeneralQuery
 
     protected function setQuery(): Select
     {
-        return new Select("writers", "t1");
+        return new Select("{$this->parentSchema}.writers", "t1");
     }
 
     protected function getConditions(): AuthorConditions
