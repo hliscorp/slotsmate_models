@@ -2,12 +2,10 @@
 
 namespace Hlis\SlotsMateModels\Filters;
 
-use \Hlis\GlobalModels\Filters\Filter as GlobalFilter;
-
-class AuthorFilter extends GlobalFilter
+class AuthorFilter extends \Hlis\GlobalModels\Filters\Filter
 {
 
-    protected ?int $id = null;
+    protected ?int $author_id = null;
     protected ?int $locale_id = null;
     protected ?string $name = null;
 
@@ -24,13 +22,13 @@ class AuthorFilter extends GlobalFilter
 
     public function setAuthorID(int $value): self
     {
-        $this->id = $value;
+        $this->author_id = $value;
         return $this;
     }
 
     public function getAuthorID(): ?int
     {
-        return $this->id;
+        return $this->author_id;
     }
 
     public function setLocaleID(int $value): self
