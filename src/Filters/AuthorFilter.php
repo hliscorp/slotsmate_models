@@ -2,9 +2,9 @@
 
 namespace Hlis\SlotsMateModels\Filters;
 
-use Hlis\GlobalModels\Filters\Filter;
+use \Hlis\GlobalModels\Filters\Filter as GlobalFilter;
 
-class AuthorFilter extends Filter
+class AuthorFilter extends GlobalFilter
 {
 
     protected ?int $id = null;
