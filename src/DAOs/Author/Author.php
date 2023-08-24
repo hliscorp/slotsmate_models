@@ -6,8 +6,9 @@ use Hlis\SlotsMateModels\Builders\Author\Info\Basic as BasicAuthorBuilder;
 use Hlis\SlotsMateModels\Entities\Author\Author as AuthorEntity;
 use Hlis\SlotsMateModels\Queries\Author\AuthorBaseQuery;
 use Hlis\SlotsMateModels\Filters\AuthorFilter;
+use Hlis\GlobalModels\DAOs\AbstractEntityInfo;
 
-class Author extends \Hlis\GlobalModels\DAOs\AbstractEntityInfo
+class Author extends \AbstractEntityInfo
 {
 
     public function __construct(AuthorFilter $filter)
@@ -30,11 +31,11 @@ class Author extends \Hlis\GlobalModels\DAOs\AbstractEntityInfo
         return $builder->build($row);
     }
 
-    // protected function appendBranches(): void
-    // {
-    //     $this->appendSocialNetworks();
-    //     $this->appendTaglines();
-    // }
+    protected function appendBranches(): void
+    {
+        // $this->appendSocialNetworks();
+        // $this->appendTaglines();
+    }
 
     protected function getBuilder(): BasicAuthorBuilder
     {
