@@ -5,7 +5,7 @@ namespace Hlis\SlotsMateModels\DAOs\Author;
 use Hlis\SlotsMateModels\Builders\Author\Info\Basic as BasicAuthorBuilder;
 use Hlis\SlotsMateModels\Entities\Author\Author as AuthorEntity;
 use Hlis\SlotsMateModels\Queries\Author\AuthorBaseQuery;
-use Hlis\SlotsMateModels\Filters\Author\AuthorFilter;
+use Hlis\SlotsMateModels\Filters\AuthorFilter;
 
 // class Author extends \Hlis\GlobalModels\DAOs\AbstractEntityInfo
 class Author
