@@ -31,8 +31,9 @@ abstract class AbstractGeneralQuery extends Query
 
     abstract protected function setQuery(): Select;
 
-    abstract protected function getConditions(): AbstractConditions;
+    // abstract protected function getConditions(): AbstractConditions;
 
+    protected function getConditions() {}
     protected function getFields() {}
 
     protected function setJoins() {}
