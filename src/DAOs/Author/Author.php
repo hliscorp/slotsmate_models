@@ -10,9 +10,15 @@ use Hlis\SlotsMateModels\Queries\Author\AuthorBaseQuery;
 class Author extends AbstractEntityInfo
 {
 
-    protected function createTrunks(): ?AuthorEntity
+    public function __construct(\Hlis\GlobalModels\Filters\Filter $filter, $parentSchema)
     {
         var_dump('test');die;
+        $this->filter = $filter;
+        $this->setInfo();
+    }
+
+    protected function createTrunks(): ?AuthorEntity
+    {
         $builder = $this->getBuilder();
         $querier = $this->getQuerier();
         $row = SQL($querier->getQuery(), $querier->getParameters())->toRow();
