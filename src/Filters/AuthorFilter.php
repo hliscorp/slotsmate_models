@@ -1,5 +1,7 @@
 <?php
 
+namespace Hlis\SlotsMateModels\Filters;
+
 use Hlis\GlobalModels\Filters\Filter;
 
 class AuthorFilter extends Filter
