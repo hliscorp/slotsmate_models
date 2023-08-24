@@ -3,12 +3,12 @@
 namespace Hlis\SlotsMateModels\Builders\Author\Info;
 
 use \Hlis\GlobalModels\Builders\ExtendableBuilder;
-use Hlis\SlotsMateModels\Entities\Author\Author;
+use Hlis\SlotsMateModels\Entities\Author\Author as AuthorEntity;
 
 class Basic extends ExtendableBuilder
 {
 
-    public function build(array $row): \Entity
+    public function build(array $row): AuthorEntity
     {
 
         $author = $this->getEntity();
@@ -23,7 +23,7 @@ class Basic extends ExtendableBuilder
 
     }
 
-    protected function getEntity(): \Entity
+    protected function getEntity(): AuthorEntity
     {
         return new Author();
     }
