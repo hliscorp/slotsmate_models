@@ -12,6 +12,7 @@ class Author extends AbstractEntityInfo
 
     protected function createTrunks(): ?AuthorEntity
     {
+        var_dump('test');die;
         $builder = $this->getBuilder();
         $querier = $this->getQuerier();
         $row = SQL($querier->getQuery(), $querier->getParameters())->toRow();
