@@ -33,7 +33,7 @@ abstract class AbstractGeneralQuery extends Query
 
     abstract protected function getConditions(): AbstractConditions;
 
-    abstract protected function getFields(): AbstractFields;
+    protected function getFields() {}
 
     protected function setJoins() {}
     protected function setOrderBy() {}
