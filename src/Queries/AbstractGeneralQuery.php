@@ -2,25 +2,27 @@
 
 namespace Hlis\SlotsMateModels\Queries;
 
-use \Hlis\GlobalModels\Queries\AbstractFields;
-use \Hlis\GlobalModels\Queries\AbstractConditions;
-use \Hlis\GlobalModels\Queries\Query;
+use Hlis\SlotsMateModels\Filters\Author\AuthorFilter;
+
+use Hlis\GlobalModels\Queries\AbstractFields;
+use Hlis\GlobalModels\Queries\AbstractConditions;
+use Hlis\GlobalModels\Queries\Query;
+use Hlis\GlobalModels\SchemaDetector;
+use Lucinda\Query\Clause\Condition;
+use Lucinda\Query\Clause\Fields;
+use Lucinda\Query\Vendor\MySQL\Select;
 
 abstract class AbstractGeneralQuery extends Query
 {
 
-    protected int $offset;
-    protected int $limit;
-    protected string $orderByAlias;
-    protected $parentSchema;
+    protected string $siteSchema = "";
+    protected string $adminSchema = "";
 
-    public function __construct(Filter $filter, $parentSchema = null, string $orderByAlias = null, int $limit = null, int $offset = null)
+    public function __construct(Filter $filter)
     {
         $this->filter = $filter;
-        $this->orderByAlias = $orderByAlias;
-        $this->offset = $offset;
-        $this->limit = $limit;
-        $this->parentSchema = $parentSchema;
+        $this->siteSchema = SchemaDetector::getInstance()->getSiteSchema();
+        $this->adminSchema = SchemaDetector::getInstance()->getAdminSchema();
         $this->query = $this->setQuery();
         $this->setFields($this->query->fields());
         $this->setJoins();
@@ -30,8 +32,6 @@ abstract class AbstractGeneralQuery extends Query
     }
 
     abstract protected function setQuery(): Select;
-
-    // abstract protected function getConditions(): AbstractConditions;
 
     protected function getConditions() {}
     protected function getFields() {}

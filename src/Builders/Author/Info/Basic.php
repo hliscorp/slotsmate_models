@@ -8,7 +8,7 @@ use Hlis\SlotsMateModels\Entities\Author\Author as AuthorEntity;
 class Basic extends ExtendableBuilder
 {
 
-    public function build(array $row): AuthorEntity
+    public function build(array $row): \Entity
     {
 
         $author = $this->getEntity();
@@ -23,9 +23,9 @@ class Basic extends ExtendableBuilder
 
     }
 
-    protected function getEntity(): AuthorEntity
+    protected function getEntity(): \Entity
     {
-        return new Author();
+        return new AuthorEntity();
     }
 
 }

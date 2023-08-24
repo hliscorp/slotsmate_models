@@ -11,9 +11,16 @@ use Hlis\SlotsMateModels\Queries\Author\FieldsSetter\AuthorFields;
 class AuthorBaseQuery extends AbstractGeneralQuery
 {
 
+    protected AuthorFilter $filter;
+
+    public function __construct(AuthorFilter $filter)
+    {
+        parent::__construct($filter);
+    }
+
     protected function setQuery(): Select
     {
-        return new Select("{$this->parentSchema}.writers", "t1");
+        return new Select($this->adminSchema.".writers", "t1");
     }
 
     protected function getConditions()

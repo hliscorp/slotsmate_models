@@ -5,19 +5,19 @@ namespace Hlis\SlotsMateModels\DAOs\Author;
 use Hlis\SlotsMateModels\Builders\Author\Info\Basic as BasicAuthorBuilder;
 use Hlis\SlotsMateModels\Entities\Author\Author as AuthorEntity;
 use Hlis\SlotsMateModels\Queries\Author\AuthorBaseQuery;
+use Hlis\SlotsMateModels\Filters\Author\AuthorFilter;
 
-class Author extends \Hlis\GlobalModels\DAOs\AbstractEntityInfo
+use Hlis\GlobalModels\DAOs\AbstractEntityInfo;
+
+class Author extends AbstractEntityInfo
 {
 
-    protected $parentSchema;
-
-    public function __construct(\Hlis\GlobalModels\Filters\Filter $filter, $parentSchema)
+    public function __construct(AuthorFilter $filter)
     {
-        $this->parentSchema = $parentSchema;
-        parent::__construct();
+        parent::__construct($filter);
     }
 
-    protected function createTrunk(): ?AuthorEntity
+    protected function createTrunk(): ?\Entity
     {
         $builder = $this->getBuilder();
         $querier = $this->getQuerier();
@@ -46,16 +46,16 @@ class Author extends \Hlis\GlobalModels\DAOs\AbstractEntityInfo
         return new AuthorBaseQuery($this->filter);
     }
 
-    protected function appendSocialNetworks(): void
-    {
-        $social_networks = new SocialNetworks($this->filter);
-        $this->entity->social_networks[] = $social_networks->getList();
-    }
+    // protected function appendSocialNetworks(): void
+    // {
+    //     $social_networks = new SocialNetworks($this->filter);
+    //     $this->entity->social_networks[] = $social_networks->getList();
+    // }
 
-    protected function appendTaglines(): void
-    {
-        $taglines = new Taglines($this->filter);
-        $this->entity->taglines[] = $taglines->getList();
-    }
+    // protected function appendTaglines(): void
+    // {
+    //     $taglines = new Taglines($this->filter);
+    //     $this->entity->taglines[] = $taglines->getList();
+    // }
 
 }

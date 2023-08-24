@@ -2,11 +2,18 @@
 
 namespace Hlis\SlotsMateModels\Queries\Author\JoinsSetter;
 
-use \Hlis\GlobalModels\Queries\AbstractJoins;
+use Hlis\GlobalModels\Filters\Filter;
+use Hlis\GlobalModels\Queries\AbstractJoins;
+use Lucinda\Query\Select;
 
 class SocialNetworksJoin extends AbstractJoins
 {
 
+    public function __construct(Filter $filter, Select $query)
+    {
+        parent::__construct($filter, $query);
+    } 
+    
     public function appendJoins(): void
     {
         $this->appendSocialNetworksJoin();

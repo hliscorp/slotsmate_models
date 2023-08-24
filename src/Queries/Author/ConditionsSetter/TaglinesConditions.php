@@ -2,7 +2,8 @@
 
 namespace Hlis\SlotsMateModels\Queries\Author\ConditionsSetter;
 
-use \Hlis\GlobalModels\Queries\AbstractConditions;
+use Hlis\GlobalModels\Queries\AbstractConditions;
+use Lucinda\Query\Clause\Condition;
 
 class TaglinesConditions extends AbstractConditions
 {

@@ -2,7 +2,8 @@
 
 namespace   Hlis\SlotsMateModels\Queries\Author\FieldsSetter;
 
-use \Hlis\GlobalModels\Queries\AbstractFields;
+use Hlis\GlobalModels\Queries\AbstractFields;
+use Lucinda\Query\Clause\Fields;
 
 class TaglinesFields extends AbstractFields
 {
