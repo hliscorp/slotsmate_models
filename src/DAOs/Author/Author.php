@@ -7,14 +7,14 @@ use Hlis\SlotsMateModels\Entities\Author\Author as AuthorEntity;
 use Hlis\SlotsMateModels\Queries\Author\AuthorBaseQuery;
 use Hlis\SlotsMateModels\Filters\AuthorFilter;
 
-// class Author extends \Hlis\GlobalModels\DAOs\AbstractEntityInfo
-class Author
+class Author extends \Hlis\GlobalModels\DAOs\AbstractEntityInfo
 {
 
     public function __construct(AuthorFilter $filter)
     {
-        var_dump('author dao');die;
-        // parent::__construct($filter);
+        var_dump('author');die;
+        $this->filter = $filter;
+        $this->setInfo();
     }
 
     protected function createTrunk(): ?\Entity
