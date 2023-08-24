@@ -9,10 +9,9 @@ class AuthorFilter extends \Hlis\GlobalModels\Filters\Filter
     protected ?int $locale_id = null;
     protected ?string $name = null;
 
-    public function setName(string $value): self
+    public function setName(string $value): void
     {
         $this->name = $value;
-        return $this;
     }
 
     public function getName(): ?string
@@ -20,10 +19,9 @@ class AuthorFilter extends \Hlis\GlobalModels\Filters\Filter
         return $this->name;
     }
 
-    public function setAuthorID(int $value): self
+    public function setAuthorID(int $value): void
     {
         $this->author_id = $value;
-        return $this;
     }
 
     public function getAuthorID(): ?int
@@ -31,10 +29,9 @@ class AuthorFilter extends \Hlis\GlobalModels\Filters\Filter
         return $this->author_id;
     }
 
-    public function setLocaleID(int $value): self
+    public function setLocaleID(int $value): void
     {
         $this->locale_id = $value;
-        return $this;
     }
 
     public function getLocaleID(): ?int
