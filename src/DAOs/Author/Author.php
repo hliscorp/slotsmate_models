@@ -8,7 +8,7 @@ use Hlis\SlotsMateModels\Queries\Author\AuthorBaseQuery;
 use Hlis\SlotsMateModels\Filters\AuthorFilter;
 use Hlis\GlobalModels\DAOs\AbstractEntityInfo;
 
-class Author extends \AbstractEntityInfo
+class Author extends AbstractEntityInfo
 {
 
     public function __construct(AuthorFilter $filter)
