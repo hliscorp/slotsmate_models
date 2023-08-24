@@ -9,7 +9,7 @@ use Hlis\SlotsMateModels\Queries\Author\AuthorBaseQuery;
 class Author extends \Hlis\GlobalModels\DAOs\AbstractEntityInfo
 {
 
-    protected function createTrunks(): void
+    protected function createTrunk(): ?AuthorEntity
     {
         $builder = $this->getBuilder();
         $querier = $this->getQuerier();
