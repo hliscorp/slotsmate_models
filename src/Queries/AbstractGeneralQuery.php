@@ -12,13 +12,15 @@ abstract class AbstractGeneralQuery extends Query
     protected int $offset;
     protected int $limit;
     protected string $orderByAlias;
+    protected $parentSchema;
 
-    public function __construct(Filter $filter, string $orderByAlias, int $limit, int $offset)
+    public function __construct(Filter $filter, $parentSchema = null, string $orderByAlias = null, int $limit = null, int $offset = null)
     {
         $this->filter = $filter;
         $this->orderByAlias = $orderByAlias;
         $this->offset = $offset;
         $this->limit = $limit;
+        $this->parentSchema = $parentSchema;
         $this->query = $this->setQuery();
         $this->setFields($this->query->fields());
         $this->setJoins();
