@@ -14,6 +14,7 @@ class Author extends AbstractEntityInfo
 
     public function __construct(AuthorFilter $filter)
     {
+        var_dump('author dao');die;
         parent::__construct($filter);
     }
 
