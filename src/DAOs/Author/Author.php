@@ -6,17 +6,10 @@ use Hlis\SlotsMateModels\Builders\Author\Info\Basic as BasicAuthorBuilder;
 use Hlis\SlotsMateModels\Entities\Author\Author as AuthorEntity;
 use Hlis\SlotsMateModels\Queries\Author\AuthorBaseQuery;
 
-class Author
+class Author extends \Hlis\GlobalModels\DAOs\AbstractEntityInfo
 {
 
-    public function __construct($filter, $parentSchema)
-    {
-        var_dump('test');die;
-        $this->filter = $filter;
-        $this->setInfo();
-    }
-
-    protected function createTrunks(): ?AuthorEntity
+    protected function createTrunks(): void
     {
         $builder = $this->getBuilder();
         $querier = $this->getQuerier();
