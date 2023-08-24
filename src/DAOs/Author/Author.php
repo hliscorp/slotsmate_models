@@ -2,12 +2,11 @@
 
 namespace Hlis\SlotsMateModels\DAOs\Author;
 
-use Hlis\GlobalModels\DAOs\AbstractEntityInfo;
 use Hlis\SlotsMateModels\Builders\Author\Info\Basic as BasicAuthorBuilder;
 use Hlis\SlotsMateModels\Entities\Author\Author as AuthorEntity;
 use Hlis\SlotsMateModels\Queries\Author\AuthorBaseQuery;
 
-class Author extends AbstractEntityInfo
+class Author extends \Hlis\GlobalModels\DAOs\AbstractEntityInfo
 {
 
     public function __construct(\Hlis\GlobalModels\Filters\Filter $filter, $parentSchema)
