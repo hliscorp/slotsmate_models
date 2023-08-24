@@ -16,10 +16,10 @@ class AuthorBaseQuery extends AbstractGeneralQuery
         return new Select("{$this->parentSchema}.writers", "t1");
     }
 
-    // protected function getConditions(): AuthorConditions
-    // {
-    //     return new AuthorConditions($this->filter);
-    // }
+    protected function getConditions()
+    {
+        return new AuthorConditions($this->filter);
+    }
 
     protected function getFields(): AuthorFields
     {

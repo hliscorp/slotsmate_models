@@ -23,11 +23,11 @@ class Author extends AbstractEntityInfo
         return $builder->build($row);
     }
 
-    protected function appendBranches(): void
-    {
-        $this->appendSocialNetworks();
-        $this->appendTaglines();
-    }
+    // protected function appendBranches(): void
+    // {
+    //     $this->appendSocialNetworks();
+    //     $this->appendTaglines();
+    // }
 
     protected function getBuilder(): BasicAuthorBuilder
     {
