@@ -16,10 +16,8 @@ class AuthorTaglineJoin extends AbstractJoins
     } 
     
     public function appendJoins(): void
-    {
-        if ($locale_id = $this->filter->getLocaleID()) {
-            $this->query->joinLeft("tagline__writers", "t4")->on(["t1.id"=>"t4.author_id", "t4.locale_id"=>$locale_id]);
-        }
+    { 
+        $this->query->joinLeft("tagline__writers", "t4")->on(["t1.id"=>"t4.author_id"]);
     }
 
     protected function getLinkingColumnName(): string

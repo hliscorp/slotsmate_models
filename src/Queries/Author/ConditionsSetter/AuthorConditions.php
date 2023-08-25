@@ -12,7 +12,7 @@ class AuthorConditions extends AbstractConditions
     {
         $this->setIDCondition($condition);
         $this->setNameCondition($condition);
-        $this->setLocaleIDCondition($condition);
+        $this->setLocaleCondition($condition);
     }
 
     protected function setIDCondition(Condition $condition): void
@@ -26,6 +26,13 @@ class AuthorConditions extends AbstractConditions
     {
         if ($full_name = $this->filter->getName()) {
             $condition->set("LOWER(CONCAT(t1.first_name,' ', t1.last_name))", "'".$full_name."'");
+        }
+    }
+
+    protected function setLocaleCondition(Condition $condition): void
+    {
+        if ($locale_id = $this->filter->getLocaleID()) {
+            $condition->set("t4.locale_id", $locale_id);
         }
     }
 
