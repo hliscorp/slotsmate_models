@@ -33,7 +33,7 @@ class AuthorBaseQuery extends Query
         $this->setOrderBy();   
     }
 
-    protected function setJoins(): void 
+    protected function setJoins(): AuthorTaglineJoin 
     {
         return new AuthorTaglineJoin($this->filter, $this->query);
     }

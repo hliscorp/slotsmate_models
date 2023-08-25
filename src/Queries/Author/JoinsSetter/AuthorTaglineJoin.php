@@ -2,6 +2,7 @@
 
 namespace Hlis\SlotsMateModels\Queries\Author\JoinsSetter;
 
+use Hlis\SlotsMateModels\Filters\AuthorFilter;
 use Hlis\GlobalModels\Filters\Filter;
 use Hlis\GlobalModels\Queries\AbstractJoins;
 use Lucinda\Query\Select;
