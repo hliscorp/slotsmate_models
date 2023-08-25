@@ -6,6 +6,7 @@ use Hlis\SlotsMateModels\Filters\AuthorFilter;
 use Hlis\GlobalModels\Filters\Filter;
 use Hlis\GlobalModels\Queries\AbstractJoins;
 use Lucinda\Query\Select;
+use Hlis\GlobalModels\SchemaDetector;
 
 class AuthorTaglineJoin extends AbstractJoins
 {
@@ -17,7 +18,7 @@ class AuthorTaglineJoin extends AbstractJoins
     
     public function appendJoins(): void
     { 
-        $this->query->joinLeft("tagline__writers", "t4")->on(["t1.id"=>"t4.author_id"]);
+        $this->query->joinLeft(SchemaDetector::getInstance()->getAdminSchema().".tagline__writers", "t4")->on(["t1.id"=>"t4.author_id"]);
     }
 
     protected function getLinkingColumnName(): string
