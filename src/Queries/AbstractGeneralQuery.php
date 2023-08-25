@@ -23,6 +23,7 @@ abstract class AbstractGeneralQuery extends Query
         $this->filter = $filter;
         $this->siteSchema = SchemaDetector::getInstance()->getSiteSchema();
         $this->adminSchema = SchemaDetector::getInstance()->getAdminSchema();
+        var_dump($this->adminSchema);die;
         $this->query = $this->setQuery();
         $this->setFields($this->query->fields());
         $this->setJoins();

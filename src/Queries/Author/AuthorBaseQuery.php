@@ -28,7 +28,7 @@ class AuthorBaseQuery extends AbstractGeneralQuery
         return new AuthorConditions($this->filter);
     }
 
-    protected function getFields(): AuthorFields
+    protected function getFields()
     {
         return new AuthorFields($this->filter);
     }

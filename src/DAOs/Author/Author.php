@@ -44,7 +44,6 @@ class Author extends AbstractEntityInfo
 
     protected function getQuerier(): AuthorBaseQuery
     {
-        var_dump('query');die;
         return new AuthorBaseQuery($this->filter);
     }
 
