@@ -15,7 +15,9 @@ class AuthorBaseQuery extends AbstractGeneralQuery
 
     public function __construct(AuthorFilter $filter)
     {
-        parent::__construct($filter);
+        $this->filter = $filter;
+        var_dump('debug');die;
+        parent::__construct();
     }
 
     protected function setQuery(): Select

@@ -18,9 +18,8 @@ abstract class AbstractGeneralQuery extends Query
     protected string $siteSchema = "";
     protected string $adminSchema = "";
 
-    public function __construct(Filter $filter)
+    public function __construct()
     {
-        $this->filter = $filter;
         $this->siteSchema = SchemaDetector::getInstance()->getSiteSchema();
         $this->adminSchema = SchemaDetector::getInstance()->getAdminSchema();
         var_dump($this->adminSchema);die;
@@ -29,7 +28,6 @@ abstract class AbstractGeneralQuery extends Query
         $this->setJoins();
         $this->setWhere($this->query->where());
         $this->setOrderBy();
-        $this->setLimit();
     }
 
     abstract protected function setQuery(): Select;
@@ -39,13 +37,6 @@ abstract class AbstractGeneralQuery extends Query
 
     protected function setJoins() {}
     protected function setOrderBy() {}
-
-    private function setLimit(): void
-    {
-        if ($this->limit) {
-            $this->query->limit($this->limit, $this->offset);
-        }
-    }
 
     private function setFields(Fields $fields): void
     {
