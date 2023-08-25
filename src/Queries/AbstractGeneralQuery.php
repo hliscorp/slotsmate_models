@@ -2,23 +2,23 @@
 
 namespace Hlis\SlotsMateModels\Queries;
 
-use Hlis\SlotsMateModels\Filters\Author\AuthorFilter;
-
 use Hlis\GlobalModels\Queries\AbstractFields;
 use Hlis\GlobalModels\Queries\AbstractConditions;
 use Hlis\GlobalModels\Queries\Query;
 use Hlis\GlobalModels\SchemaDetector;
+use Hlis\GlobalModels\Filters\Filter;
 use Lucinda\Query\Clause\Condition;
 use Lucinda\Query\Clause\Fields;
 use Lucinda\Query\Vendor\MySQL\Select;
 
-abstract class AbstractGeneralQuery extends Query
+class AbstractGeneralQuery extends Query
 {
 
     protected string $siteSchema = "";
     protected string $adminSchema = "";
+    protected Filter $filter;
 
-    public function __construct()
+    public function __construct(Filter $filter)
     {
         $this->siteSchema = SchemaDetector::getInstance()->getSiteSchema();
         $this->adminSchema = SchemaDetector::getInstance()->getAdminSchema();
@@ -30,13 +30,12 @@ abstract class AbstractGeneralQuery extends Query
         $this->setOrderBy();
     }
 
-    abstract protected function setQuery(): Select;
+    protected abstract function setQuery(): Select;
+    protected abstract function getConditions(): AbstractConditions;
+    protected abstract function getFields(): AbstractFields;
 
-    protected function getConditions() {}
-    protected function getFields() {}
-
-    protected function setJoins() {}
-    protected function setOrderBy() {}
+    protected abstract protected function setJoins(): void;
+    protected abstract protected function setOrderBy(): void;
 
     private function setFields(Fields $fields): void
     {

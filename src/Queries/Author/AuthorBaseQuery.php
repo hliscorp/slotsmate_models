@@ -2,37 +2,51 @@
 
 namespace Hlis\SlotsMateModels\Queries\Author;
 
-use Hlis\SlotsMateModels\Filters\AuthorFilter;
-use Hlis\SlotsMateModels\Queries\AbstractGeneralQuery;
 use Hlis\SlotsMateModels\Queries\Author\ConditionsSetter\AuthorConditions;
 use Hlis\SlotsMateModels\Queries\Author\FieldsSetter\AuthorFields;
+use Hlis\SlotsMateModels\Filters\AuthorFilter;
+
+use Hlis\GlobalModels\Queries\Query;
+use Hlis\GlobalModels\SchemaDetector;
+use Lucinda\Query\Clause\Condition;
+use Lucinda\Query\Clause\Fields;
+use Lucinda\Query\Vendor\MySQL\Select;
 
 
-class AuthorBaseQuery extends AbstractGeneralQuery
+class AuthorBaseQuery extends Query
 {
 
     protected AuthorFilter $filter;
+    protected string $siteSchema = "";
+    protected string $adminSchema = "";
 
     public function __construct(AuthorFilter $filter)
     {
         $this->filter = $filter;
-        var_dump('debug');die;
-        parent::__construct();
+        $this->siteSchema = SchemaDetector::getInstance()->getSiteSchema();
+        $this->adminSchema = SchemaDetector::getInstance()->getAdminSchema();
+        $this->query = new Select($this->adminSchema.".writers", "t1");
+        $this->setFields($this->query->fields());
+        $this->setJoins();
+        $this->setWhere($this->query->where());
+        $this->setOrderBy();   
     }
 
-    protected function setQuery(): Select
+    protected function setJoins(): void {}
+
+    protected function setOrderBy(): void {}
+
+    private function setFields(Fields $fields): void
     {
-        return new Select($this->adminSchema.".writers", "t1");
+        $setter = new AuthorFields($this->filter);
+        $setter->appendFields($fields);
     }
 
-    protected function getConditions()
+    private function setWhere(Condition $condition): void
     {
-        return new AuthorConditions($this->filter);
-    }
-
-    protected function getFields()
-    {
-        return new AuthorFields($this->filter);
+        $setter = new AuthorConditions($this->filter);
+        $setter->appendConditions($condition);
+        $this->parameters = $setter->getParameters();
     }
 
 }
