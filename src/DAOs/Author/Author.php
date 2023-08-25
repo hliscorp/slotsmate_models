@@ -27,13 +27,12 @@ class Author extends AbstractEntityInfo
             return null;
         }
 
-        var_dump($row);die;
         return $builder->build($row);
     }
 
     protected function appendBranches(): void
     {
-        // $this->appendSocialNetworks();
+        $this->appendSocialNetworks();
     }
 
     protected function getBuilder(): BasicAuthorBuilder
@@ -46,10 +45,10 @@ class Author extends AbstractEntityInfo
         return new AuthorBaseQuery($this->filter);
     }
 
-    // protected function appendSocialNetworks(): void
-    // {
-    //     $social_networks = new SocialNetworks($this->filter);
-    //     $this->entity->social_networks[] = $social_networks->getList();
-    // }
+    protected function appendSocialNetworks(): void
+    {
+        $social_networks = new SocialNetworks($this->filter);
+        $this->entity->social_networks[] = $social_networks->getList();
+    }
 
 }

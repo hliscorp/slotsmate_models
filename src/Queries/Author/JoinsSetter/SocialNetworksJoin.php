@@ -5,6 +5,7 @@ namespace Hlis\SlotsMateModels\Queries\Author\JoinsSetter;
 use Hlis\GlobalModels\Filters\Filter;
 use Hlis\GlobalModels\Queries\AbstractJoins;
 use Lucinda\Query\Select;
+use Hlis\GlobalModels\SchemaDetector;
 
 class SocialNetworksJoin extends AbstractJoins
 {
@@ -21,7 +22,7 @@ class SocialNetworksJoin extends AbstractJoins
 
     protected function appendSocialNetworksJoin(): void
     {
-        $this->query->joinLeft("social_networks", "t3")->on(["t2.social_network_id"=>"t3.id"]);
+        $this->query->joinLeft(SchemaDetector::getInstance()->getAdminSchema().".social_networks", "t3")->on(["t2.social_network_id"=>"t3.id"]);
     }
 
     protected function getLinkingColumnName(): string

@@ -15,7 +15,7 @@ class Basic extends ExtendableBuilder
 
         $author->id = $row['id'];
         $author->name = $row['first_name'].' '.$row['last_name'];
-        // $author->highlights = $row['highlights'];
+        $author->highlights = $row['highlights'];
         $author->date_joined = $row['date_joined'];
 
         return $author;

@@ -17,15 +17,11 @@ class SocialNetworksQuery extends Query
 {
 
     protected AuthorFilter $filter;
-    protected string $siteSchema = "";
-    protected string $adminSchema = "";
 
     public function __construct(AuthorFilter $filter)
     {
         $this->filter = $filter;
-        $this->siteSchema = SchemaDetector::getInstance()->getSiteSchema();
-        $this->adminSchema = SchemaDetector::getInstance()->getAdminSchema();
-        $this->query = new Select($this->adminSchema.".author__social_networks", "t2");
+        $this->query = new Select(SchemaDetector::getInstance()->getAdminSchema().".author__social_networks", "t2");
         $this->setFields($this->query->fields());
         $this->setJoins();
         $this->setWhere($this->query->where());

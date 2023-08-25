@@ -8,6 +8,7 @@ class AuthorFilter extends \Hlis\GlobalModels\Filters\Filter
     protected ?int $author_id = null;
     protected ?int $locale_id = null;
     protected ?string $name = null;
+    protected ?int $type = null;
 
     public function setName(string $value): void
     {
@@ -37,6 +38,16 @@ class AuthorFilter extends \Hlis\GlobalModels\Filters\Filter
     public function getLocaleID(): ?int
     {
         return $this->locale_id;
+    }
+
+    public function setAuthorType(int $value): void
+    {
+        $this->type = $value;
+    }
+
+    public function getAuthorType(): ?int
+    {
+        return $this->type;
     }
 
 }
