@@ -13,7 +13,6 @@ class Author extends AbstractEntityInfo
 
     public function __construct(AuthorFilter $filter)
     {
-        var_dump('author');die;
         $this->filter = $filter;
         $this->setInfo();
     }
