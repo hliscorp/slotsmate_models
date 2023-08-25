@@ -14,11 +14,13 @@ class Author extends AbstractEntityInfo
     public function __construct(AuthorFilter $filter)
     {
         $this->filter = $filter;
+        var_dump('setinfo');die;
         $this->setInfo();
     }
 
     protected function createTrunk(): ?\Entity
     {
+        var_dump('create trunk');die;
         $builder = $this->getBuilder();
         $querier = $this->getQuerier();
         $row = SQL($querier->getQuery(), $querier->getParameters())->toRow();
@@ -38,11 +40,13 @@ class Author extends AbstractEntityInfo
 
     protected function getBuilder(): BasicAuthorBuilder
     {
+        var_dump('builder');die;
         return new BasicAuthorBuilder();
     }
 
     protected function getQuerier(): AuthorBaseQuery
     {
+        var_dump('query');die;
         return new AuthorBaseQuery($this->filter);
     }
 
