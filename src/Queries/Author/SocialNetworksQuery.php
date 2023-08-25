@@ -6,24 +6,45 @@ use Hlis\SlotsMateModels\Filters\Author\AuthorFilter;
 use Hlis\SlotsMateModels\Queries\Author\ConditionsSetter\SocialNetworksConditions;
 use Hlis\SlotsMateModels\Queries\Author\FieldsSetter\SocialNetworksFields;
 use Hlis\SlotsMateModels\Queries\Author\JoinsSetter\SocialNetworksJoin;
-use Hlis\SlotsMateModels\Queries\AbstractGeneralQuery;
+use Hlis\GlobalModels\Queries\Query;
+use Hlis\GlobalModels\SchemaDetector;
+use Lucinda\Query\Clause\Condition;
+use Lucinda\Query\Clause\Fields;
+use Lucinda\Query\Vendor\MySQL\Select;
 
-class SocialNetworksQuery extends AbstractGeneralQuery
+
+class SocialNetworksQuery extends Query
 {
 
-    protected function setQuery(): Select
+    protected AuthorFilter $filter;
+    protected string $siteSchema = "";
+    protected string $adminSchema = "";
+
+    public function __construct(AuthorFilter $filter)
     {
-        return new Select("author__social_networks", "t2");
+        $this->filter = $filter;
+        $this->siteSchema = SchemaDetector::getInstance()->getSiteSchema();
+        $this->adminSchema = SchemaDetector::getInstance()->getAdminSchema();
+        $this->query = new Select($this->adminSchema.".author__social_networks", "t2");
+        $this->setFields($this->query->fields());
+        $this->setJoins();
+        $this->setWhere($this->query->where());
+        $this->setOrderBy();   
     }
 
-    protected function getConditions(): SocialNetworksConditions
+    protected function setOrderBy(): void {}
+
+    private function setFields(Fields $fields): void
     {
-        return new SocialNetworksConditions($this->filter);
+        $setter = new SocialNetworksFields($this->filter);
+        $setter->appendFields($fields);
     }
 
-    protected function getFields(): SocialNetworksFields
+    private function setWhere(Condition $condition): void
     {
-        return new SocialNetworksFields($this->filter);
+        $setter = new SocialNetworksConditions($this->filter);
+        $setter->appendConditions($condition);
+        $this->parameters = $setter->getParameters();
     }
 
     protected function setJoins(): void

@@ -15,7 +15,6 @@ class Basic extends ExtendableBuilder
 
         $author->id = $row['id'];
         $author->name = $row['first_name'].' '.$row['last_name'];
-        $author->avatar = '/upload/writers/' . str_replace(' ', '_', strtolower($author->full_name)) . '.jpg';
         // $author->highlights = $row['highlights'];
         $author->date_joined = $row['date_joined'];
 

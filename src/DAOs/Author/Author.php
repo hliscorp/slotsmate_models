@@ -34,7 +34,6 @@ class Author extends AbstractEntityInfo
     protected function appendBranches(): void
     {
         // $this->appendSocialNetworks();
-        // $this->appendTaglines();
     }
 
     protected function getBuilder(): BasicAuthorBuilder
@@ -51,12 +50,6 @@ class Author extends AbstractEntityInfo
     // {
     //     $social_networks = new SocialNetworks($this->filter);
     //     $this->entity->social_networks[] = $social_networks->getList();
-    // }
-
-    // protected function appendTaglines(): void
-    // {
-    //     $taglines = new Taglines($this->filter);
-    //     $this->entity->taglines[] = $taglines->getList();
     // }
 
 }

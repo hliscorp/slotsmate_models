@@ -4,6 +4,7 @@ namespace Hlis\SlotsMateModels\Queries\Author;
 
 use Hlis\SlotsMateModels\Queries\Author\ConditionsSetter\AuthorConditions;
 use Hlis\SlotsMateModels\Queries\Author\FieldsSetter\AuthorFields;
+use Hlis\SlotsMateModels\Queries\Author\JoinsSetter\AuthorTaglineJoin;
 use Hlis\SlotsMateModels\Filters\AuthorFilter;
 
 use Hlis\GlobalModels\Queries\Query;
@@ -32,7 +33,10 @@ class AuthorBaseQuery extends Query
         $this->setOrderBy();   
     }
 
-    protected function setJoins(): void {}
+    protected function setJoins(): void 
+    {
+        return new AuthorTaglineJoin($this->filter, $this->query);
+    }
 
     protected function setOrderBy(): void {}
 

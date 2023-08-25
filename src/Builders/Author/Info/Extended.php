@@ -2,6 +2,9 @@
 
 namespace Hlis\SlotsMateModels\Builders\Author\Info;
 
+use Hlis\SlotsMateModels\Builders\Author\Info\Basic;
+use Hlis\SlotsMateModels\Entities\Author\Author as AuthorEntity;
+
 class Extended extends Basic
 {
 
