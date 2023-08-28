@@ -1,9 +1,9 @@
 <?php
 
-namespace Hlis\SlotsMateModels\Builders\Author\Info;
+namespace Hlis\SlotsMateModels\Builders\Author;
 
 use \Hlis\GlobalModels\Builders\ExtendableBuilder;
-use Hlis\SlotsMateModels\Entities\Author\SocialNetwork;
+use Hlis\SlotsMateModels\Entities\Author\SocialNetwork as SocialNetworkEntity;
 
 class SocialNetworks extends ExtendableBuilder
 {
@@ -11,15 +11,20 @@ class SocialNetworks extends ExtendableBuilder
     public function build(array $row): \Entity
     {
 
-        $social = new SocialNetwork();
+        $social = $this->getEntity();
 
-        $social->id = $row['id'];
+        $social->id = $row['social_network_id'];
         $social->link = $row['link'];
         $social->name = $row['name'];
         $social->priority = $row['priority'];
 
         return $social;
 
+    }
+
+    protected function getEntity(): \Entity
+    {
+        return new SocialNetworkEntity();
     }
 
 }

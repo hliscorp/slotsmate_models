@@ -2,14 +2,10 @@
 
 namespace Hlis\SlotsMateModels\Entities\Author;
 
-class SocialNetwork extends \Entity
+use Hlis\GlobalModels\Entities\SocialNetwork as SocialNetworkBaseEntity;
+
+class SocialNetwork extends SocialNetworkBaseEntity
 {
-
-    public ?int $id;
-    public ?string $link;
-    public ?string $name;
-//    public ?int $author_id;
-//    public ?int $social_network_id;
-    public ?int $priority;
-
+    public ?int $priority = null;
+    public ?string $link = null;
 }
