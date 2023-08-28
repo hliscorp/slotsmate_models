@@ -2,7 +2,7 @@
 
 namespace Hlis\SlotsMateModels\Queries\Author;
 
-use Hlis\SlotsMateModels\Filters\Author\AuthorFilter;
+use Hlis\SlotsMateModels\Filters\AuthorFilter;
 use Hlis\SlotsMateModels\Queries\Author\ConditionsSetter\SocialNetworksConditions;
 use Hlis\SlotsMateModels\Queries\Author\FieldsSetter\SocialNetworksFields;
 use Hlis\SlotsMateModels\Queries\Author\JoinsSetter\SocialNetworksJoin;
