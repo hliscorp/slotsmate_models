@@ -18,7 +18,7 @@ class AuthorConditions extends AbstractConditions
 
     protected function setIDCondition(Condition $condition): void
     {
-        if ($id = $this->filter->getAuthorIDs()) {
+        if ($ids = $this->filter->getAuthorIDs()) {
             $condition->setIn("t1.id", $ids);
         }
     }

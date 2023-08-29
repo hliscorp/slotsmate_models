@@ -5,11 +5,11 @@ namespace Hlis\SlotsMateModels\Filters;
 class AuthorFilter extends \Hlis\GlobalModels\Filters\Filter
 {
 
-    protected ?array $author_ids = null;
+    protected ?string $author_ids = null;
     protected ?int $locale_id = null;
     protected ?string $name = null;
     protected ?int $type = null;
-    protected ?bool $is_disabled = 0;
+    protected ?bool $is_disabled = null;
 
     public function setName(string $value): void
     {
@@ -21,12 +21,12 @@ class AuthorFilter extends \Hlis\GlobalModels\Filters\Filter
         return $this->name;
     }
 
-    public function setAuthorIDs(array $values): void
+    public function setAuthorIDs(string $values): void
     {
         $this->author_ids = $values;
     }
 
-    public function getAuthorIDs(): ?array
+    public function getAuthorIDs(): ?string
     {
         return $this->author_ids;
     }
