@@ -30,15 +30,12 @@ class AuthorBaseQuery extends Query
         $this->setFields($this->query->fields());
         $this->setJoins();
         $this->setWhere($this->query->where());
-        $this->setOrderBy();   
     }
 
     protected function setJoins(): AuthorTaglineJoin 
     {
         return new AuthorTaglineJoin($this->filter, $this->query);
     }
-
-    protected function setOrderBy(): void {}
 
     private function setFields(Fields $fields): void
     {

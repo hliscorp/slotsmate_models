@@ -4,7 +4,7 @@ namespace Hlis\SlotsMateModels\Queries\Author;
 
 use Hlis\SlotsMateModels\Filters\AuthorFilter;
 use Hlis\SlotsMateModels\Queries\Author\FieldsSetter\AuthorFields;
-use Hlis\SlotsMateModels\Queries\AuthorBaseQuery;
+use Hlis\SlotsMateModels\Queries\Author\AuthorBaseQuery;
 use Lucinda\Query\Clause\Fields;
 use Lucinda\Query\Vendor\MySQL\Select;
 use Lucinda\Query\Operator\OrderBy as OrderByOperator;

@@ -5,8 +5,6 @@ namespace Hlis\SlotsMateModels\DAOs\Author;
 use Hlis\SlotsMateModels\Builders\Author\SocialNetworks as SocialNetworksBuilder;
 use Hlis\SlotsMateModels\Builders\Author\Info\Basic as AuthorBuilder;
 
-use Hlis\SlotsMateModels\Filters\AuthorFilter;
-
 use Hlis\SlotsMateModels\Queries\Author\SocialNetworksQuery;
 use Hlis\SlotsMateModels\Queries\Author\AuthorListItemsQuery;
 
@@ -14,13 +12,6 @@ use Hlis\GlobalModels\DAOs\AbstractEntityList;
 
 class AuthorListItems extends AbstractEntityList
 {
-
-    protected AuthorFilter $filter;
-
-    public function __construct(AuthorFilter $filter, string $orderByAlias, int $limit, int $offset)
-    {
-        parent::__construct($filter, $orderByAlias, $limit, $offset);
-    }
 
     protected function appendBranches(array $ids): void
     {
@@ -39,7 +30,7 @@ class AuthorListItems extends AbstractEntityList
 
     protected function appendSocialNetworks($ids): void
     {
-        $this->filter->setAuthorIDs($ids);
+        $this->filter->setAuthorIDs(implode(",",$ids));
         $builder = new SocialNetworksBuilder();
         $querier = new SocialNetworksQuery($this->filter);
         $resultSet = SQL($querier->getQuery(), $querier->getParameters());
