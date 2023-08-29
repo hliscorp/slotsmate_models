@@ -13,12 +13,13 @@ class AuthorConditions extends AbstractConditions
         $this->setIDCondition($condition);
         $this->setNameCondition($condition);
         $this->setLocaleCondition($condition);
+        $this->setDisabledCondition($condition);
     }
 
     protected function setIDCondition(Condition $condition): void
     {
-        if ($id = $this->filter->getAuthorID()) {
-            $condition->set("t1.id", $id);
+        if ($id = $this->filter->getAuthorIDs()) {
+            $condition->setIn("t1.id", $ids);
         }
     }
 
@@ -33,6 +34,13 @@ class AuthorConditions extends AbstractConditions
     {
         if ($locale_id = $this->filter->getLocaleID()) {
             $condition->set("t4.locale_id", $locale_id);
+        }
+    }
+
+    protected function setDisabledCondition(Condition $condition): void
+    {
+        if ($is_disabled = $this->filter->getDisabledStatus()) {
+            $condition->set("t1.disabled", $is_disabled);
         }
     }
 

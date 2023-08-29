@@ -15,8 +15,8 @@ class SocialNetworksConditions extends AbstractConditions
 
     protected function setIDCondition(Condition $condition): void
     {
-        if ($author_id = $this->filter->getAuthorID()) {
-            $condition->set("t2.author_id", $author_id);
+        if ($author_ids = $this->filter->getAuthorIDs()) {
+            $condition->setIn("t2.author_id", $author_ids);
         }
     }
 
