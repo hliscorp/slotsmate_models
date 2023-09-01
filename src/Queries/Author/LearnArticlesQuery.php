@@ -6,7 +6,7 @@ use Hlis\SlotsMateModels\Filters\AuthorFilter;
 use Hlis\SlotsMateModels\Queries\Author\ConditionsSetter\LearnArticleConditions;
 use Hlis\SlotsMateModels\Queries\Author\FieldsSetter\LearnArticleFields;
 use Hlis\SlotsMateModels\Queries\Author\JoinsSetter\LearnArticleJoin;
-use Hlis\SlotsMateModels\Queries\Author\SortBy\LearnArticleSortBy;
+use Hlis\SlotsMateModels\Queries\Author\LearnArticleSortBy;
 use Hlis\GlobalModels\Queries\Query;
 use Hlis\GlobalModels\SchemaDetector;
 use Lucinda\Query\Clause\Condition;
