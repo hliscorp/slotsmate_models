@@ -1,12 +1,12 @@
 <?php
 
-namespace Hlis\SlotsMateModels\Queries\Author;
+namespace Hlis\SlotsMateModels\Queries\LearnArticles;
 
-use Hlis\SlotsMateModels\Filters\AuthorFilter;
-use Hlis\SlotsMateModels\Queries\Author\ConditionsSetter\LearnArticleConditions;
-use Hlis\SlotsMateModels\Queries\Author\FieldsSetter\LearnArticleFields;
-use Hlis\SlotsMateModels\Queries\Author\JoinsSetter\LearnArticleJoin;
-use Hlis\SlotsMateModels\Queries\Author\LearnArticleSortBy;
+use Hlis\SlotsMateModels\Filters\LearnArticleFilter;
+use Hlis\SlotsMateModels\Queries\LearnArticles\ConditionsSetter\LearnArticleConditions;
+use Hlis\SlotsMateModels\Queries\LearnArticles\FieldsSetter\LearnArticleFields;
+use Hlis\SlotsMateModels\Queries\LearnArticles\JoinsSetter\LearnArticleJoin;
+use Hlis\SlotsMateModels\Queries\LearnArticles\SortBy\LearnArticleSortBy;
 use Hlis\GlobalModels\Queries\Query;
 use Hlis\GlobalModels\SchemaDetector;
 use Lucinda\Query\Clause\Condition;
@@ -17,9 +17,9 @@ use Lucinda\Query\Vendor\MySQL\Select;
 class LearnArticlesQuery extends Query
 {
 
-    protected AuthorFilter $filter;
+    protected LearnArticleFilter $filter;
 
-    public function __construct(AuthorFilter $filter, string $orderByAlias, int $limit, int $offset)
+    public function __construct(LearnArticleFilter $filter, string $orderByAlias, int $limit, int $offset)
     {
         $this->filter = $filter;
         $this->query = new Select(SchemaDetector::getInstance()->getSiteSchema().".guidelines", "g");
@@ -48,7 +48,10 @@ class LearnArticlesQuery extends Query
         $this->parameters = $setter->getParameters();
     }
 
-    protected function setJoins(): void {}
+    protected function setJoins(): void 
+    {
+        // new LearnArticleJoin($this->filter, $this->query);
+    }
 
     protected function setLimit(int $limit = null, int $offset = 0): void
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Hlis\SlotsMateModels\Queries\Author\ConditionsSetter;
+namespace Hlis\SlotsMateModels\Queries\LearnArticles\ConditionsSetter;
 
 use Hlis\GlobalModels\Queries\AbstractConditions;
 use Lucinda\Query\Clause\Condition;

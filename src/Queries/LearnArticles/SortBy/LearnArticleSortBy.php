@@ -1,6 +1,6 @@
 <?php
 
-namespace Hlis\SlotsMateModels\Queries\Author;
+namespace Hlis\SlotsMateModels\Queries\LearnArticles\SortBy;
 
 use Hlis\SlotsMateModels\Enums\LearnArticleCriteria;
 use Hlis\GlobalModels\Queries\AbstractOrderBy;

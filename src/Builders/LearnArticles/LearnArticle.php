@@ -1,9 +1,9 @@
 <?php
 
-namespace Hlis\SlotsMateModels\Builders\Author;
+namespace Hlis\SlotsMateModels\Builders\LearnArticles;
 
 use \Hlis\GlobalModels\Builders\ExtendableBuilder;
-use Hlis\SlotsMateModels\Entities\Author\LearnArticle as LearnArticleEntity;
+use Hlis\SlotsMateModels\Entities\LearnArticles\LearnArticle as LearnArticleEntity;
 
 class LearnArticle extends ExtendableBuilder
 {

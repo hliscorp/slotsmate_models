@@ -1,6 +1,6 @@
 <?php
 
-namespace Hlis\SlotsMateModels\Queries\Author\FieldsSetter;
+namespace Hlis\SlotsMateModels\Queries\LearnArticles\FieldsSetter;
 
 use Hlis\GlobalModels\Queries\AbstractFields;
 use Lucinda\Query\Clause\Fields;
