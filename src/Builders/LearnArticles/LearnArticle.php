@@ -14,7 +14,7 @@ class LearnArticle extends ExtendableBuilder
         $article = $this->getEntity();
 
         $article->id = $row['id'];
-        $article->link = $row['link'];
+        $article->link = $row['url'];
         $article->title = $row['title'];
         $article->writer_id = $row['writer_id'];
 

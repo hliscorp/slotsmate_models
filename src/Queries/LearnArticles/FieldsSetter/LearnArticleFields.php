@@ -13,7 +13,7 @@ class LearnArticleFields extends AbstractFields
         $fields->add("t1.id");
         $fields->add("t1.writer_id");
         $fields->add("t1.title");
-        $fields->add("t1.link");
+        $fields->add("t1.url");
         $fields->add("t1.is_deleted");
         $fields->add("t1.date_added");
     }
