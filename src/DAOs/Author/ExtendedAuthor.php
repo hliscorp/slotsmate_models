@@ -36,7 +36,7 @@ class ExtendedAuthor extends BasicAuthor
     protected function appendLearningArticles(): void
     {
         $builder = new LearnArticlesBuilder();
-        $querier = new LearnArticlesQuery($this->filter);
+        $querier = new LearnArticlesQuery($this->filter, Hlis\SlotsMateModels\Enums\LearnArticleCriteria::DATE_CREATED, 6, 0);
 
         $resultSet = SQL($querier->getQuery(), $querier->getParameters());
         while ($row = $resultSet->toRow()) {
