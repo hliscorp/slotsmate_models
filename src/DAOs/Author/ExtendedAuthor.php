@@ -6,6 +6,8 @@ use Hlis\SlotsMateModels\DAOs\Author\Author as BasicAuthor;
 use Hlis\SlotsMateModels\Builders\Author\Info\Extended as ExtendedAuthorBuilder;
 use Hlis\SlotsMateModels\Builders\LearnArticles\LearnArticle as LearnArticlesBuilder;
 use Hlis\SlotsMateModels\Queries\LearnArticles\LearnArticlesQuery;
+use Hlis\SlotsMateModels\Filters\LearnArticleFilter;
+
 
 /*
  *
