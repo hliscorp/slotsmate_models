@@ -5,7 +5,7 @@ namespace Hlis\SlotsMateModels\Builders\Author;
 use \Hlis\GlobalModels\Builders\ExtendableBuilder;
 use Hlis\SlotsMateModels\Entities\Author\LearnArticle as LearnArticleEntity;
 
-class LearnArticles extends ExtendableBuilder
+class LearnArticle extends ExtendableBuilder
 {
 
     public function build(array $row): \Entity
