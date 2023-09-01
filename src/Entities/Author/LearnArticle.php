@@ -1,6 +1,6 @@
 <?php
 
-namespace Hlis\SlotsMateModels\Entities\LearnArticles;
+namespace Hlis\SlotsMateModels\Entities\Author;
 
 class LearnArticle extends \Entity
 {
