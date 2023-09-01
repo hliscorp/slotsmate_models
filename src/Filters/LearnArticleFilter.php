@@ -7,17 +7,17 @@ class LearnArticleFilter extends \Hlis\GlobalModels\Filters\Filter
 
     protected ?string $author_ids = null;
     protected ?int $locale_id = null;
-    protected ?string $name = null;
-    protected ?bool $is_deleted = 0;
+    protected ?string $title = null;
+    protected ?bool $is_deleted = null;
 
-    public function setName(string $value): void
+    public function setTitle(string $value): void
     {
-        $this->name = $value;
+        $this->title = $value;
     }
 
-    public function getName(): ?string
+    public function getTitle(): ?string
     {
-        return $this->name;
+        return $this->title;
     }
 
     public function setAuthorIDs(string $values): void

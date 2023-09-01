@@ -12,7 +12,7 @@ class LearnArticleSortBy extends AbstractOrderBy
     {
         switch ($orderByAlias) {
             case LearnArticleCriteria::DATE_CREATED:
-                $this->orderBy->add("l.date_added", OrderBy::DESC);
+                $this->orderBy->add("t1.date_added", OrderBy::DESC);
                 break;
             default:
                 throw new \InvalidArgumentException("Invalid sort criteria: " . $orderByAlias);

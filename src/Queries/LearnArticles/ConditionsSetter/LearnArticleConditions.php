@@ -16,7 +16,7 @@ class LearnArticleConditions extends AbstractConditions
     protected function setAuthorCondition(Condition $condition): void
     {
         if ($ids = $this->filter->getAuthorIDs()) {
-            $condition->setIn("l.writer_id", $ids);
+            $condition->setIn("t1.writer_id", $ids);
         }
     }
 

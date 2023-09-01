@@ -10,11 +10,11 @@ class LearnArticleFields extends AbstractFields
 
     public function appendFields(Fields $fields): void
     {
-        $fields->add("l.id");
-        $fields->add("l.writer_id");
-        $fields->add("l.title");
-        $fields->add("l.is_deleted");
-        $fields->add("l.date_added");
+        $fields->add("t1.id");
+        $fields->add("t1.writer_id");
+        $fields->add("t1.title");
+        $fields->add("t1.is_deleted");
+        $fields->add("t1.date_added");
     }
 
 }

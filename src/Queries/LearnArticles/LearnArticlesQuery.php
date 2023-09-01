@@ -22,7 +22,7 @@ class LearnArticlesQuery extends Query
     public function __construct(LearnArticleFilter $filter, string $orderByAlias, int $limit, int $offset)
     {
         $this->filter = $filter;
-        $this->query = new Select(SchemaDetector::getInstance()->getSiteSchema().".guidelines", "g");
+        $this->query = new Select(SchemaDetector::getInstance()->getSiteSchema().".guidelines", "t1");
         $this->setFields($this->query->fields());
         $this->setJoins();
         $this->setWhere($this->query->where());
