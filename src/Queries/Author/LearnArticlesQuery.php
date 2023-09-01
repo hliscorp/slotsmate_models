@@ -25,7 +25,7 @@ class LearnArticlesQuery extends Query
         $this->setFields($this->query->fields());
         $this->setJoins();
         $this->setWhere($this->query->where());
-        $this->setOrderBy();   
+        $this->setOrderBy($orderByAlias);   
         $this->setLimit($limit, $offset);
     }
 
