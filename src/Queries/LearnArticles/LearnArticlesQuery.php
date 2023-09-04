@@ -14,15 +14,16 @@ use Lucinda\Query\Clause\Fields;
 use Lucinda\Query\Vendor\MySQL\Select;
 
 
-class LearnArticlesQuery extends Query
+class LearnArticlesQuery extends AbstractLearnArticlesQuery
 {
 
     protected LearnArticleFilter $filter;
 
     public function __construct(LearnArticleFilter $filter, string $orderByAlias, int $limit, int $offset)
     {
+        parent::__construct($filter);
         $this->filter = $filter;
-        $this->query = new Select(SchemaDetector::getInstance()->getSiteSchema().".guidelines", "t1");
+        $this->query = new Select($this->siteSchema.".guidelines", "t1");
         $this->setFields($this->query->fields());
         $this->setJoins();
         $this->setWhere($this->query->where());
@@ -39,18 +40,6 @@ class LearnArticlesQuery extends Query
     {
         $setter = new LearnArticleFields($this->filter);
         $setter->appendFields($fields);
-    }
-
-    private function setWhere(Condition $condition): void
-    {
-        $setter = new LearnArticleConditions($this->filter);
-        $setter->appendConditions($condition);
-        $this->parameters = $setter->getParameters();
-    }
-
-    protected function setJoins(): void 
-    {
-        new LearnArticleJoin($this->filter, $this->query);
     }
 
     protected function setLimit(int $limit = null, int $offset = 0): void

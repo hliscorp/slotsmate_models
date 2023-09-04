@@ -15,6 +15,7 @@ class AuthorListItemsQuery extends AuthorBaseQuery
     public function __construct(AuthorFilter $filter, string $orderByAlias, int $limit, int $offset)
     {
         parent::__construct($filter);
+        $this->setGroupBy(["t1.id"]);
         $this->setLimit($limit, $offset);
     }
 
@@ -29,4 +30,12 @@ class AuthorListItemsQuery extends AuthorBaseQuery
             $this->query->limit($limit, $offset);
         }
     }
+
+    protected function setGroupBy($group): void
+    {
+        if (!empty($group)) {
+            $this->query->groupBy($group);
+        }
+    }
+
 }
