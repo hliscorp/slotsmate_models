@@ -11,6 +11,7 @@ class LearnArticlesTotalQuery extends AbstractLearnArticlesQuery
     public function __construct(LearnArticleFilter $filter)
     {
         parent::__construct($filter);
+        $this->groupBy = true;
         $this->query = new Select($this->siteSchema.".guidelines", "t1");
         $this->setWhere($this->query->where());
         $this->setGroupBy($this->query->fields());
