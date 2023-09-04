@@ -4,9 +4,6 @@ namespace Hlis\SlotsMateModels\DAOs\Author;
 
 use Hlis\SlotsMateModels\DAOs\Author\Author as BasicAuthor;
 use Hlis\SlotsMateModels\Builders\Author\Info\Extended as ExtendedAuthorBuilder;
-use Hlis\SlotsMateModels\Builders\LearnArticles\LearnArticle as LearnArticlesBuilder;
-use Hlis\SlotsMateModels\Queries\LearnArticles\LearnArticlesQuery;
-use Hlis\SlotsMateModels\Filters\LearnArticleFilter;
 
 
 /*
@@ -23,10 +20,6 @@ class ExtendedAuthor extends BasicAuthor
    protected function appendBranches(): void
    {
        parent::appendBranches();
-       $this->appendLearningArticles();
-    //    $this->appendGameReviews();
-    //    $this->appendNewsArticles();
-    //    $this->appendGameImpressions();
    }
 
 //    private function appendGameReviews(): void
@@ -34,19 +27,6 @@ class ExtendedAuthor extends BasicAuthor
 //        $game_reviews = new GameReviews($this->filter);
 //        $this->entity->game_reviews[] = $game_reviews->getList();
 //    }
-
-    protected function appendLearningArticles(): void
-    {
-        $filter = new LearnArticleFilter();
-        $filter->setAuthorIDs($this->filter->getAuthorIDs());
-        $builder = new LearnArticlesBuilder();
-        $querier = new LearnArticlesQuery($filter, \Hlis\SlotsMateModels\Enums\LearnArticleCriteria::DATE_CREATED, 6, 0);
-
-        $resultSet = SQL($querier->getQuery(), $querier->getParameters());
-        while ($row = $resultSet->toRow()) {
-            $this->entity->learning_articles[] = $builder->build($row);
-        }
-    }
 
 //    private function appendNewsArticles(): void
 //    {

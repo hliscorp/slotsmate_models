@@ -50,7 +50,7 @@ class LearnArticlesQuery extends Query
 
     protected function setJoins(): void 
     {
-        // new LearnArticleJoin($this->filter, $this->query);
+        new LearnArticleJoin($this->filter, $this->query);
     }
 
     protected function setLimit(int $limit = null, int $offset = 0): void
