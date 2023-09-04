@@ -17,7 +17,7 @@ class AbstractLearnArticlesQuery extends Query
     protected string $siteSchema = "";
     protected string $adminSchema = "";
 
-    public function __construct(AuthorFilter $filter)
+    public function __construct(LearnArticleFilter $filter)
     {
         $this->filter = $filter;
         $this->siteSchema = SchemaDetector::getInstance()->getSiteSchema();
