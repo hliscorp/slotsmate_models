@@ -1,8 +1,8 @@
 <?php
 
-namespace Hlis\CasinofreakModels\Queries\LearnArticles;
+namespace Hlis\SlotsMateModels\Queries\LearnArticles;
 
-use Hlis\CasinofreakModels\Filters\LearnArticleFilter;
+use Hlis\SlotsMateModels\Filters\LearnArticleFilter;
 use Lucinda\Query\Vendor\MySQL\Select;
 use Lucinda\Query\Clause\Fields;
 
