@@ -1,6 +1,6 @@
 <?php
 
-namespace Hlis\SlotsMateModels\Queries\Author;
+namespace Hlis\SlotsMateModels\Queries\Author\SortBy;
 
 use Hlis\SlotsMateModels\Enums\AuthorSortCriteria;
 use Hlis\GlobalModels\Queries\AbstractOrderBy;
