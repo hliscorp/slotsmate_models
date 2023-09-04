@@ -8,7 +8,7 @@ use Hlis\SlotsMateModels\Filters\LearnArticleFilter;
 
 use Hlis\GlobalModels\DAOs\AbstractEntityList;
 
-class AuthorListItems extends AbstractEntityList
+class LearnArticlesList extends AbstractEntityList
 {
 
     protected function createTrunks(): void
