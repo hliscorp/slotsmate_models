@@ -21,4 +21,9 @@ class LearnArticlesList extends AbstractEntityList
         }
     }
 
+    protected function appendBranches(array $ids): void 
+    {
+        // nothing to append
+    }
+
 }
