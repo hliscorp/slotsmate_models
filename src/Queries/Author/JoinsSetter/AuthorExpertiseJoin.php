@@ -18,7 +18,8 @@ class AuthorExpertiseJoin extends AbstractJoins
     
     public function appendJoins(): void
     { 
-        $this->query->joinLeft(SchemaDetector::getInstance()->getAdminSchema().".expertise__writers", "t5")->on(["t1.id"=>"t5.author_id"]);
+        $locale_id = $this->filter->getLocaleID() ?? "0";
+        $this->query->joinLeft(SchemaDetector::getInstance()->getAdminSchema().".expertise__writers", "t5")->on(["t1.id"=>"t5.author_id", "t5.locale_id" => $locale_id]);
     }
 
     protected function getLinkingColumnName(): string

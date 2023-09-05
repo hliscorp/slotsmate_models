@@ -30,11 +30,6 @@ class AuthorExtendedQuery extends AuthorBaseQuery
         return new ExtendedAuthorFields($this->filter);
     }
 
-    protected function getConditions(): ExtendedAuthorConditions
-    {
-        return new ExtendedAuthorConditions($this->filter);
-    }
-
     private function setExpertiseJoin(): AuthorExpertiseJoin
     {
         return new AuthorExpertiseJoin($this->filter, $this->query);

@@ -18,7 +18,8 @@ class AuthorFullBioJoin extends AbstractJoins
     
     public function appendJoins(): void
     { 
-        $this->query->joinLeft(SchemaDetector::getInstance()->getAdminSchema().".full_bio__writers", "t7")->on(["t1.id"=>"t7.author_id"]);
+        $locale_id = $this->filter->getLocaleID() ?? "0";
+        $this->query->joinLeft(SchemaDetector::getInstance()->getAdminSchema().".full_bio__writers", "t7")->on(["t1.id"=>"t7.author_id", "t7.locale_id" => $locale_id]);
     }
 
     protected function getLinkingColumnName(): string

@@ -18,7 +18,8 @@ class AuthorTaglineJoin extends AbstractJoins
     
     public function appendJoins(): void
     { 
-        $this->query->joinLeft(SchemaDetector::getInstance()->getAdminSchema().".tagline__writers", "t4")->on(["t1.id"=>"t4.author_id"]);
+        $locale_id = $this->filter->getLocaleID() ?? "0";
+        $this->query->joinLeft(SchemaDetector::getInstance()->getAdminSchema().".tagline__writers", "t4")->on(["t1.id"=>"t4.author_id", "t4.locale_id" => $locale_id]);
     }
 
     protected function getLinkingColumnName(): string

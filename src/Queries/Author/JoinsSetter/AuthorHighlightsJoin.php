@@ -18,7 +18,8 @@ class AuthorHighlightsJoin extends AbstractJoins
     
     public function appendJoins(): void
     { 
-        $this->query->joinLeft(SchemaDetector::getInstance()->getAdminSchema().".highlights__writers", "t6")->on(["t1.id"=>"t6.author_id"]);
+        $locale_id = $this->filter->getLocaleID() ?? "0";
+        $this->query->joinLeft(SchemaDetector::getInstance()->getAdminSchema().".highlights__writers", "t6")->on(["t1.id"=>"t6.author_id", "t6.locale_id" => $locale_id]);
     }
 
     protected function getLinkingColumnName(): string
