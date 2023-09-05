@@ -13,7 +13,5 @@ class Author extends \Entity
     public ?string $full_bio = null;
     public ?string $tagline = null; // prev role (string) but now it is based on locale_id
     public ?array $social_networks = [];
-    // public ?array $games;
-    // public ?array $articles;
 
 }

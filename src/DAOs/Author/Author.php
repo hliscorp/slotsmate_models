@@ -47,7 +47,7 @@ class Author extends AbstractEntityInfo
         return new AuthorBaseQuery($this->filter);
     }
 
-    protected function appendSocialNetworks(): void
+    private function appendSocialNetworks(): void
     {
         $builder = new SocialNetworksBuilder();
         $querier = new SocialNetworksQuery($this->filter);

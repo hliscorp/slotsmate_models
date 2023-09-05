@@ -32,20 +32,35 @@ class AuthorBaseQuery extends Query
         $this->setWhere($this->query->where());
     }
 
-    protected function setJoins(): AuthorTaglineJoin 
+    protected function setJoins(): void 
+    {
+       $this->setTaglineJoin();
+    }
+
+    protected function setTaglineJoin(): AuthorTaglineJoin
     {
         return new AuthorTaglineJoin($this->filter, $this->query);
     }
 
-    private function setFields(Fields $fields): void
+    protected function getFields(): AuthorFields
     {
-        $setter = new AuthorFields($this->filter);
+        return new AuthorFields($this->filter);
+    }
+
+    protected function getConditions(): AuthorConditions
+    {
+        return new AuthorConditions($this->filter);
+    }
+
+    protected function setFields(Fields $fields): void
+    {
+        $setter = $this->getFields();
         $setter->appendFields($fields);
     }
 
-    private function setWhere(Condition $condition): void
+    protected function setWhere(Condition $condition): void
     {
-        $setter = new AuthorConditions($this->filter);
+        $setter = $this->getConditions();
         $setter->appendConditions($condition);
         $this->parameters = $setter->getParameters();
     }
