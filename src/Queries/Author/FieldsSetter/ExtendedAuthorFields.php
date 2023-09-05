@@ -12,7 +12,6 @@ class ExtendedAuthorFields extends AuthorFields
     {
         parent::appendFields($fields);
         $fields->add("t5.expertise");
-        $fields->add("t6.highlights");
         $fields->add("t7.full_bio");
     }
 

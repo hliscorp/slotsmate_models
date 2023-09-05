@@ -14,7 +14,6 @@ class Extended extends Basic
         $author = parent::build($row);
 
         $author->full_bio = $row['full_bio'];
-        $author->highlights = $row['highlights'];
         $author->expertise = $row['expertise'];
 
         return $author;

@@ -32,8 +32,11 @@ class AuthorConditions extends AbstractConditions
 
     protected function setLocaleCondition(Condition $condition): void
     {
+        $locale_id = $this->filter->getLocaleID() ?? "0";
         // Tagline
-        $condition->set("t4.locale_id", $this->filter->getLocaleID() ?? "0");
+        $condition->set("t4.locale_id", $locale_id);
+        // Highlights
+        $condition->set("t6.locale_id", $locale_id);
     }
 
     protected function setDisabledCondition(Condition $condition): void

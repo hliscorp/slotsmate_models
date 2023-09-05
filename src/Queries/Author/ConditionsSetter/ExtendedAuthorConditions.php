@@ -20,8 +20,6 @@ class ExtendedAuthorConditions extends AuthorConditions
 
         // Expertise
         $condition->set("t5.locale_id", $locale_id);
-        // Highlights
-        $condition->set("t6.locale_id", $locale_id);
         // Full Bio
         $condition->set("t7.locale_id", $locale_id);
     }

@@ -5,7 +5,6 @@ namespace Hlis\SlotsMateModels\Queries\Author;
 use Hlis\SlotsMateModels\Queries\Author\ConditionsSetter\ExtendedAuthorConditions;
 use Hlis\SlotsMateModels\Queries\Author\FieldsSetter\ExtendedAuthorFields;
 use Hlis\SlotsMateModels\Queries\Author\JoinsSetter\AuthorExpertiseJoin;
-use Hlis\SlotsMateModels\Queries\Author\JoinsSetter\AuthorHighlightsJoin;
 use Hlis\SlotsMateModels\Queries\Author\JoinsSetter\AuthorFullBioJoin;
 use Hlis\SlotsMateModels\Filters\AuthorFilter;
 use Hlis\SlotsMateModels\Queries\Author\AuthorBaseQuery;
@@ -23,7 +22,6 @@ class AuthorExtendedQuery extends AuthorBaseQuery
     {
         parent::setJoins();
         $this->setExpertiseJoin();
-        $this->setHighlightsJoin();
         $this->setFullBioJoin();
     }
 
@@ -40,11 +38,6 @@ class AuthorExtendedQuery extends AuthorBaseQuery
     private function setExpertiseJoin(): AuthorExpertiseJoin
     {
         return new AuthorExpertiseJoin($this->filter, $this->query);
-    }
-
-    private function setHighlightsJoin(): AuthorHighlightsJoin
-    {
-        return new AuthorHighlightsJoin($this->filter, $this->query);
     }
 
     private function setFullBioJoin(): AuthorFullBioJoin

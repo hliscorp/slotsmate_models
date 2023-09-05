@@ -5,6 +5,7 @@ namespace Hlis\SlotsMateModels\Queries\Author;
 use Hlis\SlotsMateModels\Queries\Author\ConditionsSetter\AuthorConditions;
 use Hlis\SlotsMateModels\Queries\Author\FieldsSetter\AuthorFields;
 use Hlis\SlotsMateModels\Queries\Author\JoinsSetter\AuthorTaglineJoin;
+use Hlis\SlotsMateModels\Queries\Author\JoinsSetter\AuthorHighlightsJoin;
 use Hlis\SlotsMateModels\Filters\AuthorFilter;
 
 use Hlis\GlobalModels\Queries\Query;
@@ -35,6 +36,12 @@ class AuthorBaseQuery extends Query
     protected function setJoins(): void 
     {
        $this->setTaglineJoin();
+       $this->setHighlightsJoin();
+    }
+
+    protected function setHighlightsJoin(): AuthorHighlightsJoin
+    {
+        return new AuthorHighlightsJoin($this->filter, $this->query);
     }
 
     protected function setTaglineJoin(): AuthorTaglineJoin

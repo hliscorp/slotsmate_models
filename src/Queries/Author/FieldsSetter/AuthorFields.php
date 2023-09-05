@@ -15,6 +15,7 @@ class AuthorFields extends AbstractFields
         $fields->add("t1.last_name");
         $fields->add("t1.date_joined");
         $fields->add("t4.tagline");
+        $fields->add("t6.highlights");
     }
 
 }
