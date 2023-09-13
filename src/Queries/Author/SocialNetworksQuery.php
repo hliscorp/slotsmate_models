@@ -31,7 +31,7 @@ class SocialNetworksQuery extends Query
 
     protected function setOrderBy(): void 
     {
-        $this->query->orderBy()->add("t3.prority", OrderBy::DESC);
+        $this->query->orderBy()->add("t3.priority", OrderBy::DESC);
     }
 
     private function setFields(Fields $fields): void
