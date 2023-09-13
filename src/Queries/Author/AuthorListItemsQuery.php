@@ -8,7 +8,6 @@ use Hlis\SlotsMateModels\Queries\Author\SortBy\AuthorSortBy;
 use Hlis\SlotsMateModels\Queries\Author\AuthorBaseQuery;
 use Lucinda\Query\Clause\Fields;
 use Lucinda\Query\Vendor\MySQL\Select;
-use Lucinda\Query\Operator\OrderBy as OrderByOperator;
 
 
 class AuthorListItemsQuery extends AuthorBaseQuery

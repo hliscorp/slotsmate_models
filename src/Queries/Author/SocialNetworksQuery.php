@@ -11,6 +11,7 @@ use Hlis\GlobalModels\SchemaDetector;
 use Lucinda\Query\Clause\Condition;
 use Lucinda\Query\Clause\Fields;
 use Lucinda\Query\Vendor\MySQL\Select;
+use Lucinda\Query\Operator\OrderBy;
 
 
 class SocialNetworksQuery extends Query
@@ -28,7 +29,10 @@ class SocialNetworksQuery extends Query
         $this->setOrderBy();   
     }
 
-    protected function setOrderBy(): void {}
+    protected function setOrderBy(): void 
+    {
+        $this->query->orderBy()->add("t3.prority", OrderBy::DESC);
+    }
 
     private function setFields(Fields $fields): void
     {
