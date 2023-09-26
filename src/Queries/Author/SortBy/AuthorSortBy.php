@@ -15,7 +15,7 @@ class AuthorSortBy extends AbstractOrderBy
                 $this->orderBy->add("t1.first_name", OrderBy::ASC);
                 break;
             case AuthorSortCriteria::DATE_CREATED:
-                $this->orderBy->add("t1.date_added", OrderBy::DESC);
+                $this->orderBy->add("t1.date_joined", OrderBy::DESC);
                 break;
             default:
                 throw new \InvalidArgumentException("Invalid sort criteria: " . $orderByAlias);
