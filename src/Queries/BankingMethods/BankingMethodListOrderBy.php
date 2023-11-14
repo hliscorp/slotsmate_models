@@ -1,8 +1,8 @@
 <?php
 
-namespace Hlis\SlotsmateModels\Queries\BankingMethods;
+namespace Hlis\SlotsMateModels\Queries\BankingMethods;
 
-use Hlis\SlotsmateModels\Enums\BankingMethodsOrderBy;
+use Hlis\SlotsMateModels\Enums\BankingMethodsOrderBy;
 use Hlis\GlobalModels\Queries\AbstractOrderBy;
 use Lucinda\Query\Operator\OrderBy;
 

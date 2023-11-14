@@ -1,9 +1,9 @@
 <?php
 
-namespace Hlis\SlotsmateModels\Queries\BankingMethods;
+namespace Hlis\SlotsMateModels\Queries\BankingMethods;
 
-use Hlis\SlotsmateModels\Queries\BankingMethods\ConditionsSetter\ListConditionsSetter;
-use Hlis\SlotsmateModels\Queries\BankingMethods\JoinsSetter\ListJoinsSetter;
+use Hlis\SlotsMateModels\Queries\BankingMethods\ConditionsSetter\ListConditionsSetter;
+use Hlis\SlotsMateModels\Queries\BankingMethods\JoinsSetter\ListJoinsSetter;
 use \Hlis\GlobalModels\Queries\BankingMethods\BankingMethodListItems as DefaultBankingMethodListItems;
 use Lucinda\Query\Clause\Condition;
 use Lucinda\Query\Clause\Fields;

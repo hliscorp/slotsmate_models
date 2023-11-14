@@ -1,8 +1,8 @@
 <?php
 
-namespace Hlis\SlotsmateModels\Builders\BankingMethod;
+namespace Hlis\SlotsMateModels\Builders\BankingMethod;
 
-use Hlis\SlotsmateModels\Entities\BankingMethod;
+use Hlis\SlotsMateModels\Entities\BankingMethod;
 use Hlis\GlobalModels\Builders\BankingMethod\Basic as DefaultBasic;
 
 class Basic extends DefaultBasic

@@ -1,6 +1,6 @@
 <?php
 
-namespace Hlis\SlotsmateModels\Queries\BankingMethods\JoinsSetter;
+namespace Hlis\SlotsMateModels\Queries\BankingMethods\JoinsSetter;
 
 class SearchJoinsSetter extends ListJoinsSetter
 {

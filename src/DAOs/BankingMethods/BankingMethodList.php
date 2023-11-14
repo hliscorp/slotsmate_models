@@ -1,11 +1,11 @@
 <?php
 
-namespace Hlis\SlotsmateModels\DAOs\BankingMethods;
+namespace Hlis\SlotsMateModels\DAOs\BankingMethods;
 
-use Hlis\SlotsmateModels\Builders\BankingMethod\Basic as BankingMethodBuilder;
+use Hlis\SlotsMateModels\Builders\BankingMethod\Basic as BankingMethodBuilder;
 use Hlis\GlobalModels\DAOs\BankingMethods\BankingMethodList as GlobalBankingMethodList;
-use Hlis\SlotsmateModels\Queries\BankingMethods\BankingMethodListItems as BankingMethodListQuery;
-use function Hlis\SlotsmateModels\DAOs\BankingMethods\SQL;
+use Hlis\SlotsMateModels\Queries\BankingMethods\BankingMethodListItems as BankingMethodListQuery;
+use function Hlis\SlotsMateModels\DAOs\BankingMethods\SQL;
 
 class BankingMethodList extends GlobalBankingMethodList
 {

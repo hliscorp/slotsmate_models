@@ -1,6 +1,6 @@
 <?php
 
-namespace Hlis\SlotsmateModels\Queries\BankingMethods;
+namespace Hlis\SlotsMateModels\Queries\BankingMethods;
 
 use Hlis\GlobalModels\Queries\AbstractFields;
 use Lucinda\Query\Clause\Fields;

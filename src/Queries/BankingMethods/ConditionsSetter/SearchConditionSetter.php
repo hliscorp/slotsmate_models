@@ -1,6 +1,6 @@
 <?php
 
-namespace Hlis\SlotsmateModels\Queries\BankingMethods\ConditionsSetter;
+namespace Hlis\SlotsMateModels\Queries\BankingMethods\ConditionsSetter;
 
 use Lucinda\Query\Clause\Condition;
 
