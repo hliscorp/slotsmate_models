@@ -4,7 +4,7 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "ee85931c2da4bb1ef1b132f30acd3ab2",
+  "content-hash": "3ebf4c6a4ed58f8e344c144aba6f18ec",
   "packages": [
     {
       "name": "hlis/global-models",
@@ -12,17 +12,18 @@
       "source": {
         "type": "git",
         "url": "git@github.com:hliscorp/global_models.git",
-        "reference": "28df36da6e5ff09a94c21e17a985c9b59e58a813"
+        "reference": "4d43df2f8ba883e372c0cb4d7e776c7a5c726659"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/hliscorp/global_models/zipball/28df36da6e5ff09a94c21e17a985c9b59e58a813",
-        "reference": "28df36da6e5ff09a94c21e17a985c9b59e58a813",
+        "url": "https://api.github.com/repos/hliscorp/global_models/zipball/4d43df2f8ba883e372c0cb4d7e776c7a5c726659",
+        "reference": "4d43df2f8ba883e372c0cb4d7e776c7a5c726659",
         "shasum": ""
       },
       "require": {
         "ext-ctype": "*",
         "ext-readline": "*",
+        "ext-simplexml": "*",
         "lucinda/queries": "~2.0",
         "lucinda/sql-data-access": "~2.0"
       },
@@ -49,7 +50,7 @@
         "source": "https://github.com/hliscorp/global_models/tree/master",
         "issues": "https://github.com/hliscorp/global_models/issues"
       },
-      "time": "2023-08-09T06:23:06+00:00"
+      "time": "2023-11-14T10:12:58+00:00"
     },
     {
       "name": "lucinda/queries",
@@ -156,5 +157,5 @@
   "platform-overrides": {
     "php": "7.4"
   },
-  "plugin-api-version": "2.2.0"
+  "plugin-api-version": "2.6.0"
 }
