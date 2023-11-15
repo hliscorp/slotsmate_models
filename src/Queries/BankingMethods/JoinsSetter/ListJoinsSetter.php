@@ -12,8 +12,10 @@ class ListJoinsSetter extends BankingMethodListJoins
 
         if ($this->filter->getHasOpenCasinos()) {
             $this->setCasinosJoin();
+            $this->setCasinoCountryAllowedJoin();
             $this->groupBy = true;
         }
+
 
     }
 
@@ -27,12 +29,12 @@ class ListJoinsSetter extends BankingMethodListJoins
         ]);
     }
 
-    protected function setSelectedCountryJoin(): void
+    protected function setCasinoCountryAllowedJoin(): void
     {
-        if ($selectedCountry = $this->filter->getSelectedCountry()) {
+        if ($userCountry = $this->filter->getUserCountry()) {
             $this->query->joinInner("casinos__countries_allowed", "t2")->on([
                 "t5.id" => "t2.casino_id",
-                "t2.country_id" => $selectedCountry
+                "t2.country_id" => $userCountry
             ]);
         }
     }
