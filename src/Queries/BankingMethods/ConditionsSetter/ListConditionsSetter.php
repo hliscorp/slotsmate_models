@@ -4,6 +4,7 @@ namespace Hlis\SlotsMateModels\Queries\BankingMethods\ConditionsSetter;
 
 use Hlis\GlobalModels\Queries\BankingMethods\ConditionsSetter\BankingMethodConditions;
 use Lucinda\Query\Clause\Condition;
+use Lucinda\Query\Operator\Comparison;
 
 class ListConditionsSetter extends BankingMethodConditions
 {
@@ -30,7 +31,14 @@ class ListConditionsSetter extends BankingMethodConditions
     protected function setExcludedIdCondition(Condition $condition): void
     {
         if ($excludedId = $this->filter->getExcludedId()) {
-            $condition->set("t1.id", $excludedId, false);
+            $condition->set("t1.id", $excludedId, Comparison::DIFFERS);
+        }
+    }
+
+    protected function setSelectedCountryCondition(Condition $condition): void
+    {
+        if ($this->filter->getSelectedCountry()) {
+            $condition->set("t2.is_allowed", 1);
         }
     }
 
