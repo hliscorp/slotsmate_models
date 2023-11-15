@@ -9,5 +9,21 @@ class ListJoinsSetter extends BankingMethodListJoins
     protected function appendJoins(): void
     {
         parent::appendJoins();
+
+        if ($this->filter->getHasOpenCasinos()) {
+            $this->setCasinosJoin();
+            $this->groupBy = true;
+        }
+
+    }
+
+    protected function setCasinosJoin(): void
+    {
+        $this->query->joinInner("casinos__banking_methods", "t4")->on([
+            "t1.id" => "t4.banking_method_id"
+        ]);
+        $this->query->joinInner("casinos", "t5")->on([
+            "t4.casino_id" => "t5.id"
+        ]);
     }
 }
