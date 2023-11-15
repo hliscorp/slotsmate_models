@@ -39,7 +39,7 @@ class ListConditionsSetter extends BankingMethodConditions
     protected function setNameCondition(Condition $condition): void
     {
         if ($name = $this->filter->getName()) {
-            $condition->set("t1.name", $name);
+            $condition->set("t1.name", '"' . $name . '"');
         }
     }
 
