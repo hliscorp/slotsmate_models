@@ -18,7 +18,6 @@ class ListConditionsSetter extends BankingMethodConditions
     {
         if ($this->filter->getHasOpenCasinos()) {
             $condition->set("t5.is_open", 1);
-            $condition->set("t5.is_restricted", 0);
         }
     }
 
