@@ -36,11 +36,4 @@ class ListConditionsSetter extends BankingMethodConditions
         }
     }
 
-    protected function setSelectedCountryCondition(Condition $condition): void
-    {
-        if ($this->filter->getSelectedCountry()) {
-            $condition->set("t2.is_allowed", 1);
-        }
-    }
-
 }

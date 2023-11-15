@@ -30,12 +30,10 @@ class ListJoinsSetter extends BankingMethodListJoins
     protected function setSelectedCountryJoin(): void
     {
         if ($selectedCountry = $this->filter->getSelectedCountry()) {
-            $this->buildSimpleJoin(
-                "banking_methods__countries",
-                "t2",
-                "country_id",
-                [$selectedCountry]
-            );
+            $this->query->joinInner("casinos__countries_allowed", "t2")->on([
+                "t5.id" => "t2.casino_id",
+                "t2.country_id" => $selectedCountry
+            ]);
         }
     }
 }
