@@ -13,8 +13,8 @@ class Basic extends DefaultBasic
         $entity->id = $row['id'];
         $entity->name = $row['name'];
         $entity->dateUpdated = ($row['date_updated']??"");
-        $entity->isLocaleSupported = $row["isLocaleSupported"]??null;
         $entity->isAllowedByUserCountry = $row["is_allowed"]??null;
+        $entity->counter = $row["count"]??null;
         return $entity;
     }
 }

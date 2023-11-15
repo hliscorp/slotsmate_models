@@ -11,14 +11,11 @@ class BankingMethodListFields extends AbstractFields
     {
         $fields->add("t1.id");
         $fields->add("t1.name");
-        if ($this->filter->getHasOpenCasinos()) {
-            $fields->add("COUNT(t4.casino_id)", "counter");
+        if ($this->filter->getTotalCount()) {
+            $fields->add("COUNT(t1.id)", "count");
         }
-        if ($this->filter->getHasLatestDateUpdated()) {
-            $fields->add("MAX(t5.date)", "date_updated");
-        }
-        if ($this->filter->getMethodRestrictedInCountry()) {
-            $fields->add("t9.is_allowed", "is_allowed");
+        if ($this->filter->getIsOpen()) {
+            $fields->add("is_open");
         }
     }
 }
