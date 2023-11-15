@@ -11,9 +11,6 @@ class BankingMethodListFields extends AbstractFields
     {
         $fields->add("t1.id");
         $fields->add("t1.name");
-        if ($this->filter->getTotalCount()) {
-            $fields->add("COUNT(t1.id)", "count");
-        }
         if ($this->filter->getIsOpen()) {
             $fields->add("is_open");
         }
