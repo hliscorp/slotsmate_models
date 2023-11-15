@@ -8,6 +8,17 @@ class BankingMethod extends DefaultBankingMethod
     private ?int $excludedId = null;
     private ?bool $hasOpenCasinos = null;
     private ?bool $hasLatestDateUpdated = null;
+    private ?string $name = null;
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): void
+    {
+        $this->name = $name;
+    }
 
     public function getExcludedId(): ?int
     {

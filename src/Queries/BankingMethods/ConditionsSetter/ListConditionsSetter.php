@@ -14,6 +14,7 @@ class ListConditionsSetter extends BankingMethodConditions
 
         $this->setCasinosCondition($condition);
         $this->setExcludedIdCondition($condition);
+        $this->setNameCondition($condition);
     }
 
     protected function setCasinosCondition(Condition $condition): void
@@ -32,6 +33,13 @@ class ListConditionsSetter extends BankingMethodConditions
     {
         if ($excludedId = $this->filter->getExcludedId()) {
             $condition->set("t1.id", $excludedId, Comparison::DIFFERS);
+        }
+    }
+
+    protected function setNameCondition(Condition $condition): void
+    {
+        if ($name = $this->filter->getName()) {
+            $condition->set("t1.name", $name);
         }
     }
 
