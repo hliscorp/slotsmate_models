@@ -5,7 +5,18 @@ namespace Hlis\SlotsMateModels\Filters;
 use Hlis\GlobalModels\Filters\BankingMethod as DefaultBankingMethod;
 class BankingMethod extends DefaultBankingMethod
 {
+    private ?int $excludedId = null;
     private ?bool $hasOpenCasinos = null;
+
+    public function getExcludedId(): ?int
+    {
+        return $this->excludedId;
+    }
+
+    public function setExcludedId(?int $excludedId): void
+    {
+        $this->excludedId = $excludedId;
+    }
 
     public function getHasOpenCasinos(): ?bool
     {

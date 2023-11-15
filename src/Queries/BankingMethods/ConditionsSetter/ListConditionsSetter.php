@@ -12,6 +12,7 @@ class ListConditionsSetter extends BankingMethodConditions
         parent::appendConditions($condition);
 
         $this->setCasinosCondition($condition);
+        $this->setExcludedIdCondition($condition);
     }
 
     protected function setCasinosCondition(Condition $condition): void
@@ -24,6 +25,13 @@ class ListConditionsSetter extends BankingMethodConditions
     protected function setIsOpenCondition(Condition $condition): void
     {
         $condition->set("t1.is_open", 1); // this condition is always true in site
+    }
+
+    protected function setExcludedIdCondition(Condition $condition): void
+    {
+        if ($excludedId = $this->filter->getExcludedId()) {
+            $condition->set("t1.id", $excludedId, false);
+        }
     }
 
 }
