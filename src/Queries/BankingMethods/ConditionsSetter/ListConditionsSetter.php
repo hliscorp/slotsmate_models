@@ -14,7 +14,6 @@ class ListConditionsSetter extends BankingMethodConditions
 
         $this->setCasinosCondition($condition);
         $this->setExcludedIdCondition($condition);
-        $this->setSelectedCountryCondition($condition);
     }
 
     protected function setCasinosCondition(Condition $condition): void
