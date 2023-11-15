@@ -10,13 +10,11 @@ class ListJoinsSetter extends BankingMethodListJoins
     {
         parent::appendJoins();
 
-        if ($this->filter->getHasOpenCasinos()) {
+        if ($this->filter->getHasOpenCasinos() || $this->filter->getHasLatestDateUpdated()) {
             $this->setCasinosJoin();
             $this->setCasinoCountryAllowedJoin();
             $this->groupBy = true;
         }
-
-
     }
 
     protected function setCasinosJoin(): void

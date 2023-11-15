@@ -7,6 +7,7 @@ class BankingMethod extends DefaultBankingMethod
 {
     private ?int $excludedId = null;
     private ?bool $hasOpenCasinos = null;
+    private ?bool $hasLatestDateUpdated = null;
 
     public function getExcludedId(): ?int
     {
@@ -26,5 +27,15 @@ class BankingMethod extends DefaultBankingMethod
     public function setHasOpenCasinos(?bool $hasOpenCasinos): void
     {
         $this->hasOpenCasinos = $hasOpenCasinos;
+    }
+
+    public function getHasLatestDateUpdated(): ?bool
+    {
+        return $this->hasLatestDateUpdated;
+    }
+
+    public function setHasLatestDateUpdated(?bool $hasLatestDateUpdated): void
+    {
+        $this->hasLatestDateUpdated = $hasLatestDateUpdated;
     }
 }
