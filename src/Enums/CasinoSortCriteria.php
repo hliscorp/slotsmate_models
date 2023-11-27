@@ -1,0 +1,14 @@
+<?php
+
+namespace Hlis\SlotsMateModels\Enums;
+
+class CasinoSortCriteria
+{
+    const NONE = 1;
+    const TOP_RATED = 2;
+    const NEWEST = 3;
+    const POPULARITY = 4;
+    const RELEVANT = 5;
+    const FREE_BONUS = 6;
+    const PRIORITY_NEWEST = 7;
+}
