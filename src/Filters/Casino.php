@@ -18,7 +18,6 @@ class Casino extends \Hlis\GlobalModels\Filters\Casino
     protected ?bool $deposit = false;
     protected ?bool $withdrawal = false;
     protected ?string $url = '';
-    protected ?string $banking_method = '';
     protected ?BankingMethod $bankingMethods = null;
     protected ?bool $isPopularGameTypes = null;
     protected ?bool $isAllGameTypes = null;
@@ -131,16 +130,6 @@ class Casino extends \Hlis\GlobalModels\Filters\Casino
     public function setBonusType($data)
     {
         $this->bonus_type = $data;
-    }
-
-    public function getBankingMethod()
-    {
-        return $this->banking_method;
-    }
-
-    public function setBankingMethod($data)
-    {
-        $this->banking_method = $data;
     }
 
     public function getPaymentDeposit()
