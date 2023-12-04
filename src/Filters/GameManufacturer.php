@@ -9,6 +9,8 @@ class GameManufacturer extends DefaultGameManufacturer
     private ?bool $isMain = false;
     private ?bool $votes = false;
     private ?bool $isNew = false;
+    private ?bool $iCasinoOpen = false;
+    private ?bool $isGameOpen = false;
     private ?int $volatility = null;
     private ?array $slotTypes = null;
     private ?string $slotLabel = null;
@@ -88,16 +90,6 @@ class GameManufacturer extends DefaultGameManufacturer
     public function getSlotTypes(): ?array
     {
         return $this->slotTypes;
-    }
-
-    public function setGameVotes(bool $votes): void
-    {
-        $this->votes = $votes;
-    }
-
-    public function getGameVotes(): ?bool
-    {
-        return $this->votes;
     }
 
     public function setSlotLabel(string $label): void
