@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:hliscorp/global_models.git",
-                "reference": "5f5d3d5f0a42ce34388e40168aa362935f124c18"
+                "reference": "65b47b678c92709f641887b29325010f117d4a7f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hliscorp/global_models/zipball/5f5d3d5f0a42ce34388e40168aa362935f124c18",
-                "reference": "5f5d3d5f0a42ce34388e40168aa362935f124c18",
+                "url": "https://api.github.com/repos/hliscorp/global_models/zipball/65b47b678c92709f641887b29325010f117d4a7f",
+                "reference": "65b47b678c92709f641887b29325010f117d4a7f",
                 "shasum": ""
             },
             "require": {
@@ -50,7 +50,7 @@
                 "source": "https://github.com/hliscorp/global_models/tree/master",
                 "issues": "https://github.com/hliscorp/global_models/issues"
             },
-            "time": "2023-11-24T07:23:25+00:00"
+            "time": "2023-12-06T09:43:39+00:00"
         },
         {
             "name": "lucinda/queries",
