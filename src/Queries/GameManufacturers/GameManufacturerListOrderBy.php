@@ -11,11 +11,16 @@ class GameManufacturerListOrderBy extends AbstractOrderBy
     protected function setByAlias(string $orderByAlias): void
     {
         switch ($orderByAlias) {
-                case GameManufacturersOrderBy::COUNTER:
-                default:
-                $this->orderBy->add("t1.priority", OrderBy::DESC);
-                $this->orderBy->add("nr", OrderBy::DESC);
-                $this->orderBy->add("t1.id");
+                case GameManufacturersOrderBy::MAIN:
+                    $this->orderBy->add("t1.main", OrderBy::DESC);
+                    $this->orderBy->add("t1.priority", OrderBy::DESC);
+                    $this->orderBy->add("nr", OrderBy::DESC);
+                    $this->orderBy->add("t1.id");
+                    break;
+                case GameManufacturersOrderBy::PRIORITY:
+                    $this->orderBy->add("t1.priority", OrderBy::DESC);
+                    $this->orderBy->add("nr", OrderBy::DESC);
+                    $this->orderBy->add("t1.id");
                 break;
         }
     }
