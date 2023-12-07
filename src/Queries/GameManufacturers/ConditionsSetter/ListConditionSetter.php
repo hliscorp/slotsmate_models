@@ -7,7 +7,7 @@ class ListConditionSetter extends GameManufacturerConditions
 {
     public function appendConditions(Condition $condition): void
     {
-        parent::appendConditions();
+        parent::appendConditions($condition);
         $this->setDevice($condition);
         $this->setGameTypeCondition($condition);
         $this->setDateLaunchedCondition($condition);
