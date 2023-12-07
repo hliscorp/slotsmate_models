@@ -12,7 +12,6 @@ class Basic extends DefaultBasic
         $entity = new GameManufacturer();
         $entity->id = $row['id'];
         $entity->name = $row['name'];
-        $entity->counter = $row['nr'] ?? null;
         return $entity;
     }
 }
