@@ -23,7 +23,8 @@ class ListConditionSetter extends GameManufacturerConditions
 
     protected function setDateLaunchedCondition(Condition $condition): void
     {
-        $condition->set("COALESCE(t2.date_launched, '0000-00-00')", date("Y-m-d"), \Lucinda\Query\Operator\Comparison::LESSER_EQUALS);
+        $date = date("Y-m-d");
+        $condition->set("COALESCE(t2.date_launched, '0000-00-00')","'".$date."'" , \Lucinda\Query\Operator\Comparison::LESSER_EQUALS);
     }
 
     protected function setDevice(Condition $condition): void
