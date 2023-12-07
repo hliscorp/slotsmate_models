@@ -14,7 +14,6 @@ class Basic extends DefaultBasic
         $entity->name = $row['name'];
         $entity->dateUpdated = ($row['date_updated']??"");
         $entity->isAllowedByUserCountry = $row["is_allowed"]??null;
-        $entity->counter = $row["counter"]??null;
         return $entity;
     }
 }

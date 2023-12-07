@@ -1,161 +1,161 @@
 {
-  "_readme": [
-    "This file locks the dependencies of your project to a known state",
-    "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
-    "This file is @generated automatically"
-  ],
-  "content-hash": "3ebf4c6a4ed58f8e344c144aba6f18ec",
-  "packages": [
-    {
-      "name": "hlis/global-models",
-      "version": "dev-master",
-      "source": {
-        "type": "git",
-        "url": "git@github.com:hliscorp/global_models.git",
-        "reference": "4d43df2f8ba883e372c0cb4d7e776c7a5c726659"
-      },
-      "dist": {
-        "type": "zip",
-        "url": "https://api.github.com/repos/hliscorp/global_models/zipball/4d43df2f8ba883e372c0cb4d7e776c7a5c726659",
-        "reference": "4d43df2f8ba883e372c0cb4d7e776c7a5c726659",
-        "shasum": ""
-      },
-      "require": {
-        "ext-ctype": "*",
-        "ext-readline": "*",
-        "ext-simplexml": "*",
-        "lucinda/queries": "~2.0",
-        "lucinda/sql-data-access": "~2.0"
-      },
-      "default-branch": true,
-      "type": "project",
-      "autoload": {
-        "psr-4": {
-          "Hlis\\GlobalModels\\Test\\": "test/",
-          "Hlis\\GlobalModels\\": "src/"
-        }
-      },
-      "license": [
-        "MIT"
-      ],
-      "authors": [
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "3ebf4c6a4ed58f8e344c144aba6f18ec",
+    "packages": [
         {
-          "name": "Lucian Popescu",
-          "email": "lucian@greentreemarketing.ro",
-          "role": "Developer"
+            "name": "hlis/global-models",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:hliscorp/global_models.git",
+                "reference": "5f5d3d5f0a42ce34388e40168aa362935f124c18"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hliscorp/global_models/zipball/5f5d3d5f0a42ce34388e40168aa362935f124c18",
+                "reference": "5f5d3d5f0a42ce34388e40168aa362935f124c18",
+                "shasum": ""
+            },
+            "require": {
+                "ext-ctype": "*",
+                "ext-readline": "*",
+                "ext-simplexml": "*",
+                "lucinda/queries": "~2.0",
+                "lucinda/sql-data-access": "~2.0"
+            },
+            "default-branch": true,
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "Hlis\\GlobalModels\\Test\\": "test/",
+                    "Hlis\\GlobalModels\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lucian Popescu",
+                    "email": "lucian@greentreemarketing.ro",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Hlis Models API",
+            "support": {
+                "source": "https://github.com/hliscorp/global_models/tree/master",
+                "issues": "https://github.com/hliscorp/global_models/issues"
+            },
+            "time": "2023-11-24T07:23:25+00:00"
+        },
+        {
+            "name": "lucinda/queries",
+            "version": "v2.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aherne/php-sql-statements-api.git",
+                "reference": "f2879519cc57466d1c81aad83bb9a6e0f027dcc4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aherne/php-sql-statements-api/zipball/f2879519cc57466d1c81aad83bb9a6e0f027dcc4",
+                "reference": "f2879519cc57466d1c81aad83bb9a6e0f027dcc4",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1|^8.0"
+            },
+            "require-dev": {
+                "lucinda/unit-testing": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Lucinda\\Query\\": "src/",
+                    "Test\\Lucinda\\Query\\": "tests/",
+                    "Lucinda\\Query\\Vendor\\": "drivers/",
+                    "Test\\Lucinda\\Query\\Vendor\\": "tests_drivers/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lucian Popescu",
+                    "email": "lucian.gabriel.popescu@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "API that generates SQL statements programmatically based on official standards or their vendor-specific derivation",
+            "homepage": "https://github.com/aherne/php-sql-statements-api",
+            "keywords": [
+                "generation",
+                "query",
+                "sql"
+            ],
+            "support": {
+                "issues": "https://github.com/aherne/php-sql-statements-api/issues",
+                "source": "https://github.com/aherne/php-sql-statements-api/tree/v2.0.6"
+            },
+            "time": "2022-01-08T14:35:59+00:00"
+        },
+        {
+            "name": "lucinda/sql-data-access",
+            "version": "v2.1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aherne/php-sql-data-access-api.git",
+                "reference": "894227e2cfccd79bd529e4a0f465d2e9ae0fb0fa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aherne/php-sql-data-access-api/zipball/894227e2cfccd79bd529e4a0f465d2e9ae0fb0fa",
+                "reference": "894227e2cfccd79bd529e4a0f465d2e9ae0fb0fa",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lucian Popescu",
+                    "email": "lucian.gabriel.popescu@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Abstracts all communication with SQL servers on top of PDO",
+            "homepage": "http://www.lucinda-framework.com/sql-data-access",
+            "keywords": [
+                "data access",
+                "sql"
+            ],
+            "support": {
+                "issues": "https://github.com/aherne/php-sql-data-access-api/issues",
+                "source": "https://github.com/aherne/php-sql-data-access-api/tree/v2.1.0.1"
+            },
+            "time": "2020-01-03T06:33:32+00:00"
         }
-      ],
-      "description": "Hlis Models API",
-      "support": {
-        "source": "https://github.com/hliscorp/global_models/tree/master",
-        "issues": "https://github.com/hliscorp/global_models/issues"
-      },
-      "time": "2023-11-14T10:12:58+00:00"
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "hlis/global-models": 20
     },
-    {
-      "name": "lucinda/queries",
-      "version": "v2.0.6",
-      "source": {
-        "type": "git",
-        "url": "https://github.com/aherne/php-sql-statements-api.git",
-        "reference": "f2879519cc57466d1c81aad83bb9a6e0f027dcc4"
-      },
-      "dist": {
-        "type": "zip",
-        "url": "https://api.github.com/repos/aherne/php-sql-statements-api/zipball/f2879519cc57466d1c81aad83bb9a6e0f027dcc4",
-        "reference": "f2879519cc57466d1c81aad83bb9a6e0f027dcc4",
-        "shasum": ""
-      },
-      "require": {
-        "php": "^7.1|^8.0"
-      },
-      "require-dev": {
-        "lucinda/unit-testing": "^1.0"
-      },
-      "type": "library",
-      "autoload": {
-        "psr-4": {
-          "Lucinda\\Query\\": "src/",
-          "Test\\Lucinda\\Query\\": "tests/",
-          "Lucinda\\Query\\Vendor\\": "drivers/",
-          "Test\\Lucinda\\Query\\Vendor\\": "tests_drivers/"
-        }
-      },
-      "notification-url": "https://packagist.org/downloads/",
-      "license": [
-        "MIT"
-      ],
-      "authors": [
-        {
-          "name": "Lucian Popescu",
-          "email": "lucian.gabriel.popescu@gmail.com",
-          "role": "Developer"
-        }
-      ],
-      "description": "API that generates SQL statements programmatically based on official standards or their vendor-specific derivation",
-      "homepage": "https://github.com/aherne/php-sql-statements-api",
-      "keywords": [
-        "generation",
-        "query",
-        "sql"
-      ],
-      "support": {
-        "issues": "https://github.com/aherne/php-sql-statements-api/issues",
-        "source": "https://github.com/aherne/php-sql-statements-api/tree/v2.0.6"
-      },
-      "time": "2022-01-08T14:35:59+00:00"
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "platform-overrides": {
+        "php": "7.4"
     },
-    {
-      "name": "lucinda/sql-data-access",
-      "version": "v2.1.0.1",
-      "source": {
-        "type": "git",
-        "url": "https://github.com/aherne/php-sql-data-access-api.git",
-        "reference": "894227e2cfccd79bd529e4a0f465d2e9ae0fb0fa"
-      },
-      "dist": {
-        "type": "zip",
-        "url": "https://api.github.com/repos/aherne/php-sql-data-access-api/zipball/894227e2cfccd79bd529e4a0f465d2e9ae0fb0fa",
-        "reference": "894227e2cfccd79bd529e4a0f465d2e9ae0fb0fa",
-        "shasum": ""
-      },
-      "type": "library",
-      "notification-url": "https://packagist.org/downloads/",
-      "license": [
-        "MIT"
-      ],
-      "authors": [
-        {
-          "name": "Lucian Popescu",
-          "email": "lucian.gabriel.popescu@gmail.com",
-          "role": "Developer"
-        }
-      ],
-      "description": "Abstracts all communication with SQL servers on top of PDO",
-      "homepage": "http://www.lucinda-framework.com/sql-data-access",
-      "keywords": [
-        "data access",
-        "sql"
-      ],
-      "support": {
-        "issues": "https://github.com/aherne/php-sql-data-access-api/issues",
-        "source": "https://github.com/aherne/php-sql-data-access-api/tree/v2.1.0.1"
-      },
-      "time": "2020-01-03T06:33:32+00:00"
-    }
-  ],
-  "packages-dev": [],
-  "aliases": [],
-  "minimum-stability": "stable",
-  "stability-flags": {
-    "hlis/global-models": 20
-  },
-  "prefer-stable": false,
-  "prefer-lowest": false,
-  "platform": [],
-  "platform-dev": [],
-  "platform-overrides": {
-    "php": "7.4"
-  },
-  "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }

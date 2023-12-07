@@ -12,9 +12,7 @@ class Basic extends DefaultBasic
         $entity = new GameManufacturer();
         $entity->id = $row['id'];
         $entity->name = $row['name'];
-        $entity->priority = $row['priority']??null;
-        $entity->isLocaleSupported = $row["isLocaleSupported"]??null;
-        $entity->isAllowedByUserCountry = $row["is_allowed"]??null;
+        $entity->counter = $row['nr'] ?? null;
         return $entity;
     }
 }
