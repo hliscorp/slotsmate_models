@@ -11,7 +11,7 @@ class GameManufacturerList extends GlobalGameManufacturerList
     {
         $builder = new GameManufacturerBuilder();
         $querier = new GameManufacturerCounterListQuery($this->filter, $this->orderByAlias, $this->limit, $this->offset);
-        echo $querier->getQuery()->toString();
+        echo $querier->getQuery();
         $resultSet = \SQL($querier->getQuery(), $querier->getParameters());
         while ($row = $resultSet->toRow()) {
             $this->entities[$row["id"]] = $builder->build($row);
