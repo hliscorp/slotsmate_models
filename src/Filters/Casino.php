@@ -22,7 +22,7 @@ class Casino extends \Hlis\GlobalModels\Filters\Casino
     protected ?bool $isNew = null;
     protected ?bool $isBest = null;
     protected ?int $localeCountry = null;
-    protected ?string $locale = null;
+    protected ?int $locale = null;
     protected ?int $additionalSoftware = null;
 
     public function setIsLiveDealer(int $isLiveDealer): void
@@ -203,7 +203,7 @@ class Casino extends \Hlis\GlobalModels\Filters\Casino
         return $this->locale;
     }
 
-    public function setLocale(string $locale): void
+    public function setLocale(int $locale): void
     {
         $this->locale = $locale;
     }
