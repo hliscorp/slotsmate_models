@@ -7,18 +7,16 @@ use Hlis\GlobalModels\Filters\Game as GamesFilter;
 class Game extends GamesFilter
 {
     protected ?array $themes = null;
-    protected ?string $mainTheme = null;
+    protected ?int $mainTheme = null;
     protected ?array $features = null;
     protected ?array $volatility = null;
     protected ?array $excludeIds = null;
     protected ?string $url = null;
     protected ?string $pageEntity = null;
     protected ?string $key = null;
-    protected ?string $gameType = null;
+    protected ?int $gameType = null;
     protected ?string $upcoming = null;
     protected ?string $sectionType = null;
-    protected ?string $search = null;
-    protected ?array $volatilityIds = null;
     protected ?array $slotTypes = null;
     protected ?array $ratings = null;
     protected ?int $reels = null;
@@ -30,13 +28,11 @@ class Game extends GamesFilter
     protected ?int $max_min_cpl = null;
     protected ?int $min_max_cpl = null;
     protected ?int $max_max_cpl = null;
-    protected ?bool $gameImpressions = null;
+    protected ?bool $hasGameImpressions = null;
+    protected ?int $sort = null;
     protected ?string $ignoreDateLaunch = null;
-    protected ?int $writerID = null;
-    protected ?array $additional_softwares = null;
-    protected ?bool $isCountQuery = null;
 
-    public function setThemes(?string $theme)
+    public function setThemes(?int $theme)
     {
         $this->themes[] = $theme;
     }
@@ -46,7 +42,7 @@ class Game extends GamesFilter
         return $this->themes;
     }
 
-    public function setMainTheme(?string $mainTheme)
+    public function setMainTheme(?int $mainTheme)
     {
         $this->mainTheme = $mainTheme;
     }
@@ -56,7 +52,7 @@ class Game extends GamesFilter
         return $this->mainTheme;
     }
 
-    public function setFeatures(?string $feature)
+    public function setFeatures(?int $feature)
     {
         $this->features[] = $feature;
     }
@@ -66,7 +62,7 @@ class Game extends GamesFilter
         return $this->features;
     }
 
-    public function setVolatility(?string $volatility)
+    public function setVolatility(?int $volatility)
     {
         $this->volatility[] = $volatility;
     }
@@ -76,7 +72,7 @@ class Game extends GamesFilter
         return $this->volatility;
     }
 
-    public function setExcludeIds(?string $excludeId)
+    public function setExcludeIds(?int $excludeId)
     {
         $this->excludeIds[] = $excludeId;
     }
@@ -116,7 +112,7 @@ class Game extends GamesFilter
         return $this->key;
     }
 
-    public function setGameType(?string $gameType)
+    public function setGameType(?int $gameType)
     {
         $this->gameType = $gameType;
     }
@@ -144,26 +140,6 @@ class Game extends GamesFilter
     public function getSectionType(): ?string
     {
         return $this->sectionType;
-    }
-
-    public function setSearch(?string $search)
-    {
-        $this->search = $search;
-    }
-
-    public function getSearch(): ?string
-    {
-        return $this->search;
-    }
-
-    public function setVolatilityIds(?string $volatilityId)
-    {
-        $this->volatilityIds[] = $volatilityId;
-    }
-
-    public function getVolatilityIds(): ?array
-    {
-        return $this->volatilityIds;
     }
 
     public function setSlotTypes(?string $slotType)
@@ -276,14 +252,24 @@ class Game extends GamesFilter
         return $this->max_max_cpl;
     }
 
-    public function setGameImpressions(?bool $gameImpressions)
+    public function setGameImpressions(?bool $hasGameImpressions)
     {
-        $this->gameImpressions = $gameImpressions;
+        $this->hasGameImpressions = $hasGameImpressions;
     }
 
     public function getGameImpressions(): ?bool
     {
-        return $this->gameImpressions;
+        return $this->hasGameImpressions;
+    }
+
+    public function setSort(?int $sort)
+    {
+        $this->sort = $sort;
+    }
+
+    public function getSort(): ?int
+    {
+        return $this->sort;
     }
 
     public function setIgnoreDateLaunch(?string $ignoreDateLaunch)
@@ -295,37 +281,4 @@ class Game extends GamesFilter
     {
         return $this->ignoreDateLaunch;
     }
-
-    public function setWriterID(?int $writerID)
-    {
-        $this->writerID = $writerID;
-    }
-
-    public function getWriterID(): ?int
-    {
-        return $this->writerID;
-    }
-
-    public function setAdditionalSoftwares(?string $additional_softwares)
-    {
-        $this->additional_softwares[] = $additional_softwares;
-    }
-
-    public function getAdditionalSoftwares(): ?array
-    {
-        return $this->additional_softwares;
-    }
-
-    public function setIsCountQuery(?bool $isCountQuery)
-    {
-        $this->isCountQuery = $isCountQuery;
-    }
-
-    public function getIsCountQuery(): ?bool
-    {
-        return $this->isCountQuery;
-    }
-
-
-
 }

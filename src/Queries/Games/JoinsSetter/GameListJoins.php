@@ -10,13 +10,7 @@ class GameListJoins extends GameListJoinsGlobal
     {
         parent::appendJoins();
 
-        if (!$this->filter->getIsCountQuery()
-            || $this->filter->getMinScore()
-            || $this->filter->getRatings()
-            || (!$this->filter->getIsCountQuery() && in_array($this->filter->getSort(), [\GameSortCriteria::BEST, \GameSortCriteria::MOST_PLAYED]))
-        ) {
-            $this->query->joinLeft("games__votes", "gv")->on(["t1.id"=>"gv.game_id"]);
-        }
+        $this->query->joinLeft("games__votes", "gv")->on(["t1.id"=>"gv.game_id"]);
 
         if (!empty($this->filter->getThemes())) {
             $this->query->joinLeft("games__themes", "themes")->on(["t1.id" => "themes.game_id"]);

@@ -12,7 +12,6 @@ class GameListConditions extends GameListConditionsGlobal
     {
         parent::appendConditions($condition);
         $this->setManufacturerOpenCondition($condition);
-        $this->setManufacturerAdditionalSoftwaresCondition($condition);
         $this->setFeaturesCondition($condition);
         $this->setVolatilityCondition($condition);
         $this->setIsMobileCondition($condition);
@@ -35,13 +34,6 @@ class GameListConditions extends GameListConditionsGlobal
         $this->buildBooleanCondition($condition, "gm.is_open", true);
     }
 
-    protected function setManufacturerAdditionalSoftwaresCondition(Condition $condition): void
-    {
-        if ($this->filter->getAdditionalSoftwares()) {
-            $condition->setIn("gm.id", $this->filter->getAdditionalSoftwares());
-        }
-    }
-
     protected function setFeaturesCondition(Condition $condition): void
     {
         if ($features = $this->filter->getFeatures()) {
@@ -53,10 +45,6 @@ class GameListConditions extends GameListConditionsGlobal
     {
         if ($this->filter->getVolatility()) {
             $condition->setIn("t1.game_volatility_id", $this->filter->getVolatility());
-        }
-
-        if (!empty($this->filter->getVolatilityIds())) {
-            $condition->setIn('t1.game_volatility_id', $this->filter->getVolatilityIds());
         }
     }
 
