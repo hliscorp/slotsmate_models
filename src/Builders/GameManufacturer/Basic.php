@@ -11,7 +11,7 @@ class Basic extends DefaultBasic
     {
         $entity = new GameManufacturer();
         $entity->id = $row['id'];
-        $entity->name = $row['unit'] ? $row['unit'] :  $row['name'];
+        $entity->name = isset($row['unit']) ? $row['unit'] :  $row['name'];
         return $entity;
     }
 }
