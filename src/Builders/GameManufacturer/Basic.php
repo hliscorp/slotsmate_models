@@ -2,7 +2,7 @@
 
 namespace Hlis\SlotsMateModels\Builders\GameManufacturer;
 
-use Hlis\SlotsMateModels\Entities\GameManufacturer;
+use Hlis\GlobalModels\Entities\GameManufacturer;
 use Hlis\GlobalModels\Builders\GameManufacturer\Basic as DefaultBasic;
 
 class Basic extends DefaultBasic
@@ -11,8 +11,7 @@ class Basic extends DefaultBasic
     {
         $entity = new GameManufacturer();
         $entity->id = $row['id'];
-        $entity->name = $row['name'];
-        $entity->counter = $row['nr'] ?? null;
+        $entity->name = isset($row['unit']) ? $row['unit'] :  $row['name'];
         return $entity;
     }
 }
