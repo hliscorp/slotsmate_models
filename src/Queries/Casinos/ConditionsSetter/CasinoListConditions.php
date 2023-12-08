@@ -31,11 +31,11 @@ class CasinoListConditions extends DefaultCasinoListConditions
 
     protected function setLabelCondition(Condition $condition): void
     {
-        if ($this->filter->getCasinoLabel() == "New") {
+        if ($this->filter->getIsNew()) {
             $condition->set("t1.date_established", "'" . date("Y-m-d", strtotime(date("Y-m-d") . " -1 year")) . "'", Comparison::GREATER);
-        } elseif ($this->filter->getCasinoLabel() == "Best" and $this->filter->isTopRated()) {
+        } elseif ($this->filter->getIsBest() && $this->filter->isTopRated()) {
             $condition->set("t1.rating_total/t1.rating_votes", 7.5, Comparison::GREATER_EQUALS);
-        } elseif ($this->filter->getCasinoLabel() == "Best") {
+        } elseif ($this->filter->getIsBest()) {
             $condition->set("t1.rating_total/t1.rating_votes", 4, Comparison::GREATER);
         }
     }

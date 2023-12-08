@@ -20,7 +20,6 @@ class CasinoListJoins extends AbstractCasinoListJoins
         $this->appendLiveDealerJoin();
         $this->appendPopularGameTypesJoin();
         $this->appendCasinoLabelJoin();
-        $this->appendBonusesJoin();
         $this->appendAllGameTypesJoin();
         $this->setSoftwareNameJoin();
         $this->appendBankingMethodsJoin();
@@ -44,37 +43,22 @@ class CasinoListJoins extends AbstractCasinoListJoins
 
     protected function appendCasinoLabelJoin(): void
     {
-        if ($this->filter->getCasinoLabel()) {
-            if ($this->filter->getCasinoLabel() == "Stay away") {
-                $this->filter->setPromoted(false);
-            }
+        if ($this->filter->getLabels()) {
+            $labels = implode(',', $this->filter->getLabels());
 
-            if ($this->filter->getCasinoLabel() != "New") {
-                $sub_select = new \Lucinda\Query\Vendor\MySQL\Select("casino_labels");
-                $sub_select->fields(["id"]);
-                $sub_select->where()->set("name", "'".$this->filter->getCasinoLabel()."'");
-                $this->query->joinInner("casinos__labels", "t5")->on(["t1.id" => "t5.casino_id", "t5.label_id" => "(" . $sub_select->toString() . ")"]);
-            }
+            $this->query->joinInner("casinos__labels", "t5")->on(["t1.id" => "t5.casino_id", "t5.label_id" => "(" . $labels . ")"]);
         }
     }
 
-    protected function appendBonusesJoin(): void
+    protected function setBonusesJoins(): void
     {
-        if ($this->filter->getBonusType() || $this->filter->getFreeBonus()) {
-            if ($this->filter->getBonusType() && in_array(
-                    strtolower($this->filter->getBonusType()),
-                    array("free spins", "no deposit bonus")
-                )) {
-                // free bonus is no longer relevant
-                $sub_select = new \Lucinda\Query\Vendor\MySQL\Select("bonus_types");
-                $sub_select->fields(["id"]);
-                $sub_select->where()->set("name", "'".$this->filter->getBonusType()."'");
-                $this->query->joinInner("casinos__bonuses", "cb")->on(["t1.id" => "cb.casino_id"])
-                    ->set("cb.bonus_type_id", "(".$sub_select->toString().")");
-            } elseif ($this->filter->getFreeBonus()) {
-                $this->query->joinInner("casinos__bonuses", "cb")->on(["t1.id" => "cb.casino_id"])
-                    ->set('cb.bonus_type_id', '"^(3|4|5|6|11)$"', 'REGEXP');
-            }
+        if ($this->filter->getFreeBonus())
+        {
+            $this->query->joinInner("casinos__bonuses", "cb")->on(["t1.id" => "cb.casino_id"])->set('cb.bonus_type_id', '"^(3|4|5|6|11)$"', 'REGEXP');
+        }
+        elseif($this->filter->getBonus())
+        {
+            parent::setBonusesJoins();
         }
     }
 

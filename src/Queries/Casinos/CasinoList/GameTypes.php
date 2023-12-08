@@ -25,7 +25,6 @@ class GameTypes extends \Hlis\GlobalModels\Queries\Query
         $fields->add("t1.is_vr");
         $fields->add("t2.name", "game_type_name");
         $fields->add("t2.id", "game_type_id");
-
     }
 
     protected function setJoins(): void
