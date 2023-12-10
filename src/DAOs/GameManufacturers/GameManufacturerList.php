@@ -26,6 +26,7 @@ class GameManufacturerList extends GlobalGameManufacturerList
         foreach ($ids as $id) {
             $this->filter->addId($id);
         }
+
         $querier = new GameRating($this->filter);
         $resultSet = SQL($querier->getQuery(), $querier->getParameters());
         while ($row = $resultSet->toRow()) {
@@ -38,7 +39,7 @@ class GameManufacturerList extends GlobalGameManufacturerList
             $game->features = new Features();
             $game->features->rtp = new Rtp();
             $game->features->rtp->value = $row["rtp"];
-            $this->entities[$row["id"]]->games[] = $game;
+            $this->entities[$row["game_manufacturer_id"]]->games[] = $game;
         }
     }
 }
