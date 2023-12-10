@@ -11,7 +11,7 @@ class GameRatingFields extends AbstractFields
     public function appendFields(Fields $fields): void
     {
         $fields->add("t1.game_manufacturer_id");
-        $fields->add("ROUND(SUM(gv.score)/COUNT(gv.score))", "score");
+        $fields->add("ROUND(SUM(t2.score)/COUNT(t2.score))", "score");
         $fields->add("COUNT(t3.rating)", "rating");
     }
 }
