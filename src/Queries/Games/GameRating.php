@@ -44,6 +44,6 @@ class GameRating extends Query
 
     protected function setGroupBy(): void
     {
-        $this->query->groupBy(["t1.id"]);
+        $this->query->groupBy(["t1.game_manufacturer_id"]);
     }
 }
