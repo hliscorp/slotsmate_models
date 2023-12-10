@@ -10,8 +10,6 @@ class Basic extends DefaultBasic
         $entity = new \Hlis\SlotsMateModels\Entities\GameManufacturer\GameManufacturer();
         $entity->id = $row['id'];
         $entity->name = isset($row['unit']) ? $row['unit'] :  $row['name'];
-        $entity->gameScore = $row['score']??null;
-        $entity->gameRating = $row['rating']??null;
         return $entity;
     }
 }
