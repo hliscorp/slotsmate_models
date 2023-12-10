@@ -31,14 +31,8 @@ class GameManufacturerList extends GlobalGameManufacturerList
         $resultSet = SQL($querier->getQuery(), $querier->getParameters());
         while ($row = $resultSet->toRow()) {
             $game = new Game();
-            $game->timesPlayed = $row["times_played"];
-            $game->dateLaunched = $row["date_launched"];
-            $game->name = $row["name"];
             $game->score = $row["score"];
             $game->rating = $row["rating"];
-            $game->features = new Features();
-            $game->features->rtp = new Rtp();
-            $game->features->rtp->value = $row["rtp"];
             $this->entities[$row["game_manufacturer_id"]]->games[] = $game;
         }
     }
