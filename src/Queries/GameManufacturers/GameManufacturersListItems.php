@@ -30,6 +30,7 @@ class GameManufacturersListItems extends DefaultGameManufacturerListItems
 
     protected function setGroupBy(): void
     {
+        $this->groupBy = true;
         $this->query->groupBy(["t1.id"]);
     }
 
