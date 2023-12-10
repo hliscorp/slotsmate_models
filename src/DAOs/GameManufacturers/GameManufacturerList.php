@@ -1,6 +1,8 @@
 <?php
 
 namespace Hlis\SlotsMateModels\DAOs\GameManufacturers;
+use Hlis\GlobalModels\Entities\Game\Features;
+use Hlis\GlobalModels\Entities\Game\Rtp;
 use Hlis\SlotsMateModels\Builders\GameManufacturer\Basic as GameManufacturerBuilder;
 use Hlis\GlobalModels\DAOs\GameManufacturers\GameManufacturerList as GlobalGameManufacturerList;
 use Hlis\SlotsMateModels\Entities\Game\Game;
@@ -33,6 +35,8 @@ class GameManufacturerList extends GlobalGameManufacturerList
             $game->name = $row["name"];
             $game->score = $row["score"];
             $game->rating = $row["rating"];
+            $game->features = new Features();
+            $game->features->rtp = new Rtp();
             $game->features->rtp->value = $row["rtp"];
             $this->entities[$row["id"]]->games[] = $game;
         }
