@@ -33,7 +33,7 @@ class GameManufacturerList extends GlobalGameManufacturerList
             $game = new Game();
             $game->score = $row["score"];
             $game->rating = $row["rating"];
-            $this->entities[$row["game_manufacturer_id"]]['game'] = $game;
+            $this->entities[$row["game_manufacturer_id"]]->games[] = $game;
         }
     }
 }
