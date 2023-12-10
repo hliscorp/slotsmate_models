@@ -1,6 +1,6 @@
 <?php
 
-namespace Hlis\SlotsMateModels\Entities;
+namespace Hlis\SlotsMateModels\Entities\GameManufacturer;
 use Hlis\GlobalModels\Entities\GameManufacturer as DefaultGameManufacturer;
 class GameManufacturer extends DefaultGameManufacturer
 {

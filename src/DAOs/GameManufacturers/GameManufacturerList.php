@@ -1,12 +1,8 @@
 <?php
 
 namespace Hlis\SlotsMateModels\DAOs\GameManufacturers;
-use Hlis\GlobalModels\Entities\Game\Features;
-use Hlis\GlobalModels\Entities\Game\Rtp;
-use Hlis\SlotsMateModels\Builders\Game\Rating;
 use Hlis\SlotsMateModels\Builders\GameManufacturer\Basic as GameManufacturerBuilder;
 use Hlis\GlobalModels\DAOs\GameManufacturers\GameManufacturerList as GlobalGameManufacturerList;
-use Hlis\SlotsMateModels\Entities\Game\Game;
 use Hlis\SlotsMateModels\Queries\GameManufacturers\GameManufacturersListItems as GameManufacturerCounterListQuery;
 use Hlis\SlotsMateModels\Queries\Games\GameRating;
 
