@@ -30,7 +30,7 @@ class GameRatingConditions extends AbstractConditions
 
     protected function setGameType(Condition $condition): void
     {
-        $condition->setIn("t1.game_type", [4,12]);
+        $condition->setIn("t1.game_type_id", [4,12]);
     }
 
     protected function setDevice(Condition $condition): void
