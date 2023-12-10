@@ -27,11 +27,11 @@ class GameManufacturerList extends GlobalGameManufacturerList
         foreach ($ids as $id) {
             $this->filter->addId($id);
         }
-        $builder = new Rating();
         $querier = new GameRating($this->filter);
         $resultSet = SQL($querier->getQuery(), $querier->getParameters());
         while ($row = $resultSet->toRow()) {
-            $this->entities[$row["game_manufacturer_id"]]->games[] = $builder->build($row);
+            $this->entities[$row["game_manufacturer_id"]]->gameScore = $row["score"];
+            $this->entities[$row["game_manufacturer_id"]]->gameRating = $row["rating"];
         }
     }
 }
