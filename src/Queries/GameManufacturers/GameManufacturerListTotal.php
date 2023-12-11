@@ -12,6 +12,7 @@ class GameManufacturerListTotal extends DefaultGameManufacturerListTotal
 {
     protected function setJoins(): void
     {
+        $this->groupBy = true;
         $setter = new ListJoinsSetter($this->filter, $this->query);
         $this->groupBy = $setter->isGroupBy();
     }
