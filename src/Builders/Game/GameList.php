@@ -2,7 +2,7 @@
 
 namespace Hlis\SlotsMateModels\Builders\Game;
 
-use Hlis\SlotsMateModels\Entities\Game\Game as GameEntity;
+use Hlis\SlotsMateModels\Entities\Game as GameEntity;
 use Hlis\GlobalModels\Builders\Game\Basic as GlobalBuilder;
 
 class GameList extends GlobalBuilder

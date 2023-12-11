@@ -9,7 +9,6 @@ class GameInfoJoins extends GlobalJoins
     protected function appendJoins(): void
     {
         parent::appendJoins();
-        $this->query->joinLeft("games__votes_statistics", "gvs")->on(["t1.id"=>"gvs.game_id"]);
 
         $this->query->joinLeft("games__themes","gmt")->on(["t1.id"=>"gmt.game_id"]);
         $this->query->joinLeft("themes","themes")->on(["gmt.theme_id"=>"themes.id"]);
@@ -25,7 +24,5 @@ class GameInfoJoins extends GlobalJoins
         $this->query->joinLeft("game_features", "gf")->on(["gsf.feature_id"=>"gf.id"]);
 
         $this->query->joinLeft("games__paytables", "gp")->on(["t1.id"=>"gp.game_id"]);
-
-        $this->query->joinLeft("games__votes", "gmv")->on(["t1.id"=>"gmv.game_id"]);
     }
 }
