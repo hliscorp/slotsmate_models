@@ -3,18 +3,20 @@
 namespace Hlis\SlotsMateModels\DAOs\Games;
 
 use Hlis\GlobalModels\Builders\Game\Collection as CollectionBuilder;
-use Hlis\GlobalModels\Queries\Games\GameInfo\Collection as CollectionQuery;
-use Hlis\GlobalModels\DAOs\Games\GameInfo as GlobalGameInfo;
 use Hlis\GlobalModels\Builders\Game\FeaturesGallery as FeaturesGalleryBuilder;
 use Hlis\GlobalModels\Builders\Game\HowToPlay as HowToPlayBuilder;
-
-use Hlis\SlotsMateModels\Queries\Games\GameInfo\HowToPlay as HowToPlayQuery;
-use Hlis\SlotsMateModels\Queries\Games\GameInfo\FeaturesGallery as FeaturesGalleryQuery;
+use Hlis\GlobalModels\DAOs\Games\GameInfo as GlobalGameInfo;
+use Hlis\GlobalModels\Queries\Games\GameInfo\Collection as CollectionQuery;
+use Hlis\GlobalModels\DAOs\Games\GameFeatures;
 use Hlis\SlotsMateModels\Builders\Game\GameInfo as GameInfoBuilder;
-use Hlis\SlotsMateModels\Queries\Games\GameInfo as GameInfoQuery;
-use Hlis\SlotsMateModels\Queries\Games\GameInfo\PaylinesGallery as PaylinesGalleryQuery;
-use Hlis\SlotsMateModels\Entities\Game\Game as GameEntity;
 use Hlis\SlotsMateModels\DAOs\Games\GamePaytable as GamePaytable;
+use Hlis\SlotsMateModels\Entities\Game as GameEntity;
+use Hlis\SlotsMateModels\Queries\Games\GameInfo as GameInfoQuery;
+use Hlis\SlotsMateModels\Queries\Games\GameInfo\FeaturesGallery as FeaturesGalleryQuery;
+use Hlis\SlotsMateModels\Queries\Games\GameInfo\GameVotes;
+use Hlis\SlotsMateModels\Queries\Games\GameInfo\GameVotesStatistics;
+use Hlis\SlotsMateModels\Queries\Games\GameInfo\HowToPlay as HowToPlayQuery;
+use Hlis\SlotsMateModels\Queries\Games\GameInfo\PaylinesGallery as PaylinesGalleryQuery;
 
 class GameInfo extends GlobalGameInfo
 {
@@ -31,9 +33,7 @@ class GameInfo extends GlobalGameInfo
 
     protected function appendBranches(): void
     {
-        // advanced features
         $this->setAdvancedFeatures();
-        // themes
         $this->appendThemes();
         $this->appendVideoGallery();
         $this->appendVideoTimelines();
@@ -42,6 +42,19 @@ class GameInfo extends GlobalGameInfo
         $this->appendFeaturesGallery();
         $this->appendHowToPlays();
         $this->appendRtpInfo();
+        $this->appendGameVotes();
+        $this->appendGameVotesStatistics();
+    }
+
+    protected function setAdvancedFeatures(): void
+    {
+        $dao = new GameFeatures($this->filter);
+        $advancedFeatures = $dao->getFeatures();
+
+        foreach($advancedFeatures as $feature) {
+            $columnName = "is".str_replace([" ","-"], "", ucwords($feature->name));
+            $this->entity->features->$columnName = true;
+        }
     }
 
     protected function appendVideoTimelines(): void
@@ -87,5 +100,23 @@ class GameInfo extends GlobalGameInfo
     protected function getEntity(): GameEntity
     {
         return new GameEntity();
+    }
+
+    protected function appendGameVotes(): void
+    {
+        $query = new GameVotes($this->filter);
+        $results = \SQL($query->getQuery(), $query->getParameters());
+        while ($row = $results->toRow()) {
+            $this->entity->score = $row['score'];
+        }
+    }
+
+    protected function appendGameVotesStatistics(): void
+    {
+        $query = new GameVotesStatistics($this->filter);
+        $results = \SQL($query->getQuery(), $query->getParameters());
+        while ($row = $results->toRow()) {
+            $this->entity->rating = $row['rating'];
+        }
     }
 }

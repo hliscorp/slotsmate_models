@@ -16,8 +16,5 @@ class GameListFields extends GameListFieldsGlobal
         $fields->add('t1.is_hot');
         $fields->add('t1.is_mobile');
         $fields->add('gv.score');
-        if ($this->filter->getPageEntity() == 'Best') {
-            $fields->add('COUNT( gvs.game_id)');
-        }
     }
 }

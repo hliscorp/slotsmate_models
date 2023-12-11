@@ -1,12 +1,11 @@
 <?php
 
-namespace Hlis\SlotsMateModels\Entities\Game;
-
-use Hlis\GlobalModels\Entities\Game as GlobalGameEntity;
-use Hlis\GlobalModels\Entities\BlogBonus;
+namespace Hlis\SlotsMateModels\Entities;
 
 use Hlis\ChipyModels\Entities\Game\FAQItem as FAQItem;
 use Hlis\ChipyModels\Entities\Game\Label as GameLabel;
+use Hlis\GlobalModels\Entities\BlogBonus;
+use Hlis\GlobalModels\Entities\Game as GlobalGameEntity;
 
 class Game extends GlobalGameEntity
 {
