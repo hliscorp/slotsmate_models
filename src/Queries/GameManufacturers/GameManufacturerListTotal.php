@@ -22,6 +22,10 @@ class GameManufacturerListTotal extends DefaultGameManufacturerListTotal
         $setter = new ListConditionSetter($this->filter);
         $setter->appendConditions($condition);
         $this->parameters = $setter->getParameters();
+    }
 
+    protected function setGroupBy(Fields $fields): void
+    {
+        $fields->add("COUNT(DISTINCT t1.id)", "total");
     }
 }
