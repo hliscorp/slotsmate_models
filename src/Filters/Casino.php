@@ -11,10 +11,8 @@ class Casino extends \Hlis\GlobalModels\Filters\Casino
     protected ?int $withdrawalMinimum = null;
     protected ?bool $countReviews = false;
     protected ?string $pageType = '';
-    protected ?string $label = '';
     protected ?bool $promoted = false;
     protected ?bool $free_bonus = false;
-    protected ?string $bonus_type = '';
     protected ?bool $deposit = false;
     protected ?bool $withdrawal = false;
     protected ?string $url = '';
@@ -24,7 +22,7 @@ class Casino extends \Hlis\GlobalModels\Filters\Casino
     protected ?bool $isNew = null;
     protected ?bool $isBest = null;
     protected ?int $localeCountry = null;
-    protected ?string $locale = null;
+    protected ?int $locale = null;
     protected ?int $additionalSoftware = null;
 
     public function setIsLiveDealer(int $isLiveDealer): void
@@ -80,25 +78,13 @@ class Casino extends \Hlis\GlobalModels\Filters\Casino
         $this->countReviews = $data;
     }
 
-    public function getCasinoLabel()
-    {
-        return $this->label;
-    }
-
-    public function setCasinoLabel($data)
-    {
-        $this->label = $data;
-    }
-
     public function isTopRated(): bool
     {
-        if ($this->getCasinoLabel() != 'Best') return false;
         return $this->isTopRated;
     }
 
     public function setTopRated(bool $data)
     {
-        if ($this->getCasinoLabel() != 'Best') return;
         $this->isTopRated = $data;
     }
 
@@ -120,16 +106,6 @@ class Casino extends \Hlis\GlobalModels\Filters\Casino
     public function setFreeBonus($data)
     {
         $this->free_bonus = $data;
-    }
-
-    public function getBonusType()
-    {
-        return $this->bonus_type;
-    }
-
-    public function setBonusType($data)
-    {
-        $this->bonus_type = $data;
     }
 
     public function getPaymentDeposit()
@@ -227,7 +203,7 @@ class Casino extends \Hlis\GlobalModels\Filters\Casino
         return $this->locale;
     }
 
-    public function setLocale(string $locale): void
+    public function setLocale(int $locale): void
     {
         $this->locale = $locale;
     }

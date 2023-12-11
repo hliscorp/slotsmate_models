@@ -4,7 +4,7 @@ namespace Hlis\SlotsMateModels\Builders\Casino\Info;
 
 use Hlis\GlobalModels\Builders\Casino\Info\Basic as DefaultBasic;
 use Hlis\SlotsMateModels\Entities\Casino as CasinoEntity;
-use Hlis\GlobalModels\Entities\Casino\Features;
+use Hlis\SlotsMateModels\Entities\Casino\Features;
 
 class Basic extends DefaultBasic
 {
@@ -22,6 +22,9 @@ class Basic extends DefaultBasic
         $features = new Features();
         $features->depositMinimum = $row["deposit_minimum"];
         $features->withdrawMinimum = $row["withdraw_minimum"];
+        if(isset($row["is_live"])) {
+            $features->isLiveDealer = $row["is_live"];
+        }
         return $features;
     }
 

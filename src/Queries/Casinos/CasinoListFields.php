@@ -16,6 +16,10 @@ class CasinoListFields extends DefaultCasinoListItemsFields
         $fields->add("t1.deposit_minimum");
         $fields->add("(rating_total/rating_votes) AS average_rating");
 
+        if ($this->filter->getIsLiveDealer()) {
+            $fields->add("t7.is_live");
+        }
+
         if ($this->filter->getGameTypes() || ($this->filter->getIsAllGameTypes() && $this->filter->getPageType() !== 'no-deposit-slots')) {
             $fields->add("IF(cb_fb.id IS NOT NULL,1,0) AS has_free_bonus");
             $fields->add("IF(cb_fdb.id IS NOT NULL,2,0) AS has_first_deposit_bonus");
