@@ -12,22 +12,15 @@ class BankingMethodListOrderBy extends AbstractOrderBy
     {
         switch ($orderByAlias) {
             case BankingMethodsOrderBy::CASINOS_COUNT:
-                $this->orderBy->add("counter", OrderBy::DESC);
                 $this->orderBy->add("t1.id", OrderBy::DESC);
                 break;
             case BankingMethodsOrderBy::PRIORITY:
                 $this->orderBy->add("t1.priority", OrderBy::DESC);
-                if ($this->filter->getHasOpenCasinos()) {
-                    $this->orderBy->add("counter", OrderBy::DESC);
-                }
                 $this->orderBy->add("t1.id", OrderBy::DESC);
                 break;
             case BankingMethodsOrderBy::DATE:
                 $this->orderBy->add("date_updated", OrderBy::DESC);
                 $this->orderBy->add("t1.id", OrderBy::DESC);
-                break;
-            case BankingMethodsOrderBy::BANKING_COUNT:
-                $this->orderBy->add("counter", OrderBy::DESC);
                 break;
         }
     }

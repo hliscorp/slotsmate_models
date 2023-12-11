@@ -1,10 +1,8 @@
 <?php
 
 namespace Hlis\SlotsMateModels\Builders\GameManufacturer;
-
-use Hlis\GlobalModels\Entities\GameManufacturer;
 use Hlis\GlobalModels\Builders\GameManufacturer\Basic as DefaultBasic;
-
+use Hlis\SlotsMateModels\Entities\GameManufacturer;
 class Basic extends DefaultBasic
 {
     public function build(array $row): \Entity
