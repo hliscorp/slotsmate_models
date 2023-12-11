@@ -14,9 +14,9 @@ class ListJoinsSetter extends GameManufacturerListJoins
         if ($this->filter->getSelectedCountry()) {
             $this->query->joinLeft("game_manufacturers__countries", "t3")->on([
                 "t1.id" => "t3.game_manufacturer_id"
-            ])->set([
-                "t3.country_id" => $this->filter->getSelectedCountry()
-            ]);
+            ])->set(
+                "t3.country_id",$this->filter->getSelectedCountry()
+            );
         }
     }
 
