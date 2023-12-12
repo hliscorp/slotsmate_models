@@ -3,6 +3,7 @@
 namespace Hlis\SlotsMateModels\Queries\Games\JoinsSetter;
 
 use Hlis\GlobalModels\Queries\Games\JoinsSetter\GameListJoins as GameListJoinsGlobal;
+use Hlis\SlotsMateModels\Enums\GameSortCriteria;
 
 class GameListJoins extends GameListJoinsGlobal
 {
@@ -10,7 +11,9 @@ class GameListJoins extends GameListJoinsGlobal
     {
         parent::appendJoins();
 
-        if ($this->filter->getMinScore() || $this->filter->getRatings()) {
+        if ($this->filter->getMinScore() || $this->filter->getRatings() ||
+            $this->filter->getSort() == GameSortCriteria::BEST || $this->filter->getSort() == GameSortCriteria::MOST_PLAYED
+        ) {
             $this->query->joinLeft("games__votes", "gv")->on(["t1.id"=>"gv.game_id"]);
         }
 

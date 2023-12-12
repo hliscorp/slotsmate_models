@@ -3,6 +3,7 @@
 namespace Hlis\SlotsMateModels\Queries\Games\FieldsSetter;
 
 use Hlis\GlobalModels\Queries\Games\FieldsSetter\GameListFields as GameListFieldsGlobal;
+use Hlis\SlotsMateModels\Enums\GameSortCriteria;
 use Lucinda\Query\Clause\Fields;
 
 class GameListFields extends GameListFieldsGlobal
@@ -14,5 +15,8 @@ class GameListFields extends GameListFieldsGlobal
         $fields->add('t1.is_best');
         $fields->add('t1.is_hot');
         $fields->add('t1.is_mobile');
+        if($this->filter->getSort() == GameSortCriteria::BEST || $this->filter->getSort() == GameSortCriteria::MOST_PLAYED) {
+            $fields->add('gv.score');
+        }
     }
 }
