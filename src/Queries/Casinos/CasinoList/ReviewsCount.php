@@ -24,7 +24,7 @@ class ReviewsCount extends \Hlis\GlobalModels\Queries\Query
 
     protected function setWhere(\Lucinda\Query\Clause\Condition $condition, array $casinoIDs): void
     {
-        $condition->set("t1.comment_status", "3");
+        $condition->set("t1.comment_status", "1");
         $condition->set("t1.parent_id", "0");
         $condition->setIn("t1.casino_id", $casinoIDs);
     }
