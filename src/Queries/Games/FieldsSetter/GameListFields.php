@@ -10,11 +10,9 @@ class GameListFields extends GameListFieldsGlobal
     public function appendFields(Fields $fields): void
     {
         parent::appendFields($fields);
-        $fields->add('t1.times_played');
         $fields->add('t1.rtp');
         $fields->add('t1.is_best');
         $fields->add('t1.is_hot');
         $fields->add('t1.is_mobile');
-        $fields->add('gv.score');
     }
 }

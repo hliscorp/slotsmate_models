@@ -17,7 +17,16 @@ class GameSearch extends GameList
         }
     }
 
-    protected function appendBonuses(array $casinoIDs): void {}
+    protected function appendBranches(array $ids): void {
+        $this->appendTimesPlayed($ids);
+    }
 
-    protected function appendBranches(array $ids): void {}
+    protected function appendTimesPlayed($ids)
+    {
+        $query = new \Hlis\SlotsMateModels\Queries\Games\GameList\TimesPlayed($ids);
+        $resultSet = \SQL($query->getQuery(), $query->getParameters());
+        while ($row = $resultSet->toRow()) {
+            $this->entities[$row["id"]]->timesPlayed = $row["times_played"];
+        }
+    }
 }

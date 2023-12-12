@@ -10,7 +10,9 @@ class GameListJoins extends GameListJoinsGlobal
     {
         parent::appendJoins();
 
-        $this->query->joinLeft("games__votes", "gv")->on(["t1.id"=>"gv.game_id"]);
+        if ($this->filter->getMinScore() || $this->filter->getRatings()) {
+            $this->query->joinLeft("games__votes", "gv")->on(["t1.id"=>"gv.game_id"]);
+        }
 
         if (!empty($this->filter->getThemes())) {
             $this->query->joinLeft("games__themes", "themes")->on(["t1.id" => "themes.game_id"]);

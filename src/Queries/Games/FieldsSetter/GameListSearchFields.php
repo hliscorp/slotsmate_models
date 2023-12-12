@@ -10,7 +10,6 @@ class GameListSearchFields extends GameListFieldsGlobal
     public function appendFields(Fields $fields): void
     {
         parent::appendFields($fields);
-        $fields->add('t1.times_played');
         $fields->add('t1.is_mobile');
     }
 }

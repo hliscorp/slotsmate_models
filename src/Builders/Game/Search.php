@@ -10,7 +10,6 @@ class Search extends GlobalBuilder
     public function build(array $row): \Entity
     {
         $game = parent::build($row);
-        $game->timesPlayed = $row["times_played"];
         $game->is_mobile = $row["is_mobile"];
 
         return $game;

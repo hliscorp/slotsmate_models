@@ -26,8 +26,6 @@ class GameInfo extends GlobalDetailedInfo
         $game->features = $this->compileBasicGameFeatures($row);
         $game->volatility = $this->compileVolatility($row);
 
-        $game->timesPlayed = $row['times_played'];
-
         $game->is_best = $row["is_best"];
         $game->is_hot = $row["is_hot"];
         $game->is_mobile = $row["is_mobile"];

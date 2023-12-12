@@ -44,6 +44,7 @@ class GameInfo extends GlobalGameInfo
         $this->appendRtpInfo();
         $this->appendGameVotes();
         $this->appendGameVotesStatistics();
+        $this->appendTimesPlayed();
     }
 
     protected function setAdvancedFeatures(): void
@@ -117,6 +118,15 @@ class GameInfo extends GlobalGameInfo
         $results = \SQL($query->getQuery(), $query->getParameters());
         while ($row = $results->toRow()) {
             $this->entity->rating = $row['rating'];
+        }
+    }
+
+    protected function appendTimesPlayed(): void
+    {
+        $query = new \Hlis\SlotsMateModels\Queries\Games\GameInfo\TimesPlayed($this->filter);
+        $resultSet = \SQL($query->getQuery(), $query->getParameters());
+        while ($row = $resultSet->toRow()) {
+            $this->entity->timesPlayed = $row["times_played"];
         }
     }
 }
