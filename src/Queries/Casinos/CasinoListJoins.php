@@ -23,6 +23,7 @@ class CasinoListJoins extends AbstractCasinoListJoins
         $this->appendAllGameTypesJoin();
         $this->setSoftwareNameJoin();
         $this->appendBankingMethodsJoin();
+        $this->appendCasinoLiicenseJoin();
     }
 
     protected function setSoftwareNameJoin(): void
@@ -96,6 +97,15 @@ class CasinoListJoins extends AbstractCasinoListJoins
                 $this->groupBy = true;
             }
             $this->query->joinInner("game_types", "t26")->on(["t26.id" => "t7.game_type_id"]);
+        }
+    }
+
+    protected function appendCasinoLiicenseJoin(): void
+    {
+        if ($this->filter->getCountryName() && in_array($this->filter->getCountryName(),['Australia', 'Slovakia']))
+        {
+            $this->query->joinInner('casinos__licenses', 'cl')->on(['t1.id' => 'cl.casino_id']);
+            $this->query->joinInner('licenses', 'lcns')->on(['cl.license_id' => 'lcns.id', 'lcns.name' =>"'{$this->filter->getCountryName()}'"]);
         }
     }
 }

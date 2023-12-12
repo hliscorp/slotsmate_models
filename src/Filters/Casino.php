@@ -24,6 +24,7 @@ class Casino extends \Hlis\GlobalModels\Filters\Casino
     protected ?int $localeCountry = null;
     protected ?int $locale = null;
     protected ?int $additionalSoftware = null;
+    protected ?string $countryName = null;
 
     public function setIsLiveDealer(int $isLiveDealer): void
     {
@@ -214,5 +215,13 @@ class Casino extends \Hlis\GlobalModels\Filters\Casino
 
     public function getAdditionalSoftware() {
         return $this->additionalSoftware;
+    }
+
+    public function setCountryName($name) {
+        $this->countryName = $name;
+    }
+
+    public function getCountryName() {
+        return $this->countryName;
     }
 }
