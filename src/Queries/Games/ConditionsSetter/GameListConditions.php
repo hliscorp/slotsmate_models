@@ -27,6 +27,15 @@ class GameListConditions extends GameListConditionsGlobal
         $this->setThemesCondition($condition);
         $this->setNewAdvancedFilters($condition);
         $this->setRatingsCondition($condition);
+        $this->setSearchCondition($condition);
+    }
+
+    protected function setSearchCondition(Condition $condition): void
+    {
+        if ($this->filter->getSearch()) {
+            $search = strtolower(str_replace(" ", "%", $this->filter->getSearch()));
+            $condition->setLike('t1.name', "'%".$search."%'");
+        }
     }
 
     protected function setManufacturerOpenCondition(Condition $condition): void

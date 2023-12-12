@@ -29,6 +29,17 @@ class Game extends GamesFilter
     protected ?bool $hasGameImpressions = null;
     protected ?int $sort = null;
     protected ?string $ignoreDateLaunch = null;
+    private ?string $search = null;
+
+    public function getSearch(): ?string
+    {
+        return $this->search;
+    }
+
+    public function setSearch(string $search): void
+    {
+        $this->search = $search;
+    }
 
     public function setThemes(?int $theme)
     {
