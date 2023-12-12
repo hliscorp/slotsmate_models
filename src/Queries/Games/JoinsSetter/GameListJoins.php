@@ -30,6 +30,7 @@ class GameListJoins extends GameListJoinsGlobal
         if (empty($this->filter->getFeature()) && !empty($this->filter->getSectionType()) || !empty($this->filter->getFeatures()) || !empty($this->filter->getSlotTypes())) {
             $this->query->joinInner("games__features", "gff")
                 ->on(["t1.id" => "gff.game_id"]);
+            $this->groupBy = true;
         }
     }
 }
