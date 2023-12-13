@@ -15,12 +15,23 @@ class ListConditionsSetter extends BankingMethodConditions
         $this->setCasinosCondition($condition);
         $this->setExcludedIdCondition($condition);
         $this->setNameCondition($condition);
+        $this->setCountryAllowedCondition($condition);
     }
 
     protected function setCasinosCondition(Condition $condition): void
     {
         if ($this->filter->getHasOpenCasinos()) {
             $condition->set("t5.is_open", 1);
+        }
+    }
+
+    protected function setCountryAllowedCondition(Condition $condition): void
+    {
+        if ($this->filter->getUserCountry()) {
+            $group = new Condition([], \Lucinda\Query\Operator\Logical::_OR_);
+            $group->setIsNull("t2.id");
+            $group->set("t2.is_allowed",1);
+            $condition->setGroup($group);
         }
     }
 
