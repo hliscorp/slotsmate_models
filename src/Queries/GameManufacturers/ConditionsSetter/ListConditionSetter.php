@@ -21,7 +21,7 @@ class ListConditionSetter extends GameManufacturerConditions
     {
         if ($this->filter->getSelectedCountry()) {
             $group = new Condition([], \Lucinda\Query\Operator\Logical::_OR_);
-            $group->setIsNull(t3.id);
+            $group->setIsNull("t3.id");
             $group->set("t3.is_allowed",1);
             $condition->setGroup($group);
         }
