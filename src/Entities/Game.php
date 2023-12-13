@@ -13,4 +13,5 @@ class Game extends GlobalGameEntity
     public ?float $score = null;
     public ?int $timesPlayed = null;
     public ?int $max_win_pl = null;
+    public ?float $rtp = null;
 }
