@@ -14,6 +14,9 @@ class BankingMethodListFields extends AbstractFields
         if ($this->filter->getIsOpen()) {
             $fields->add("is_open");
         }
+        if ($this->filter->getHasOpenCasinos()) {
+            $fields->add("COUNT(DISTINCT t4.casino_id)", 'counter');
+        }
         if ($this->filter->getHasLatestDateUpdated()) {
             $fields->add("MAX(t5.date)", "date_updated");
         }

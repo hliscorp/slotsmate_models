@@ -12,33 +12,23 @@ class GameInfoFields extends GlobalFields
         $fields->add("t1.id");
         $fields->add("t1.name");
         $fields->add("t1.date_launched");
-        $fields->add("gm.id", "game_manufacturer_id");
-        $fields->add("gm.name", "game_manufacturer_name");
-
         $fields->add("t1.paylines");
         $fields->add("t1.reels");
         $fields->add("t1.min_cpl");
         $fields->add("t1.max_cpl");
         $fields->add("t1.min_cs");
         $fields->add("t1.max_cs");
-        $fields->add("t1.game_volatility_id", "volatility_id");
-        $fields->add("gv.name", "volatility_name");
         $fields->add("t1.rtp");
-        $fields->add("gt.id", "game_type_id");
-        $fields->add("gt.name", "game_type_name");
-
-        $fields->add('t1.times_played');
         $fields->add('t1.is_best');
         $fields->add('t1.is_hot');
         $fields->add('t1.is_open');
-        $fields->add('gmv.score');
-        if ($this->filter->getPageEntity() == 'Best') {
-            $fields->add('COUNT( gvs.game_id)');
-        }
-        $fields->add('GROUP_CONCAT(DISTINCT themes.name)', 'themes');
+        $fields->add("t1.game_volatility_id", "volatility_id");
+        $fields->add("gm.name", "game_manufacturer_name");
+        $fields->add("gm.id", "game_manufacturer_id");
+        $fields->add("gv.name", "volatility_name");
+        $fields->add("gt.id", "game_type_id");
+        $fields->add("gt.name", "game_type_name");
         $fields->add('IF(gpp.id IS NOT NULL,1,0)', 'is_mobile');
-        $fields->add('gvs.rating');
-        $fields->add('GROUP_CONCAT(DISTINCT gf.name)', 'features');
         $fields->add('MAX(gp.value)', 'max_win_pl');
     }
 }

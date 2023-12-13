@@ -2,10 +2,10 @@
 
 namespace Hlis\SlotsMateModels\Builders\Game;
 
-use Hlis\SlotsMateModels\Entities\Game\Game as GameEntity;
 use Hlis\GlobalModels\Builders\Game\Detailed as GlobalDetailedInfo;
-use Hlis\GlobalModels\Builders\GameType as GameTypeBuilder;
 use Hlis\GlobalModels\Builders\GameManufacturer as GameManufacturerBuilder;
+use Hlis\GlobalModels\Builders\GameType as GameTypeBuilder;
+use Hlis\SlotsMateModels\Entities\Game as GameEntity;
 
 class GameInfo extends GlobalDetailedInfo
 {
@@ -26,14 +26,9 @@ class GameInfo extends GlobalDetailedInfo
         $game->features = $this->compileBasicGameFeatures($row);
         $game->volatility = $this->compileVolatility($row);
 
-        $game->timesPlayed = $row['times_played'];
-
         $game->is_best = $row["is_best"];
         $game->is_hot = $row["is_hot"];
         $game->is_mobile = $row["is_mobile"];
-
-        $game->score = $row["score"];
-        $game->rating = $row["rating"];
 
         $game->max_win_pl = $row["max_win_pl"];
 
@@ -49,13 +44,6 @@ class GameInfo extends GlobalDetailedInfo
         $features->maxCPL = $row["max_cpl"];
         $features->minCS = $row["min_cs"];
         $features->maxCS = $row["max_cs"];
-
-        $features_arr = explode(",", $row["features"]);
-        foreach($features_arr as $feature) {
-            $columnName = "is".str_replace([" ","-"], "", ucwords($feature));
-            $features->$columnName = true;
-        }
-
         $features->rtp = $this->compileRtp($row);
         return $features;
     }

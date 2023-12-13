@@ -11,11 +11,9 @@ class Game extends GamesFilter
     protected ?array $features = null;
     protected ?array $volatility = null;
     protected ?array $excludeIds = null;
-    protected ?string $url = null;
     protected ?string $pageEntity = null;
-    protected ?string $key = null;
     protected ?int $gameType = null;
-    protected ?string $upcoming = null;
+    protected ?bool $upcoming = null;
     protected ?string $sectionType = null;
     protected ?array $slotTypes = null;
     protected ?array $ratings = null;
@@ -31,6 +29,17 @@ class Game extends GamesFilter
     protected ?bool $hasGameImpressions = null;
     protected ?int $sort = null;
     protected ?string $ignoreDateLaunch = null;
+    private ?string $search = null;
+
+    public function getSearch(): ?string
+    {
+        return $this->search;
+    }
+
+    public function setSearch(string $search): void
+    {
+        $this->search = $search;
+    }
 
     public function setThemes(?int $theme)
     {
@@ -82,16 +91,6 @@ class Game extends GamesFilter
         return $this->excludeIds;
     }
 
-    public function setUrl(?string $url)
-    {
-        $this->url = $url;
-    }
-
-    public function getUrl(): ?string
-    {
-        return $this->url;
-    }
-
     public function setPageEntity(?string $pageEntity)
     {
         $this->pageEntity = $pageEntity;
@@ -100,16 +99,6 @@ class Game extends GamesFilter
     public function getPageEntity(): ?string
     {
         return $this->pageEntity;
-    }
-
-    public function setKey(?string $key)
-    {
-        $this->key = $key;
-    }
-
-    public function getKey(): ?string
-    {
-        return $this->key;
     }
 
     public function setGameType(?int $gameType)
@@ -122,12 +111,12 @@ class Game extends GamesFilter
         return $this->gameType;
     }
 
-    public function setUpcoming(?string $upcoming)
+    public function setUpcoming(?bool $upcoming)
     {
         $this->upcoming = $upcoming;
     }
 
-    public function getUpcoming(): ?string
+    public function getUpcoming(): ?bool
     {
         return $this->upcoming;
     }

@@ -17,4 +17,28 @@ class GameList extends GlobalGameList
             $this->entities[$row["id"]] = $builder->build($row);
         }
     }
+
+    protected function appendBranches(array $ids): void
+    {
+        $this->appendTimesPlayed($ids);
+        $this->appendGameVotes($ids);
+    }
+
+    protected function appendTimesPlayed($ids)
+    {
+        $query = new \Hlis\SlotsMateModels\Queries\Games\GameList\TimesPlayed($ids);
+        $resultSet = \SQL($query->getQuery(), $query->getParameters());
+        while ($row = $resultSet->toRow()) {
+            $this->entities[$row["id"]]->timesPlayed = $row["times_played"];
+        }
+    }
+
+    protected function appendGameVotes($ids)
+    {
+        $query = new \Hlis\SlotsMateModels\Queries\Games\GameList\GameVotes($ids);
+        $resultSet = \SQL($query->getQuery(), $query->getParameters());
+        while ($row = $resultSet->toRow()) {
+            $this->entities[$row["game_id"]]->score = $row["score"];
+        }
+    }
 }

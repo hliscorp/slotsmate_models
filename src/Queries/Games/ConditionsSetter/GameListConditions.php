@@ -27,6 +27,15 @@ class GameListConditions extends GameListConditionsGlobal
         $this->setThemesCondition($condition);
         $this->setNewAdvancedFilters($condition);
         $this->setRatingsCondition($condition);
+        $this->setSearchCondition($condition);
+    }
+
+    protected function setSearchCondition(Condition $condition): void
+    {
+        if ($this->filter->getSearch()) {
+            $search = strtolower(str_replace(" ", "%", $this->filter->getSearch()));
+            $condition->setLike('t1.name', "'%".$search."%'");
+        }
     }
 
     protected function setManufacturerOpenCondition(Condition $condition): void
@@ -164,7 +173,7 @@ class GameListConditions extends GameListConditionsGlobal
         if (!empty($this->filter->getSlotTypes())) {
             $mainClause = new \Lucinda\Query\Clause\Condition([], \Lucinda\Query\Operator\Logical::_OR_);
             $gotClause = false;
-            $featuresNames = [];
+
             foreach ($this->filter->getSlotTypes() as $type) {
                 $clause = new \Lucinda\Query\Clause\Condition([], \Lucinda\Query\Operator\Logical::_OR_);
                 switch ($type) {
@@ -185,7 +194,6 @@ class GameListConditions extends GameListConditionsGlobal
                     case 'Mobile Slots':
                     case 'HTML5 Slots':
                     case 'Flash Slots':
-                        $featuresNames[] = trim(str_replace('Slots', '', $type));
                         continue 2;
                     case 'Best Payout Slots':
                         $clause->set('t1.rtp', 97.5, Comparison::GREATER_EQUALS);
@@ -196,26 +204,6 @@ class GameListConditions extends GameListConditionsGlobal
 
                 $gotClause = true;
                 $mainClause->setGroup($clause);
-            }
-
-            if (!empty($featuresNames)) {
-                $query = new \Lucinda\Query\Vendor\MySQL\Select("game_features", "t1");
-                $query->fields(['t1.id']);
-                $where = $query->where();
-
-                $parameters = [];
-                $mainClause = new \Lucinda\Query\Clause\Condition([], \Lucinda\Query\Operator\Logical::_OR_);
-                foreach ($featuresNames as $k => $name) {
-                    $clause = new \Lucinda\Query\Clause\Condition([], \Lucinda\Query\Operator\Logical::_OR_);
-                    $clause->set('LOWER(t1.name)', ':name_' . $k, \Lucinda\Query\Operator\Comparison::LIKE);
-                    $mainClause->setGroup($clause);
-                    $parameters[':name_' . $k] = $name . '%';
-                }
-                $where->setGroup($mainClause);
-
-                $result = SQL($query->toString(), $parameters)->toColumn();
-
-                $condition->setIn('gff.feature_id', $result);
             }
 
             if ($gotClause) {
