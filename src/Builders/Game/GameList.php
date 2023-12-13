@@ -10,7 +10,6 @@ class GameList extends GlobalBuilder
     public function build(array $row): \Entity
     {
         $game = parent::build($row);
-        $game->rtp = $row["rtp"];
         $game->is_best = $row["is_best"];
         $game->is_hot = $row["is_hot"];
         $game->is_mobile = $row["is_mobile"];
