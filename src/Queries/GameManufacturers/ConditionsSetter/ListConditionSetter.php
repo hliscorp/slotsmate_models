@@ -16,6 +16,16 @@ class ListConditionSetter extends GameManufacturerConditions
         $this->setExcludedIdsCondition($condition);
     }
 
+    protected function setSelectedCountryCondition(Condition $condition): void
+    {
+        if ($this->filter->getSelectedCountry()) {
+            $group = new Condition([], \Lucinda\Query\Operator\Logical::_OR_);
+            $group->setIsNull(t3.id);
+            $group->set("t3.is_allowed",1);
+            $condition->setGroup($group);
+        }
+    }
+
     protected function setGameTypeCondition(Condition $condition): void
     {
         $condition->setIn("t2.game_type_id ", [12,4]);
