@@ -14,6 +14,7 @@ class ListConditionSetter extends GameManufacturerConditions
         $this->setGameIsOpen($condition);
         $this->setIsMain($condition);
         $this->setExcludedIdsCondition($condition);
+        $this->setSelectedCountryCondition($condition);
     }
 
     protected function setSelectedCountryCondition(Condition $condition): void
