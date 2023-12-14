@@ -214,8 +214,12 @@ class GameListConditions extends GameListConditionsGlobal
 
     protected function setThemesCondition(Condition $condition): void
     {
-        if ($themes = $this->filter->getThemes()) {
-            $condition->setIn("themes.theme_id", $themes);
+        if ($this->filter->getThemes()) {
+            $condition->set("themes.game_id", "", Comparison::IS_NOT_NULL);
+        }
+
+        if ($this->filter->getMainTheme()) {
+            $condition->set("themes2.game_id", "", Comparison::IS_NOT_NULL);
         }
     }
 
