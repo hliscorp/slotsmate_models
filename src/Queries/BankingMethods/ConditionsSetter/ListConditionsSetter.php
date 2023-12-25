@@ -11,7 +11,7 @@ class ListConditionsSetter extends BankingMethodConditions
     public function appendConditions(Condition $condition): void
     {
         parent::appendConditions($condition);
-
+        $this->setKeepOpenCondition($condition);
         $this->setCasinosCondition($condition);
         $this->setExcludedIdCondition($condition);
         $this->setNameCondition($condition);
@@ -33,6 +33,11 @@ class ListConditionsSetter extends BankingMethodConditions
             $group->set("t2.is_allowed",1);
             $condition->setGroup($group);
         }
+    }
+
+    protected function setKeepOpenCondition(Condition $condition): void
+    {
+        $condition->set("t1.keep", 1);
     }
 
     protected function setIsOpenCondition(Condition $condition): void
