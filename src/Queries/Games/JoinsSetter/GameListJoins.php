@@ -18,7 +18,12 @@ class GameListJoins extends GameListJoinsGlobal
         }
 
         if (!empty($this->filter->getThemes())) {
-            $this->query->joinLeft("games__themes", "themes")->on(["t1.id" => "themes.game_id"]);
+            $this->query->joinLeft("games__themes", "themes")->on(["t1.id" => "themes.game_id"])->setIn("themes.theme_id", $this->filter->getThemes());
+            $this->groupBy = true;
+        }
+
+        if (!empty($this->filter->getMainTheme())) {
+            $this->query->joinLeft("games__themes", "themes2")->on(["t1.id" => "themes2.game_id"])->setIn("themes2.theme_id", $this->filter->getMainTheme());
             $this->groupBy = true;
         }
 
