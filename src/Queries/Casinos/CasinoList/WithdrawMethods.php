@@ -30,7 +30,6 @@ class WithdrawMethods extends \Hlis\GlobalModels\Queries\Query
 
     protected function setWhere(\Lucinda\Query\Clause\Condition $condition, array $casinoIDs): void
     {
-        $condition->set('t2.keep', 1);
         $condition->setIn("t1.casino_id", $casinoIDs);
     }
 

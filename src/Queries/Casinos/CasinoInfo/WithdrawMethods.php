@@ -29,7 +29,7 @@ class WithdrawMethods extends DefaultWithdrawMethods
     protected function setWhere(Condition $condition): void
     {
         parent::setWhere($condition);
-        $condition->set('t2.keep', 1);
+
         $condition->set('t2.is_open', 1);
     }
 }
