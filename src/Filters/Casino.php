@@ -22,7 +22,6 @@ class Casino extends \Hlis\GlobalModels\Filters\Casino
     protected ?bool $isNew = null;
     protected ?bool $isBest = null;
     protected ?int $localeCountry = null;
-    protected ?int $locale = null;
     protected ?int $additionalSoftware = null;
     protected ?string $countryName = null;
 
@@ -197,16 +196,6 @@ class Casino extends \Hlis\GlobalModels\Filters\Casino
     public function getLocaleCountry(): ?int
     {
         return $this->localeCountry;
-    }
-
-    public function getLocale(): ?string
-    {
-        return $this->locale;
-    }
-
-    public function setLocale(int $locale): void
-    {
-        $this->locale = $locale;
     }
 
     public function setAdditionalSoftware($id) {
