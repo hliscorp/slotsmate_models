@@ -22,4 +22,5 @@ class GameSortCriteria
     // const RTP = 5;
     // const COUNTER = 6;
     // const DATE_ASC = 7;
+    const DEMO = 10;
 }
