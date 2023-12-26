@@ -61,8 +61,6 @@ class GameListConditions extends GameListConditionsGlobal
     {
         if ($this->filter->getIsMobile()) {
             $condition->set("t1.is_mobile", 1);
-        } else {
-            $condition->set("t1.is_desktop", 1);
         }
     }
 
