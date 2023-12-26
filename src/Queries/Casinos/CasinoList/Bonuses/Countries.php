@@ -12,7 +12,7 @@ class Countries extends Query
         $this->query = new \Lucinda\Query\Select("casinos__bonuses_countries", "t1");
         $this->setFields($this->query->fields());
         $this->query->joinInner("countries", "t2")->on(["t1.country_id"=>"t2.id"]);
-        $this->query->where()->setIn("t1.casino_bonus_id", $ids);
+        $this->query->where()->setIn("t1.casino_bonus_id", $ids)->set("t2.keep", 1);
     }
 
     private function setFields(Fields $fields): void
