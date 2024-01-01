@@ -15,6 +15,7 @@ class GameListFields extends GameListFieldsGlobal
         $fields->add('t1.is_best');
         $fields->add('t1.is_hot');
         $fields->add('t1.is_mobile');
+        $fields->add('COALESCE(t1.is_mobile OR t1.is_desktop) AS has_demo');
         if($this->filter->getSort() == GameSortCriteria::BEST || $this->filter->getSort() == GameSortCriteria::MOST_PLAYED) {
             $fields->add('gv.score');
         }
