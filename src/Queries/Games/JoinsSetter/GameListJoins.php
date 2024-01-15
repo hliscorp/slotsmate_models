@@ -11,6 +11,8 @@ class GameListJoins extends GameListJoinsGlobal
     {
         parent::appendJoins();
 
+        $this->query->joinLeft("game_play__matches", "gp_m")->on(["t1.id" => "gp_m.game_id"]);
+
         if ($this->filter->getMinScore() || $this->filter->getRatings() ||
             $this->filter->getSort() == GameSortCriteria::BEST || $this->filter->getSort() == GameSortCriteria::MOST_PLAYED
         ) {
