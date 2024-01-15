@@ -17,7 +17,7 @@ class DepositMethods extends DefaultDepositMethods
     protected function setJoins(): void
     {
         parent::setJoins();
-
+        $this->query->joinInner("locale__banking", "lb")->on(["lb.banking_id"=>"t2.id"]);
         if($this->filter->getLocaleCountry()) {
             $this->query->joinInner('banking_methods__countries_allowed', 't3')->on([
                 "t1.banking_method_id" => "t3.banking_method_id",
@@ -29,7 +29,6 @@ class DepositMethods extends DefaultDepositMethods
     protected function setWhere(Condition $condition): void
     {
         parent::setWhere($condition);
-        $condition->set("t2.keep", 1);
         $condition->set('t2.is_open', 1);
     }
 }
