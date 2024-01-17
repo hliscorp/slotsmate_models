@@ -40,7 +40,9 @@ class GameListConditions extends GameListConditionsGlobal
 
     protected function setManufacturerOpenCondition(Condition $condition): void
     {
-        $this->buildBooleanCondition($condition, "gm.is_open", true);
+        if ($this->filter->getSectionType() != "closed") {
+            $this->buildBooleanCondition($condition, "gm.is_open", true);
+        }
     }
 
     protected function setFeaturesCondition(Condition $condition): void
