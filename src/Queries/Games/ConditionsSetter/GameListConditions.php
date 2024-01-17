@@ -109,7 +109,9 @@ class GameListConditions extends GameListConditionsGlobal
             }
 
         } else {
-            $condition->setIn("t1.game_type_id", $types);
+            if ($sectionType != "closed") {
+                $condition->setIn("t1.game_type_id", $types);
+            }
         }
     }
 
