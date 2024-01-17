@@ -36,7 +36,8 @@ class GamesListOrderBy extends AbstractOrderBy
                     ->add('t1.id', OrderBy::DESC);
                 break;
             case GameSortCriteria::COUNTER:
-                $this->orderBy->add('t1.times_played', OrderBy::DESC)
+                $this->orderBy->add('has_demo', OrderBy::DESC)
+                    ->add('t1.times_played', OrderBy::DESC)
                     ->add('t1.priority', OrderBy::ASC)
                     ->add('t1.id', OrderBy::DESC);
                 break;
