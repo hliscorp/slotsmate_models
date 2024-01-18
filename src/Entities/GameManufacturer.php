@@ -6,4 +6,5 @@ class GameManufacturer extends DefaultGameManufacturer
 {
     public ?float $gameScore = null;
     public ?int $gameRating = null;
+    public ?int $softwareLocaleSupported = null;
 }

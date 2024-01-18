@@ -8,6 +8,7 @@ class GameManufacturer extends DefaultGameManufacturer
     private ?bool $isMain = false;
     private ?string $device = null;
     private ?array $excludedIds = null;
+    private ?bool $isRemoved = false;
 
 
     public function setDevice(string $device): void
@@ -39,5 +40,15 @@ class GameManufacturer extends DefaultGameManufacturer
     public function getExcludedIds(): ?array
     {
         return $this->excludedIds;
+    }
+
+    public function setIsRemoved(bool $isRemoved): void
+    {
+        $this->isRemoved = $isRemoved;
+    }
+
+    public function getIsRemoved(): ?bool
+    {
+        return $this->isRemoved;
     }
 }

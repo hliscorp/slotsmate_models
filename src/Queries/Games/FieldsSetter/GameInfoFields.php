@@ -30,5 +30,6 @@ class GameInfoFields extends GlobalFields
         $fields->add("gt.name", "game_type_name");
         $fields->add('IF(gpp.id IS NOT NULL,1,0)', 'is_mobile');
         $fields->add('MAX(gp.value)', 'max_win_pl');
+        $fields->add("IF(lgm.id IS NOT NULL,1,0) AS softwareLocaleSupported");
     }
 }

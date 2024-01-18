@@ -3,7 +3,7 @@
 namespace Hlis\SlotsMateModels\Builders\Game;
 
 use Hlis\GlobalModels\Builders\Game\Detailed as GlobalDetailedInfo;
-use Hlis\GlobalModels\Builders\GameManufacturer as GameManufacturerBuilder;
+use Hlis\SlotsMateModels\Builders\GameManufacturer as GameManufacturerBuilder;
 use Hlis\GlobalModels\Builders\GameType as GameTypeBuilder;
 use Hlis\SlotsMateModels\Entities\Game as GameEntity;
 

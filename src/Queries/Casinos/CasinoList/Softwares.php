@@ -23,11 +23,13 @@ class Softwares extends \Hlis\GlobalModels\Queries\Query
         $fields->add("t1.casino_id");
         $fields->add("t2.name");
         $fields->add("t2.id");
+        $fields->add("IF(t3.id IS NOT NULL,1,0) AS softwareLocaleSupported");
     }
 
     protected function setJoins(): void
     {
         $this->query->joinInner("game_manufacturers", "t2")->on(["t1.game_manufacturer_id"=>"t2.id"]);
+        $this->query->joinLeft('locale__game_manufacturers', 't3')->on(['t2.id' => 't3.game_manufacturers_id']);
     }
 
     protected function setWhere(\Lucinda\Query\Clause\Condition $condition, array $casinoIDs): void
