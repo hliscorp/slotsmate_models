@@ -11,5 +11,6 @@ class GameListSearchFields extends GameListFieldsGlobal
     {
         parent::appendFields($fields);
         $fields->add('t1.is_mobile');
+        $fields->add("IF(lgm.id IS NOT NULL,1,0) AS softwareLocaleSupported");
     }
 }
