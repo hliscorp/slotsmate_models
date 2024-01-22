@@ -61,6 +61,8 @@ class GameListConditions extends GameListConditionsGlobal
 
     protected function setIsMobileCondition(Condition $condition): void
     {
+        if($this->filter->getIsOpen() === false) return;
+
         if ($this->filter->getIsMobile()) {
             $condition->set("t1.is_mobile", 1);
         } else {
