@@ -13,7 +13,7 @@ class Languages extends Query
         $this->query = new Select("casinos__languages", "c_l");
         $this->setFields($this->query->fields());
         $this->query->joinInner("languages", "la")->on(["c_l.language_id" => "la.id"]);
-        $this->query->where()->setIn("c_l.id", $casinoIDs);
+        $this->query->where()->setIn("c_l.casino_id", $casinoIDs);
     }
 
     protected function setJoins(): void
