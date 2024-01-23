@@ -5,6 +5,7 @@ namespace Hlis\SlotsMateModels\DAOs\Casinos;
 use Hlis\SlotsMateModels\Builders\Casino\Bonus\Basic as CasinoBonusBuilder;
 use Hlis\SlotsMateModels\Builders\Casino\Info\Basic as CasinoBuilder;
 use Hlis\SlotsMateModels\Builders\Casino\Rating as RatingBuilder;
+use Hlis\SlotsMateModels\Builders\Casino\Language as LanguageBuilder;
 use Hlis\SlotsMateModels\Builders\GameManufacturer\Basic as GameManufacturerBuilder;
 use Hlis\SlotsMateModels\Builders\BankingMethod\Basic as BankingMethodBuilder;
 use Hlis\SlotsMateModels\Builders\GameType as GameTypeBuilder;
@@ -46,6 +47,7 @@ class CasinoList extends DefaultCasinoList
         $this->appendDepositMethods($ids);
         $this->appendWithdrawMethods($ids);
         $this->appendReviewsCount($ids);
+        $this->appendLanguages($ids);
     }
 
     protected function appendRatingInfo(array $casinoIDs): void
@@ -144,6 +146,16 @@ class CasinoList extends DefaultCasinoList
         $resultSet = \SQL($query->getQuery(), $query->getParameters());
         while ($row = $resultSet->toRow()) {
             $this->entities[$row["casino_id"]]->reviewsCount = $row["nr"];
+        }
+    }
+
+    protected function appendLanguages($ids)
+    {
+        $builder = new LanguageBuilder();
+        $query = new \Hlis\SlotsMateModels\Queries\Casinos\CasinoList\Languages($ids);
+        $resultSet = \SQL($query->getQuery(), $query->getParameters());
+        while ($row = $resultSet->toRow()) {
+            $this->entities[$row["casino_id"]]->languages[] = $builder->build($row);
         }
     }
 
