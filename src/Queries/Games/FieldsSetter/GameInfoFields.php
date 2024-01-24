@@ -22,6 +22,7 @@ class GameInfoFields extends GlobalFields
         $fields->add('t1.is_best');
         $fields->add('t1.is_hot');
         $fields->add('t1.is_open');
+        $fields->add('t1.noindex');
         $fields->add("t1.game_volatility_id", "volatility_id");
         $fields->add("gm.name", "game_manufacturer_name");
         $fields->add("gm.id", "game_manufacturer_id");

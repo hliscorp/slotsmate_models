@@ -32,6 +32,8 @@ class GameInfo extends GlobalDetailedInfo
 
         $game->max_win_pl = $row["max_win_pl"];
 
+        $game->noindex = $row["noindex"];
+
         return $game;
     }
 
