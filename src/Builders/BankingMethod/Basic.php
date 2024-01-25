@@ -14,6 +14,7 @@ class Basic extends DefaultBasic
         $entity->name = $row['name'];
         $entity->dateUpdated = ($row['date_updated']??"");
         $entity->isAllowedByUserCountry = $row["is_allowed"]??null;
+        $entity->bankingLocaleSupported = isset($row['is_locale']) ? $row['is_locale'] :  0;
         return $entity;
     }
 }
