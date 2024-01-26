@@ -48,7 +48,7 @@ class GameListConditions extends GameListConditionsGlobal
     protected function setFeaturesCondition(Condition $condition): void
     {
         if ($features = $this->filter->getFeatures()) {
-            $condition->setIn("gff.feature_id", $features);
+            $condition->setIn("gff2.feature_id", $features);
         }
     }
 
@@ -64,9 +64,9 @@ class GameListConditions extends GameListConditionsGlobal
         if($this->filter->getIsOpen() === false) return;
 
         if ($this->filter->getIsMobile()) {
-            $condition->set("t1.is_mobile", 1);
+            $condition->set("gff2.feature_id", 7);
         } else {
-            $condition->set("t1.is_desktop", 1);
+            $condition->set("gff2.feature_id", 8);
         }
     }
 
@@ -89,9 +89,9 @@ class GameListConditions extends GameListConditionsGlobal
         $sectionType = $this->filter->getSectionType();
         if($sectionType){
             if($sectionType == 'bonus round'){
-                $condition->set("gff.feature_id", '1');
+                $condition->set("gff2.feature_id", '1');
             }else if($sectionType == 'free spins'){
-                $condition->set("gff.feature_id", '5');
+                $condition->set("gff2.feature_id", '5');
             }
         }
 

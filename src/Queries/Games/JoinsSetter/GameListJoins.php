@@ -34,11 +34,13 @@ class GameListJoins extends GameListJoinsGlobal
             $this->groupBy = true;
         }
 
-        if (empty($this->filter->getFeature()) && !empty($this->filter->getSectionType()) || !empty($this->filter->getFeatures()) || !empty($this->filter->getSlotTypes())) {
-            $this->query->joinInner("games__features", "gff")
-                ->on(["t1.id" => "gff.game_id"]);
-            $this->groupBy = true;
-        }
+        $this->query->joinInner("games__features", "gff2")
+            ->on(["t1.id" => "gff2.game_id"]);
+        $this->groupBy = true;
+
+        $this->query->joinLeft("game_play__patterns","gpl")->on()
+            ->set("gpl.id", "gp_m.pattern_id")
+            ->setIn("gpl.isMobile", ($this->filter->getIsMobile()?[0,2]:[1,2]));
 
         $this->query->joinLeft("locale__game_manufacturers", "lgm")->on([
             "lgm.game_manufacturers_id" => "gm.id"
