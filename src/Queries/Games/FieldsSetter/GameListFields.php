@@ -14,7 +14,7 @@ class GameListFields extends GameListFieldsGlobal
         $fields->add('t1.rtp');
         $fields->add('t1.is_best');
         $fields->add('t1.is_hot');
-        $fields->add('IF(gpl.id IS NOT NULL,1,0)', 'is_mobile');
+        $fields->add('t1.is_mobile');
         $fields->add('(gp_m.id IS NOT NULL) AS has_demo');
         $fields->add("IF(lgm.id IS NOT NULL,1,0) AS softwareLocaleSupported");
         if($this->filter->getSort() == GameSortCriteria::BEST || $this->filter->getSort() == GameSortCriteria::MOST_PLAYED) {
