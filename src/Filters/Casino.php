@@ -6,6 +6,7 @@ use Hlis\GlobalModels\Filters\BankingMethod;
 
 class Casino extends \Hlis\GlobalModels\Filters\Casino
 {
+    protected ?bool $hasApp = null;
     protected ?int $isLiveDealer = null;
     protected ?int $depositMinimum = null;
     protected ?int $withdrawalMinimum = null;
@@ -15,6 +16,7 @@ class Casino extends \Hlis\GlobalModels\Filters\Casino
     protected ?bool $free_bonus = false;
     protected ?bool $deposit = false;
     protected ?bool $withdrawal = false;
+    protected ?bool $isTopRated = false;
     protected ?string $url = '';
     protected ?BankingMethod $bankingMethods = null;
     protected ?bool $isPopularGameTypes = null;
@@ -212,5 +214,15 @@ class Casino extends \Hlis\GlobalModels\Filters\Casino
 
     public function getCountryName() {
         return $this->countryName;
+    }
+
+    public function getHasApp(): ?bool
+    {
+        return $this->hasApp;
+    }
+
+    public function setHasApp(bool $hasApp): void
+    {
+        $this->hasApp = $hasApp;
     }
 }

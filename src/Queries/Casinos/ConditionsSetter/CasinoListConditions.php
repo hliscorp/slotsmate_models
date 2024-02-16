@@ -13,6 +13,7 @@ class CasinoListConditions extends DefaultCasinoListConditions
     {
         parent::appendConditions($condition);
         $this->setIsLiveCondition($condition);
+        $this->setHasAppCondition($condition);
         $this->setLabelCondition($condition);
         $this->setPromotedCondition($condition);
         $this->setGameTypeCondition($condition);
@@ -26,6 +27,13 @@ class CasinoListConditions extends DefaultCasinoListConditions
     {
         if ($this->filter->getIsLiveDealer()) {
             $condition->set("t7.is_live", 1);
+        }
+    }
+
+    protected function setHasAppCondition(Condition $condition): void
+    {
+        if ($this->filter->getOperatingSystems() && $this->filter->getHasApp()) {
+            $condition->set("t10.is_app", 1);
         }
     }
 
