@@ -34,7 +34,7 @@ class GameListConditions extends GameListConditionsGlobal
     {
         if ($this->filter->getSearch()) {
             $search = strtolower(str_replace(" ", "%", $this->filter->getSearch()));
-            $condition->setLike('t1.name', "'%".$search."%'");
+            $condition->setLike('t1.name',  '"%'.$search.'%"');
         }
     }
 
