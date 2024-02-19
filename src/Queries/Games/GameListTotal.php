@@ -11,8 +11,8 @@ class GameListTotal extends GlobalGameListTotal
 {
     protected function setJoins(): void
     {
-        $joins = new GameListJoins($this->filter, $this->query);
-        $this->groupBy = $joins->isGroupBy();
+        new GameListJoins($this->filter, $this->query);
+        $this->groupBy = true;
     }
 
     protected function setWhere(Condition $condition): void
