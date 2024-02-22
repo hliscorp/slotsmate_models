@@ -84,8 +84,8 @@ class CasinoListConditions extends DefaultCasinoListConditions
     {
         if ($this->filter->getIsBest()) {# @no-cache
             $condition->setIn("t1.status_id", [0, 3]);
-            $date = date("Y-m-d", strtotime(date("Y-m-d") . " -6 months"));
-            $condition->set("t1.date_established", "'" . $date . "'", Comparison::LESSER_EQUALS);
+            // $date = date("Y-m-d", strtotime(date("Y-m-d") . " -6 months"));
+            // $condition->set("t1.date_established", "'" . $date . "'", Comparison::LESSER_EQUALS);
             $condition->set("t1.rating_votes", 10, Comparison::GREATER_EQUALS);
             $condition->set("ROUND(t1.rating_total/t1.rating_votes)", 7.5, Comparison::GREATER_EQUALS);
         }
