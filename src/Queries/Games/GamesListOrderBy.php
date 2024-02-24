@@ -16,8 +16,9 @@ class GamesListOrderBy extends AbstractOrderBy
                     ->add('t1.id', OrderBy::DESC);
                 break;
             case GameSortCriteria::NEWEST:
-                $this->orderBy->add("t1.date_launched", OrderBy::DESC)
-                    ->add("t1.id", OrderBy::DESC);
+                $this->orderBy->add('has_demo', OrderBy::DESC)
+                              ->add("t1.date_launched", OrderBy::DESC)
+                              ->add("t1.id", OrderBy::DESC);
                 break;
                 break;
             case GameSortCriteria::BEST:
