@@ -9,6 +9,7 @@ class Game extends GamesFilter
     protected ?array $themes = null;
     protected ?int $mainTheme = null;
     protected ?array $features = null;
+    protected ?int $mainFeature = null;
     protected ?array $volatility = null;
     protected ?array $excludeIds = null;
     protected ?string $pageEntity = null;
@@ -69,6 +70,16 @@ class Game extends GamesFilter
     public function getFeatures(): ?array
     {
         return $this->features;
+    }
+
+    public function setMainFeature(?int $mainFeature)
+    {
+        $this->mainFeature = $mainFeature;
+    }
+
+    public function getMainFeature(): ?string
+    {
+        return $this->mainFeature;
     }
 
     public function setVolatility(?int $volatility)

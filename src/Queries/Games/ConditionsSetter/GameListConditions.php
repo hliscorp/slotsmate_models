@@ -51,6 +51,10 @@ class GameListConditions extends GameListConditionsGlobal
         if ($features = $this->filter->getFeatures()) {
             $condition->setIn("gff.feature_id", $features);
         }
+
+        if ($mainFeature = $this->filter->getMainFeature()) {
+            $condition->setIn("gffMain.feature_id", $mainFeature);
+        }
     }
 
     protected function setVolatilityCondition(Condition $condition): void
