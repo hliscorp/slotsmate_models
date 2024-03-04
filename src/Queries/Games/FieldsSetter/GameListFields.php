@@ -10,7 +10,12 @@ class GameListFields extends GameListFieldsGlobal
 {
     public function appendFields(Fields $fields): void
     {
-        parent::appendFields($fields);
+//        parent::appendFields($fields);
+        $fields->add("DISTINCT t1.id");
+        $fields->add("t1.name");
+        $fields->add("t1.date_launched");
+        $fields->add("gm.id", "game_manufacturer_id");
+        $fields->add("gm.name", "game_manufacturer_name");
         $fields->add('t1.rtp');
         $fields->add('t1.is_best');
         $fields->add('t1.is_hot');
