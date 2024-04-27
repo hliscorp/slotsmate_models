@@ -26,7 +26,8 @@ class GameInfoJoins extends GlobalJoins
         $this->query->joinLeft("games__paytables", "gp")->on(["t1.id"=>"gp.game_id"]);
 
         $this->query->joinLeft("locale__game_manufacturers", "lgm")->on([
-            "lgm.game_manufacturers_id" => "t1.game_manufacturer_id"
+            "lgm.game_manufacturers_id" => "t1.game_manufacturer_id",
+            "lgm.locale_id" => 1
         ]);
     }
 }
