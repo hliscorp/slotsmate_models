@@ -46,8 +46,9 @@ class GameListJoins extends GameListJoinsGlobal
             $this->groupBy = true;
         }
 
-        $this->query->joinLeft("locale__game_manufacturers", "lgm")->on([
-            "lgm.game_manufacturers_id" => "gm.id"
+        $this->query->joinInner("locale__game_manufacturers", "lgm")->on([
+            "lgm.game_manufacturers_id" => "gm.id",
+            "lgm.locale_id" => $this->filter->getLocale()
         ]);
     }
 }

@@ -9,8 +9,9 @@ class GameListSearchJoins extends GameListJoinsGlobal
     protected function appendJoins(): void
     {
         $this->query->joinInner('game_manufacturers', 'gm')->on(['t1.game_manufacturer_id' => 'gm.id']);
-        $this->query->joinLeft("locale__game_manufacturers", "lgm")->on([
-            "lgm.game_manufacturers_id" => "gm.id"
+        $this->query->joinInner("locale__game_manufacturers", "lgm")->on([
+            "lgm.game_manufacturers_id" => "gm.id",
+            "lgm.locale_id" => $this->filter->getLocale()
         ]);
 
         $this->query->joinInner("game_types", "t3")->on(["t1.game_type_id"=>"t3.id"]);

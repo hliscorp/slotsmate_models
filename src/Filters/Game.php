@@ -31,6 +31,7 @@ class Game extends GamesFilter
     protected ?int $sort = null;
     protected ?string $ignoreDateLaunch = null;
     private ?string $search = null;
+    protected int $locale = 1; //en default locale
 
     public function getSearch(): ?string
     {
@@ -280,5 +281,15 @@ class Game extends GamesFilter
     public function getIgnoreDateLaunch(): ?string
     {
         return $this->ignoreDateLaunch;
+    }
+
+    public function getLocale(): int
+    {
+        return $this->locale;
+    }
+
+    public function setLocale(int $locale): void
+    {
+        $this->locale = $locale;
     }
 }

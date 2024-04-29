@@ -27,7 +27,7 @@ class GameInfoJoins extends GlobalJoins
 
         $this->query->joinLeft("locale__game_manufacturers", "lgm")->on([
             "lgm.game_manufacturers_id" => "t1.game_manufacturer_id",
-            "lgm.locale_id" => 1
+            "lgm.locale_id" => $this->filter->getLocale()
         ]);
     }
 }
