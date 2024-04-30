@@ -21,11 +21,11 @@ class GameFeedbacksAbstract extends Query
     {
         if ($this->filter->hasComments()) {
             $join = $this->query->joinInner($this->schema . ".games__feedbacks_translations", "gft")->on();
-            $join = $this->query->joinInner($this->schema . ".countries", "c")->on(['gf.country_id' => 'c.id']);
+            $this->query->joinInner($this->schema . ".countries", "c")->on(['gf.country_id' => 'c.id']);
 
         } else {
             $join = $this->query->joinLeft($this->schema . ".games__feedbacks_translations", "gft")->on();
-            $join = $this->query->joinLeft($this->schema . ".countries", "c")->on(['gf.country_id' => 'c.id']);
+            $this->query->joinLeft($this->schema . ".countries", "c")->on(['gf.country_id' => 'c.id']);
 
         }
 
@@ -53,9 +53,9 @@ class GameFeedbacksAbstract extends Query
             $where->setIn("gf.game_id", $this->filter->getEntityIds());
         }
 
-
         if ($this->filter->getIp()) {
-            $where->setIn("gf.ip", $this->filter->getIp());
+            $where->setIn("gf.ip", ':ip');
+            $this->parameters[':ip'] = $this->filter->getIp();
         }
     }
 
