@@ -30,7 +30,7 @@ class GameFeedbacksList extends GameFeedbacksAbstract
         $fields->add("gf.game_id", 'entity_id');
         $fields->add("gf.ip");
         $fields->add("gf.name", "user_name");
-        $fields->add("gf.email", "email_name");
+        $fields->add("gf.email", "user_email");
         $fields->add("gf.score");
         $fields->add("gf.date_added");
         $fields->add("(SELECT COUNT(id) FROM {$this->schema}.games__feedbacks_helpful WHERE feedback_id = gf.id AND status_id = 1)", "helpful");

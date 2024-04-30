@@ -4,7 +4,7 @@ namespace Hlis\SlotsMateModels\Entities;
 
 use Hlis\SlotsMateModels\Entities\Feedback\Comment;
 
-class Feedback
+class Feedback extends \Entity
 {
     public int $id;
     public ?int $entityId = null;

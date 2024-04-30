@@ -2,7 +2,7 @@
 
 namespace Hlis\SlotsMateModels\Entities\Feedback;
 
-class Comment
+class Comment extends \Entity
 {
     public ?string $body = null;
     public ?string $title = null;
