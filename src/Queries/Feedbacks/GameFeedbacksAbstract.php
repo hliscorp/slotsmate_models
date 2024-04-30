@@ -21,8 +21,12 @@ class GameFeedbacksAbstract extends Query
     {
         if ($this->filter->hasComments()) {
             $join = $this->query->joinInner($this->schema . ".games__feedbacks_translations", "gft")->on();
+            $join = $this->query->joinInner($this->schema . ".countries", "c")->on(['gf.country_id' => 'c.id']);
+
         } else {
             $join = $this->query->joinLeft($this->schema . ".games__feedbacks_translations", "gft")->on();
+            $join = $this->query->joinLeft($this->schema . ".countries", "c")->on(['gf.country_id' => 'c.id']);
+
         }
 
         $join->set("gft.is_original_language", 1);

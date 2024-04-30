@@ -3,6 +3,7 @@
 namespace Hlis\SlotsMateModels\Entities;
 
 use Hlis\SlotsMateModels\Entities\Feedback\Comment;
+use Hlis\GlobalModels\Entities\Country;
 
 class Feedback extends \Entity
 {
@@ -13,6 +14,7 @@ class Feedback extends \Entity
     public ?int $helpful = 0;
     public ?User $user = null;
     public ?int $rating = null;
+    public ?Country $country = null;
     public ?Comment $comment = null;
 
 }

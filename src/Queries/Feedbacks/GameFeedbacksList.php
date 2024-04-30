@@ -40,8 +40,13 @@ class GameFeedbacksList extends GameFeedbacksAbstract
         $fields->add("gft.language_id");
         $fields->add("gft.is_original_language");
         $fields->add("l.name", "original_language_name");
+        $fields->add('c.id', 'country_id');
+        $fields->add('c.name', 'country_name');
+        $fields->add('c.code', 'country_code');
+
+
     }
-    
+
     protected function setOrderBy(string $orderByAlias)
     {
         $orderBy = $this->query->orderBy();
