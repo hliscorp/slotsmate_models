@@ -2,13 +2,12 @@
 
 namespace Hlis\SlotsMateModels\DAOs\Games\Feedbacks;
 
-use Hlis\SlotsMateModels\Builders\Game\GameFeedback as GameFeedbacksListBuilder;
+use Hlis\SlotsMateModels\Builders\GameFeedback as GameFeedbacksListBuilder;
 use Hlis\SlotsMateModels\Queries\Feedbacks\GameFeedbacksList as GameFeedbacksListQuery;
 use Hlis\GlobalModels\DAOs\AbstractEntityList;
 
 class GameFeedbacksList extends AbstractEntityList
 {
-
     protected function createTrunks(): void
     {
         $querier = new GameFeedbacksListQuery($this->filter, $this->orderByAlias, $this->limit, $this->offset);

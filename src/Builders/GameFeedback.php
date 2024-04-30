@@ -1,6 +1,6 @@
 <?php
 
-namespace Hlis\SlotsMateModels\Builders\Game;
+namespace Hlis\SlotsMateModels\Builders;
 
 use Hlis\SlotsMateModels\Entities\Feedback\Comment;
 use Hlis\SlotsMateModels\Entities\Game\GameFeedback as GameFeedbackEntity;
