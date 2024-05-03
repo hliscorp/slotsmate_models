@@ -21,8 +21,8 @@ class Game extends GamesFilter
     protected ?int $reels = null;
     protected ?string $min_date = null;
     protected ?int $min_score = null;
-    protected ?int $min_rtp = null;
-    protected ?int $max_rtp = null;
+    protected ?float $min_rtp = null;
+    protected ?float $max_rtp = null;
     protected ?int $min_min_cpl = null;
     protected ?int $max_min_cpl = null;
     protected ?int $min_max_cpl = null;
@@ -193,22 +193,22 @@ class Game extends GamesFilter
         return $this->min_score;
     }
 
-    public function setMinRtp(?int $min_rtp)
+    public function setMinRtp(?float $min_rtp)
     {
         $this->min_rtp = $min_rtp;
     }
 
-    public function getMinRtp(): ?int
+    public function getMinRtp(): ?float
     {
         return $this->min_rtp;
     }
 
-    public function setMaxRtp(?int $max_rtp)
+    public function setMaxRtp(?float $max_rtp)
     {
         $this->max_rtp = $max_rtp;
     }
 
-    public function getMaxRtp(): ?int
+    public function getMaxRtp(): ?float
     {
         return $this->max_rtp;
     }

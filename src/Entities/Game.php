@@ -2,9 +2,6 @@
 
 namespace Hlis\SlotsMateModels\Entities;
 
-use Hlis\ChipyModels\Entities\Game\FAQItem as FAQItem;
-use Hlis\ChipyModels\Entities\Game\Label as GameLabel;
-use Hlis\GlobalModels\Entities\BlogBonus;
 use Hlis\GlobalModels\Entities\Game as GlobalGameEntity;
 
 class Game extends GlobalGameEntity
@@ -15,4 +12,7 @@ class Game extends GlobalGameEntity
     public ?int $max_win_pl = null;
     public ?float $rtp = null;
     public ?int $noindex = null;
+    public ?bool $is_best = null;
+    public ?bool $is_hot = null;
+    public ?bool $is_mobile = null;
 }
