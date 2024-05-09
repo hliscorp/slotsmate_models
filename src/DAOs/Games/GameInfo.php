@@ -19,6 +19,7 @@ use Hlis\SlotsMateModels\Queries\Games\GameInfo\GameVotesStatistics;
 use Hlis\SlotsMateModels\Queries\Games\GameInfo\HowToPlay as HowToPlayQuery;
 use Hlis\SlotsMateModels\Queries\Games\GameInfo\PaylinesGallery as PaylinesGalleryQuery;
 use Hlis\SlotsMateModels\Queries\Games\GameRating;
+use Hlis\SlotsMateModels\Queries\Games\Rating as RatingQuery;
 
 class GameInfo extends GlobalGameInfo
 {
@@ -116,7 +117,7 @@ class GameInfo extends GlobalGameInfo
 
     protected function appendGameVotesStatistics(): void
     {
-        $query = new GameRating($this->filter);
+        $query = new RatingQuery($this->filter);
         $results = \SQL($query->getQuery(), $query->getParameters())->toColumn();
         $builder = new Rating();
         $this->entity->rating = $builder->build($results);
