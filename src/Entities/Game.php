@@ -3,10 +3,11 @@
 namespace Hlis\SlotsMateModels\Entities;
 
 use Hlis\GlobalModels\Entities\Game as GlobalGameEntity;
+use Hlis\SlotsMateModels\Entities\Game\Rating;
 
 class Game extends GlobalGameEntity
 {
-    public ?float $rating = null;
+    public ?Rating $rating = null;
     public ?float $score = null;
     public ?int $timesPlayed = null;
     public ?int $max_win_pl = null;

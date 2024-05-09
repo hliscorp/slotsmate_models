@@ -9,6 +9,7 @@ use Hlis\GlobalModels\DAOs\Games\GameInfo as GlobalGameInfo;
 use Hlis\GlobalModels\Queries\Games\GameInfo\Collection as CollectionQuery;
 use Hlis\GlobalModels\DAOs\Games\GameFeatures;
 use Hlis\SlotsMateModels\Builders\Game\GameInfo as GameInfoBuilder;
+use Hlis\SlotsMateModels\Builders\Game\Rating;
 use Hlis\SlotsMateModels\DAOs\Games\GamePaytable as GamePaytable;
 use Hlis\SlotsMateModels\Entities\Game as GameEntity;
 use Hlis\SlotsMateModels\Queries\Games\GameInfo as GameInfoQuery;
@@ -17,6 +18,7 @@ use Hlis\SlotsMateModels\Queries\Games\GameInfo\GameVotes;
 use Hlis\SlotsMateModels\Queries\Games\GameInfo\GameVotesStatistics;
 use Hlis\SlotsMateModels\Queries\Games\GameInfo\HowToPlay as HowToPlayQuery;
 use Hlis\SlotsMateModels\Queries\Games\GameInfo\PaylinesGallery as PaylinesGalleryQuery;
+use Hlis\SlotsMateModels\Queries\Games\GameRating;
 
 class GameInfo extends GlobalGameInfo
 {
@@ -114,11 +116,10 @@ class GameInfo extends GlobalGameInfo
 
     protected function appendGameVotesStatistics(): void
     {
-        $query = new GameVotesStatistics($this->filter);
-        $results = \SQL($query->getQuery(), $query->getParameters());
-        while ($row = $results->toRow()) {
-            $this->entity->rating = $row['rating'];
-        }
+        $query = new GameRating($this->filter);
+        $results = \SQL($query->getQuery(), $query->getParameters())->toColumn();
+        $builder = new Rating();
+        $this->entity->rating = $builder->build($results);
     }
 
     protected function appendTimesPlayed(): void
