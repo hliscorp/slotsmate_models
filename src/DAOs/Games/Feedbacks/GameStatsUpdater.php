@@ -30,14 +30,14 @@ class GameStatsUpdater
 
         $score = \SQL($query->toString())->toValue();
 
-        $query = new Select('games__stats');
+        $query = new Select('games__votes');
         $query->fields()->add("game_id");
         $query->where()->set("game_id", $this->gameId);
 
         $gameStatsId = \SQL($query->toString())->toValue();
 
         if ($gameStatsId) {
-            $updater = new Update('games__stats');
+            $updater = new Update('games__votes');
             $updater->set([
                 "votes" => ":votes",
                 "score" => ":score"
@@ -54,7 +54,7 @@ class GameStatsUpdater
 
         } else {
 
-            $inserter = new Insert('games__stats');
+            $inserter = new Insert('games__votes');
             $inserter->columns([
                 'game_id',
                 'votes',
