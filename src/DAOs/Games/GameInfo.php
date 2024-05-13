@@ -61,6 +61,11 @@ class GameInfo extends GlobalGameInfo
         }
     }
 
+    protected function appendVideoTimelines(): void
+    {
+        // do nothing
+    }
+
     protected function appendPaytable(): void
     {
         $paytableModel = new GamePaytable($this->filter);
