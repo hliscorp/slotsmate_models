@@ -5,6 +5,7 @@ namespace Hlis\SlotsMateModels\DAOs\BlogBonuses;
 use Hlis\GlobalModels\Builders\Game\Basic as GameBuilder;
 use Hlis\GlobalModels\DAOs\BlogBonuses\BonusList as GlobalBonusList;
 use Hlis\GlobalModels\Builders\Currency as CurrencyBuilder;
+use Hlis\SlotsMateModels\DAOs\BlogBonuses\BonusList\Casinos as CasinosDAO;
 use Hlis\SlotsMateModels\Queries\BlogBonuses\BonusList\Games as GamesQuery;
 use Hlis\SlotsMateModels\Builders\BlogBonuses\Basic as BonusBuilder;
 use Hlis\SlotsMateModels\Queries\BlogBonuses\BonusListItems as BonusListQuery;
@@ -26,6 +27,15 @@ class BonusList extends GlobalBonusList
     {
         parent::appendBranches($ids);
         $this->appendCurrencies($ids);
+    }
+
+    protected function appendCasinos(array $ids): void
+    {
+        $dao = new CasinosDAO($ids, $this->filter->getCasinos());
+        $list = $dao->getList();
+        foreach ($list as $bonusID=>$casinos) {
+            $this->entities[$bonusID]->casinos = $casinos;
+        }
     }
 
     protected function appendGames(array $ids): void
