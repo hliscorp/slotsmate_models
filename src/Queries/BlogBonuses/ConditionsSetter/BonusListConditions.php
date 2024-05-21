@@ -29,4 +29,12 @@ class BonusListConditions extends GlobalBonusListConditions
             );
         }
     }
+
+    protected function setCasinosCondition(Condition $condition): void
+    {
+        if ($casinos = $this->filter->getCasinos()) {
+            $object = new CasinoListConditions($casinos);
+            $object->appendConditions($condition);
+        }
+    }
 }

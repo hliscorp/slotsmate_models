@@ -20,4 +20,13 @@ class BonusListJoins extends GlobalBonusListJoins
             ]);
         }
     }
+
+    protected function setCasinosJoins(): void
+    {
+        if ($casinoFilter = $this->filter->getCasinos()) {
+            $this->setBonusesCasinoJoin($casinoFilter);
+
+            new CasinoListJoins($casinoFilter, $this->query);
+        }
+    }
 }
