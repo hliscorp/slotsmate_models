@@ -45,7 +45,7 @@ class GameStatsUpdater
 
             $parameters = [
                 ":votes" => $total,
-                ":score" => $score
+                ":score" => $score/$total
             ];
 
             $updater->where()->set("game_id", $this->gameId);
@@ -69,7 +69,7 @@ class GameStatsUpdater
             $parameters = [
                 ':game_id' => $this->gameId,
                 ':votes' => $total,
-                ':score' => $score
+                ':score' => $score/$total
             ];
 
             \SQL($inserter->toString(), $parameters)->getInsertId();
