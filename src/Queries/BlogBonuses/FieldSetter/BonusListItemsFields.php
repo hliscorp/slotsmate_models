@@ -11,6 +11,10 @@ class BonusListItemsFields extends GlobalBonusListItemsFields
     {
         parent::appendFields($fields);
         $fields->add("t1.unknown_minimum_deposit");
+        $fields->add(
+            "IF(t1.minimum_deposit = 0,0,1)",
+            "is_free"
+        );
         if ($this->filter->getSelectedCountry() || $this->filter->getUserCountry()) {
             $fields->add(
                 "IF(t4.id IS NOT NULL,1,0)",

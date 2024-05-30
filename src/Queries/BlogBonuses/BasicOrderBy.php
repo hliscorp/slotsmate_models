@@ -12,10 +12,11 @@ class BasicOrderBy extends GlobalBasicOrderBy
     {
         switch ($orderByAlias) {
             case BonusesSortCriteria::GAMES_BONUSES:
-                $this->orderBy->add("t1.minimum_deposit");
+                $this->orderBy->add("is_free");
                 if ($this->filter->getSelectedCountry() || $this->filter->getUserCountry()) {
                     $this->orderBy->add("is_allowed_by_user_country", OrderBy::DESC);
                 }
+                $this->orderBy->add("t1.minimum_deposit");
                 $this->orderBy->add("t1.date_modified", OrderBy::DESC);
                 break;
             default:
