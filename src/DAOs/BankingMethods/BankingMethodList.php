@@ -5,7 +5,6 @@ namespace Hlis\SlotsMateModels\DAOs\BankingMethods;
 use Hlis\SlotsMateModels\Builders\BankingMethod\Basic as BankingMethodBuilder;
 use Hlis\GlobalModels\DAOs\BankingMethods\BankingMethodList as GlobalBankingMethodList;
 use Hlis\SlotsMateModels\Queries\BankingMethods\BankingMethodListItems as BankingMethodListQuery;
-use function Hlis\SlotsMateModels\DAOs\BankingMethods\SQL;
 
 class BankingMethodList extends GlobalBankingMethodList
 {
