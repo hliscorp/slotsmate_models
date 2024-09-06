@@ -12,12 +12,20 @@ class LearnArticleConditions extends AbstractConditions
     {
         $this->setAuthorCondition($condition);
         $this->setDraftCondition($condition);
+        $this->setCategoryCondition($condition);
     }
 
     protected function setAuthorCondition(Condition $condition): void
     {
         if ($ids = $this->filter->getAuthorIDs()) {
             $condition->setIn("t1.writer_id", $ids);
+        }
+    }
+
+    protected function setCategoryCondition(Condition $condition): void
+    {
+        if ($ids = $this->filter->getCategoryIds()) {
+            $condition->setIn("t3.category_id", $ids);
         }
     }
 

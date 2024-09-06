@@ -14,6 +14,9 @@ class LearnArticleSortBy extends AbstractOrderBy
             case LearnArticleCriteria::DATE_CREATED:
                 $this->orderBy->add("t1.date_added", OrderBy::DESC);
                 break;
+            case LearnArticleCriteria::PRIORITY:
+                $this->orderBy->add("t1.priority");
+                break;
             default:
                 throw new \InvalidArgumentException("Invalid sort criteria: " . $orderByAlias);
         }

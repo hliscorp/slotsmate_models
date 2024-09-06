@@ -19,6 +19,7 @@ class LearnArticleJoin extends AbstractJoins
     public function appendJoins(): void
     { 
         $this->query->joinLeft(SchemaDetector::getInstance()->getAdminSchema().".writers", "t2")->on(["t1.writer_id"=>"t2.id"]);
+        $this->query->joinInner("guidelines__categories", "t3")->on(["t1.id"=>"t3.guideline_id"]);
     }
 
     protected function getLinkingColumnName(): string

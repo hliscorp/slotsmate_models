@@ -9,6 +9,7 @@ class LearnArticleFilter extends \Hlis\GlobalModels\Filters\Filter
     protected ?int $locale_id = null;
     protected ?string $title = null;
     protected ?bool $is_deleted = null;
+    protected ?array $categoryIds = null;
 
     public function setTitle(string $value): void
     {
@@ -50,4 +51,13 @@ class LearnArticleFilter extends \Hlis\GlobalModels\Filters\Filter
         return $this->is_deleted;
     }
 
+    public function addCategoryId(int $id): void
+    {
+        $this->categoryIds[$id] = $id;
+    }
+
+    public function getCategoryIds(): ?array
+    {
+        return $this->categoryIds;
+    }
 }
