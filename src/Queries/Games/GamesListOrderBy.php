@@ -47,6 +47,11 @@ class GamesListOrderBy extends AbstractOrderBy
                     ->add('t1.priority', OrderBy::ASC)
                     ->add('t1.id', OrderBy::DESC);
                 break;
+            case GameSortCriteria::DATE_DESC:
+                $this->orderBy->add('date_launched', OrderBy::DESC)
+                    ->add('t1.priority', OrderBy::ASC)
+                    ->add('t1.id', OrderBy::DESC);
+                break;
             case GameSortCriteria::DEMO:
                 $this->orderBy->add('has_demo', OrderBy::DESC)
                     ->add('t1.priority', OrderBy::ASC)

@@ -24,4 +24,5 @@ class GameSortCriteria
     // const DATE_ASC = 7;
     const DEMO = 10;
     const RELEVANT = 11;
+    const DATE_DESC = 12;
 }
