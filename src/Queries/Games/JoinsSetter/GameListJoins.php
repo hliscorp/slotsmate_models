@@ -29,11 +29,6 @@ class GameListJoins extends GameListJoinsGlobal
             $this->groupBy = true;
         }
 
-        if ($this->filter->getPageEntity() == 'Best') {
-            $this->query->joinLeft("games__votes_statistics", "gvs")->on(["t1.id"=>"gvs.game_id"]);
-            $this->groupBy = true;
-        }
-
         if (empty($this->filter->getFeature()) && !empty($this->filter->getSectionType()) || !empty($this->filter->getFeatures()) || !empty($this->filter->getSlotTypes())) {
             $this->query->joinInner("games__features", "gff")
                 ->on(["t1.id" => "gff.game_id"]);

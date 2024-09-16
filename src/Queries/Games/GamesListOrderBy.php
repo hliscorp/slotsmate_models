@@ -23,7 +23,7 @@ class GamesListOrderBy extends AbstractOrderBy
                 break;
             case GameSortCriteria::BEST:
                 $this->orderBy->add('gv.score', OrderBy::DESC);
-                $this->orderBy->add('COUNT( gvs.game_id)', OrderBy::DESC)
+                $this->orderBy->add('gv.votes', OrderBy::DESC)
                     ->add('t1.id', OrderBy::DESC);
                 break;
             case GameSortCriteria::MOST_PLAYED:
