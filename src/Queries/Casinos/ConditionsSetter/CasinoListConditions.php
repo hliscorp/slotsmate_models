@@ -21,6 +21,7 @@ class CasinoListConditions extends DefaultCasinoListConditions
         $this->setIsBestCondition($condition);
         $this->setIsPopularGameTypesCondition($condition);
         $this->setBankingMethodCondition($condition);
+        $this->setFreeSpinsAmountCondition($condition);
     }
 
     protected function setIsLiveCondition(Condition $condition): void
@@ -100,6 +101,18 @@ class CasinoListConditions extends DefaultCasinoListConditions
             } else {
                 $condition->set("t26.filter_sort", 0, Comparison::GREATER);
             }
+        }
+    }
+
+    protected function setFreeSpinsAmountCondition(Condition $condition): void
+    {
+        $bonusFilter = $this->filter->getBonus();
+        if (!empty($bonusFilter) && !empty($bonusFilter->getFreeSpinsAmount())) {
+            $freeSpinsAmount = $bonusFilter->getFreeSpinsAmount();
+            $minFreeSpinsAmount = $freeSpinsAmount[0];
+            $maxFreeSpinsAmount = $freeSpinsAmount[1];
+
+            $condition->setBetween("t22.amount_fs", $minFreeSpinsAmount, $maxFreeSpinsAmount);
         }
     }
 }

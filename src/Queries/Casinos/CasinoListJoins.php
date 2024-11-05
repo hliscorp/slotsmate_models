@@ -53,12 +53,10 @@ class CasinoListJoins extends AbstractCasinoListJoins
 
     protected function setBonusesJoins(): void
     {
-        if ($this->filter->getFreeBonus())
-        {
-            $this->query->joinInner("casinos__bonuses", "cb")->on(["t1.id" => "cb.casino_id"])->set('cb.bonus_type_id', '"^(3|4|5|6|11)$"', 'REGEXP');
-        }
-        elseif($this->filter->getBonus())
-        {
+        if ($this->filter->getFreeBonus()) {
+            $this->query->joinInner("casinos__bonuses", "cb")->on(["t1.id" => "cb.casino_id"])
+                ->set('cb.bonus_type_id', '"^(3|4|5|6|11)$"', 'REGEXP');
+        } elseif($this->filter->getBonus()) {
             parent::setBonusesJoins();
         }
     }
