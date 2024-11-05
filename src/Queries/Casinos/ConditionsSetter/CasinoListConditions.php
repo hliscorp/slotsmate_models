@@ -112,7 +112,13 @@ class CasinoListConditions extends DefaultCasinoListConditions
             $minFreeSpinsAmount = $freeSpinsAmount[0];
             $maxFreeSpinsAmount = $freeSpinsAmount[1];
 
-            $condition->setBetween("t22.amount_fs", $minFreeSpinsAmount, $maxFreeSpinsAmount);
+            if ($minFreeSpinsAmount && $maxFreeSpinsAmount) {
+                $condition->setBetween("t22.amount_fs", $minFreeSpinsAmount, $maxFreeSpinsAmount);
+            } elseif ($minFreeSpinsAmount) {
+                $condition->set("t22.amount_fs", $minFreeSpinsAmount, Comparison::GREATER_EQUALS);
+            } elseif ($maxFreeSpinsAmount) {
+                $condition->set("t22.amount_fs", $maxFreeSpinsAmount, Comparison::LESSER_EQUALS);
+            }
         }
     }
 }
