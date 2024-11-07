@@ -12,7 +12,7 @@ class BonusListConditions extends GlobalBonusListConditions
     {
         parent::appendConditions($condition);
         $this->setByFreeSpinsAmountCondition($condition);
-
+        $this->setByNoDepositCondition($condition);
     }
 
     protected function setDateExpiredCondition(Condition $condition): void
@@ -59,6 +59,13 @@ class BonusListConditions extends GlobalBonusListConditions
             } elseif ($maxFreeSpinsAmount) {
                 $condition->set("t1.amount_fs", $maxFreeSpinsAmount, Comparison::LESSER_EQUALS);
             }
+        }
+    }
+
+    protected function setByNoDepositCondition(Condition $condition): void
+    {
+        if ($this->filter->getNoDeposit()) {
+            $condition->set("t1.minimum_deposit", 0);
         }
     }
 }

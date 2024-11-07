@@ -9,6 +9,7 @@ class BlogBonus extends GlobalFilter
     protected ?bool $isActive = null; // getActive
     protected ?bool $isExpired = null; // getExpired
     protected ?array $freeSpinsAmount = null;
+    protected ?bool $noDeposit = null;
 
     public function setIsActive(bool $value): self
     {
@@ -48,5 +49,16 @@ class BlogBonus extends GlobalFilter
     public function setFreeSpinsAmount(int $minFreeSpinsAmount = 0, int $maxFreeSpinsAmount = 0): void
     {
         $this->freeSpinsAmount = [$minFreeSpinsAmount, $maxFreeSpinsAmount];
+    }
+
+    public function setNoDeposit(bool $value): self
+    {
+        $this->noDeposit = $value;
+        return $this;
+    }
+
+    public function getNoDeposit(): ?bool
+    {
+        return $this->noDeposit;
     }
 }
