@@ -8,6 +8,7 @@ class BlogBonus extends GlobalFilter
 {
     protected ?bool $isActive = null; // getActive
     protected ?bool $isExpired = null; // getExpired
+    protected ?array $freeSpinsAmount = null;
 
     public function setIsActive(bool $value): self
     {
@@ -29,5 +30,23 @@ class BlogBonus extends GlobalFilter
     public function getIsExpired(): ?bool
     {
         return $this->isExpired;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getFreeSpinsAmount(): ?array
+    {
+        return $this->freeSpinsAmount;
+    }
+
+    /**
+     * @param int $minFreeSpinsAmount
+     * @param int $maxFreeSpinsAmount
+     */
+
+    public function setFreeSpinsAmount(int $minFreeSpinsAmount = 0, int $maxFreeSpinsAmount = 0): void
+    {
+        $this->freeSpinsAmount = [$minFreeSpinsAmount, $maxFreeSpinsAmount];
     }
 }
