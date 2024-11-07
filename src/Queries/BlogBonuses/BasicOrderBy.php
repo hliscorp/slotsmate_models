@@ -19,6 +19,12 @@ class BasicOrderBy extends GlobalBasicOrderBy
                 $this->orderBy->add("t1.minimum_deposit");
                 $this->orderBy->add("t1.date_modified", OrderBy::DESC);
                 break;
+            case BonusesSortCriteria::IS_ALLOWED_IN_COUNTRY_NEWEST:
+                if ($this->filter->getSelectedCountry() || $this->filter->getUserCountry()) {
+                    $this->orderBy->add("is_allowed_by_user_country", OrderBy::DESC);
+                }
+                $this->orderBy->add("t1.id", OrderBy::DESC);
+                break;
             default:
                 parent::setByAlias($orderByAlias);
         }
