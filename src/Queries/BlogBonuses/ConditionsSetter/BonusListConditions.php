@@ -13,6 +13,7 @@ class BonusListConditions extends GlobalBonusListConditions
         parent::appendConditions($condition);
         $this->setByFreeSpinsAmountCondition($condition);
         $this->setByNoDepositCondition($condition);
+        $this->setByNoWageringCondition($condition);
     }
 
     protected function setDateExpiredCondition(Condition $condition): void
@@ -66,6 +67,13 @@ class BonusListConditions extends GlobalBonusListConditions
     {
         if ($this->filter->getNoDeposit()) {
             $condition->set("t1.minimum_deposit", 0);
+        }
+    }
+
+    protected function setByNoWageringCondition(Condition $condition): void
+    {
+        if ($this->filter->getIsNoWagering()) {
+            $condition->set("t1.wagering_amount", 0);
         }
     }
 }
