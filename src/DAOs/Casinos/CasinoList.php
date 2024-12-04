@@ -11,7 +11,6 @@ use Hlis\SlotsMateModels\Builders\BankingMethod\Basic as BankingMethodBuilder;
 use Hlis\SlotsMateModels\Builders\GameType as GameTypeBuilder;
 
 use Hlis\SlotsMateModels\Queries\Casinos\CasinoList\GameTypes as GameTypesQuery;
-use Hlis\SlotsMateModels\Queries\Casinos\CasinoList\GameTypesList;
 use Hlis\SlotsMateModels\Queries\Casinos\CasinoList\RatingInfo;
 use Hlis\SlotsMateModels\Queries\Casinos\CasinoList\Bonuses;
 use Hlis\SlotsMateModels\Queries\Casinos\CasinoListItems as CasinoListQuery;
@@ -70,12 +69,14 @@ class CasinoList extends DefaultCasinoList
             $tmp = $builder->build($row);
             $tmp->countries = [];
             $tmp->notes = [];
+            $tmp->targets = [];
             $this->entities[$row["casino_id"]]->bonuses[$row["id"]] = $tmp;
 
             $bonusIDs[] = $row["id"];
         }
         if (!empty($bonusIDs)) {
             $this->appendBonusesLinks("countries", new CountryAccess(), new Bonuses\Countries($bonusIDs));
+            $this->appendBonusesLinks("targets", new \Hlis\GlobalModels\Builders\Country(), new Bonuses\Targets($bonusIDs));
             $this->appendBonusesLinks("notes", new LocaleText(), new Bonuses\Notes($bonusIDs));
         }
     }
