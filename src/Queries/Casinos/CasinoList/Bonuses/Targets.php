@@ -19,7 +19,7 @@ class Targets extends Query
     protected function setFields(): void
     {
         $fields = $this->query->fields();
-        $fields->add("t1.casino_bonus_id", "bonus_id");
+        $fields->add("t1.casino_bonus_id");
         $fields->add("t2.id", "country_id");
         $fields->add("t2.name", "country_name");
         $fields->add("t2.code", "country_code");
