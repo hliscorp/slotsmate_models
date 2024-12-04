@@ -7,6 +7,7 @@ class CasinoBonus extends GlobalCasinoBonus
 {
     protected ?array $freeSpinsAmount = null;
     protected ?bool $noWagering = null;
+    protected ?int $targetCountry = null;
 
     /**
      * @return array|null
@@ -35,5 +36,16 @@ class CasinoBonus extends GlobalCasinoBonus
     public function getIsNoWagering(): ?bool
     {
         return $this->noWagering;
+    }
+
+    public function setTargetCountry(int $value): self
+    {
+        $this->targetCountry = $value;
+        return $this;
+    }
+
+    public function getTargetCountry(): ?int
+    {
+        return $this->targetCountry;
     }
 }

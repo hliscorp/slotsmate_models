@@ -99,16 +99,6 @@ class Casino extends \Hlis\GlobalModels\Filters\Casino
         $this->promoted = $data;
     }
 
-    public function getFreeBonus()
-    {
-        return $this->free_bonus;
-    }
-
-    public function setFreeBonus($data)
-    {
-        $this->free_bonus = $data;
-    }
-
     public function getPaymentDeposit()
     {
         return $this->deposit;

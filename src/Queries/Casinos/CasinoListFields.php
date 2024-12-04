@@ -32,5 +32,9 @@ class CasinoListFields extends DefaultCasinoListItemsFields
         } else {
             $fields->add("rating_votes");
         }
+
+        if (!empty($this->filter->getBonus())) {
+            $fields->add("GROUP_CONCAT(DISTINCT(t22.id)) as acceptableBonusesIds");
+        }
     }
 }

@@ -1,11 +1,8 @@
 <?php
-
 namespace Hlis\SlotsMateModels\Queries\Casinos;
 
 use Hlis\GlobalModels\Queries\Casinos\JoinsSetter\CasinoListJoins as AbstractCasinoListJoins;
 use Lucinda\Query\Select;
-use \Hlis\SlotsMateModels\DAOs\BankingMethods\BankingMethodList as BankingMethodListDAO;
-use \Hlis\SlotsMateModels\Enums\BankingMethodsOrderBy;
 
 class CasinoListJoins extends AbstractCasinoListJoins
 {
@@ -53,11 +50,27 @@ class CasinoListJoins extends AbstractCasinoListJoins
 
     protected function setBonusesJoins(): void
     {
-        if ($this->filter->getFreeBonus()) {
-            $this->query->joinInner("casinos__bonuses", "cb")->on(["t1.id" => "cb.casino_id"])
-                ->set('cb.bonus_type_id', '"^(3|4|5|6|11)$"', 'REGEXP');
-        } elseif($this->filter->getBonus()) {
-            parent::setBonusesJoins();
+        $aliasIndex = 22;
+        $filter = $this->filter->getBonus();
+        if ($filter !== null) {
+            $alias1 = "t".$aliasIndex;
+            $alias2 = "t".($aliasIndex+1);
+            $onClause = $this->query->joinInner("casinos__bonuses", $alias1)->on();
+            $onClause->set("t1.id", $alias1.".casino_id");
+            if ($ids = $filter->getType()) {
+                $onClause->setIn($alias1.".bonus_type_id", $ids);
+            }
+            if ($filter->getIsExclusive()) {
+                $onClause->set($alias1.".is_exclusive", 1);
+            }
+            if ($country = $filter->getSelectedCountry()) {
+                $this->addCasinoBonusSelectedCountryJoin($country, $alias1, $alias2);
+            }
+            if ($country = $filter->getTargetCountry()) {
+                $this->addCasinoBonusTargetCountryJoin($country, $alias1, 'cbtargets'.$alias2);
+            }
+
+            $this->groupBy = true;
         }
     }
 
@@ -100,12 +113,58 @@ class CasinoListJoins extends AbstractCasinoListJoins
 
     protected function appendCasinoLicenseJoin(): void
     {
-        if ($this->filter->getSelectedCountry() && in_array($this->filter->getSelectedCountry(),[1, 53]))
-        {
+        if ($this->filter->getSelectedCountry() && in_array($this->filter->getSelectedCountry(),[1, 53])) {
             $this->query->joinInner('casinos__licenses', 'cl')->on(['t1.id' => 'cl.casino_id']);
             $this->query->joinInner('licenses', 'lcns')->on(['cl.license_id' => 'lcns.id']);
             $this->query->joinInner('jurisdictions', 'j')->on(['j.country_id' => $this->filter->getSelectedCountry()]);
             $this->query->joinInner('jurisdictions__licenses', 'j_l')->on(['j_l.license_id' => 'lcns.id', 'j_l.jurisdiction_id' => 'j.id']);
         }
+    }
+
+    protected function addCasinoBonusSelectedCountryJoin(int $country, string $alias1, string $alias2): void
+    {
+        $subSelect = new Select("casinos__bonuses", "cb1");
+        $subSelect->fields()->add("cb1.id");
+        $subSelect->joinLeft("casinos__bonuses_countries", "cbc1")->on(["cb1.id"=>"cbc1.casino_bonus_id"]);
+        $subSelect->where()->setIsNull("cbc1.id");
+
+        $subSelect2 = new Select("casinos__bonuses", "cb2");
+        $subSelect2->fields()->add("cb2.id");
+        $subSelect2->joinInner("casinos__bonuses_countries", "cbc2")
+            ->on(["cb2.id"=>"cbc2.casino_bonus_id", "cbc2.country_id"=>$country, "cbc2.is_allowed"=>1]);
+
+        $subSelect3 = new Select("casinos__bonuses", "cb3");
+        $subSelect3->fields()->add("cb3.id");
+        $subSelect3->joinLeft("casinos__bonuses_countries", "cbc3")
+            ->on(["cb3.id"=>"cbc3.casino_bonus_id", "cbc3.country_id"=>$country, "cbc3.is_allowed"=>0]);
+        $subSelect3Where = $subSelect3->where();
+        $subSelect3Where->setIsNull("cbc3.id");
+
+        $subSelect3SubSelect = new Select("casinos__bonuses_countries");
+        $subSelect3SubSelect->fields()->add("casino_bonus_id");
+        $subSelect3SubSelect->where()->set("is_allowed", 0);
+        $subSelect3Where->setIn("cb3.id", $subSelect3SubSelect);
+
+        $this->query->joinInner(
+            "((" . $subSelect->toString() . ") UNION (" . $subSelect2->toString() . ") UNION (" . $subSelect3->toString() . "))",
+            $alias2)->on(["$alias1.id"=>"$alias2.id"]);
+    }
+
+    protected function addCasinoBonusTargetCountryJoin(int $country, string $alias1, string $alias2): void
+    {
+        $subSelect1 = new Select("casinos__bonuses", "cb1");
+        $subSelect1->fields()->add("cb1.id");
+        $subSelect1->joinLeft("casinos__bonuses_targets", "cbc1")->on(["cb1.id"=>"cbc1.casino_bonus_id"]);
+        $subSelectWhere1 = $subSelect1->where();
+        $subSelectWhere1->setIsNull("cbc1.casino_bonus_id");
+
+        $subSelect2 = new Select("casinos__bonuses", "cb2");
+        $subSelect2->fields()->add("cb2.id");
+        $subSelect2->joinInner("casinos__bonuses_targets", "cbc2")
+            ->on(["cb2.id"=>"cbc2.casino_bonus_id", "cbc2.country_id"=>$country]);
+
+        $this->query->joinInner(
+            "((" . $subSelect1->toString() . ") UNION (" . $subSelect2->toString() . "))",
+            $alias2)->on(["$alias1.id"=>"$alias2.id"]);
     }
 }

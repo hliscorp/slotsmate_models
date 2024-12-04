@@ -14,6 +14,13 @@ class Basic extends DefaultBasic
 
         $casino->dateEstablished = $row["date_established"];
         $casino->features = $this->compileCasinoFeatures($row);
+
+        if (!empty($row['acceptableBonusesIds'])) {
+            foreach (explode(',', $row['acceptableBonusesIds']) as $bonusId) {
+                $casino->acceptableBonusesIds[] = $bonusId;
+            }
+        }
+
         return $casino;
     }
 
