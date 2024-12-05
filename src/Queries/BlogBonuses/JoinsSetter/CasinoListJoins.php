@@ -9,5 +9,6 @@ class CasinoListJoins extends GlobalCasinoListJoins
     protected function appendJoins(): void
     {
         $this->setCasinosJoin();
+        $this->setLicensesJoins();
     }
 }
