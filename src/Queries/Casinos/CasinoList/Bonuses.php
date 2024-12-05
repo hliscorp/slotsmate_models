@@ -10,6 +10,7 @@ class Bonuses extends \Hlis\GlobalModels\Queries\Casinos\CasinoList\Bonuses
     {
         parent::setFields($fields);
 
+        $fields->add("t1.client_id");
         $fields->add("t1.games");
         $fields->add("t1.wagering");
         $fields->add("t1.deposit_minimum");
