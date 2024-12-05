@@ -12,7 +12,8 @@ class Countries extends Query
         $this->query = new \Lucinda\Query\Select("casinos__bonuses_countries", "t1");
         $this->setFields($this->query->fields());
         $this->query->joinInner("countries", "t2")->on(["t1.country_id"=>"t2.id"]);
-        $this->query->joinInner("locale__countries", "lc")->on(["lc.country_id"=>"t2.id"]);
+        // could not understand what that shit is needed, its not working properly
+        //$this->query->joinInner("locale__countries", "lc")->on(["lc.country_id"=>"t2.id"]);
         $this->query->where()->setIn("t1.casino_bonus_id", $ids);
     }
 
