@@ -62,7 +62,7 @@ class CasinoList extends DefaultCasinoList
     protected function appendBonuses(array $casinoIDs): void
     {
         $builder = new CasinoBonusBuilder();
-        $query = new Bonuses($casinoIDs);
+        $query = new Bonuses($casinoIDs, $this->orderByAlias);
         $resultSet = \SQL($query->getQuery(), $query->getParameters());
         $bonusIDs = [];
         while ($row = $resultSet->toRow()) {
