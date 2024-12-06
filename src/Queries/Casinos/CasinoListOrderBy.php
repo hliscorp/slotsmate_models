@@ -40,6 +40,11 @@ class CasinoListOrderBy extends AbstractOrderBy
                     ->add("t1.date_established", OrderBy::DESC)
                     ->add("t1.id", OrderBy::DESC);
                 break;
+            case CasinoSortCriteria::AMOUNT_FS_PRIORITY:
+                $this->orderBy->add("t22.amount_fs")
+                    ->add("t1.priority", OrderBy::DESC)
+                    ->add("t1.id", OrderBy::DESC);
+                break;
             case CasinoSortCriteria::NONE:
                 $this->orderBy->add("t1.priority", OrderBy::DESC)
                     ->add("t1.id", OrderBy::DESC);

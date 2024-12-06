@@ -11,4 +11,5 @@ class CasinoSortCriteria
     const RELEVANT = 5;
     const FREE_BONUS = 6;
     const PRIORITY_NEWEST = 7;
+    const AMOUNT_FS_PRIORITY = 8;
 }
