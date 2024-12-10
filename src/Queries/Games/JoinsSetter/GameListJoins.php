@@ -45,5 +45,14 @@ class GameListJoins extends GameListJoinsGlobal
             "lgm.game_manufacturers_id" => "gm.id",
             "lgm.locale_id" => $this->filter->getLocale()
         ]);
+
+        if($manufacturer = $this->filter->getManufacturer()) {
+            if ($countryID = $manufacturer->getSelectedCountry()) {
+                $this->query->joinInner("game_manufacturers__countries_allowed", "gmca")->on([
+                    "gm.id"=>"gmca.game_manufacturer_id",
+                    "gmca.country_id"=>$countryID
+                ]);
+            }
+        }
     }
 }
