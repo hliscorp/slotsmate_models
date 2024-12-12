@@ -31,7 +31,7 @@ class Bonuses extends \Hlis\GlobalModels\Queries\Casinos\CasinoList\Bonuses
         switch ($this->orderByAlias) {
             case CasinoSortCriteria::AMOUNT_FS_PRIORITY:
                 $this->query->orderBy()
-                    ->add("amount_fs", OrderBy::DESC)
+                    ->add("amount_fs")
                     ->add("t1.id");
                 break;
             default:
