@@ -206,4 +206,9 @@ class Casino extends \Hlis\GlobalModels\Filters\Casino
     {
         $this->hasApp = $hasApp;
     }
+
+    public function clearGameTypes(): void
+    {
+        $this->gameTypes = [];
+    }
 }
