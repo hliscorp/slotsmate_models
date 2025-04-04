@@ -1,7 +1,7 @@
 <?php
-
 namespace Hlis\SlotsMateModels\Queries\Casinos;
 
+use Hlis\SlotsMateModels\Enums\Clients;
 use Hlis\SlotsMateModels\Enums\CasinoSortCriteria;
 use Hlis\GlobalModels\Queries\AbstractOrderBy;
 use Lucinda\Query\Operator\OrderBy;
@@ -61,8 +61,23 @@ class CasinoListOrderBy extends AbstractOrderBy
                 $this->orderBy->add("t1.priority", OrderBy::DESC)
                     ->add("t1.id", OrderBy::DESC);
                 break;
+            case CasinoSortCriteria::GEO_PRIORITY:
+                $this->setGeoPriorityOrder();
+                break;
             default:
                 throw new \InvalidArgumentException("Invalid sort criteria: " . $orderByAlias);
         }
+    }
+
+    protected function setGeoPriorityOrder()
+    {
+        $this->orderBy
+            ->add('
+                CASE WHEN cp.country_id IS NOT NULL THEN IF(cp.client_id=' . Clients::SLOTSMATE . ',1,2)
+                WHEN cp1.country_id IS NOT NULL THEN IF(cp1.client_id=' . Clients::SLOTSMATE . ',3,4)
+                ELSE 5 END')
+            ->add('cp.value', OrderBy::DESC)
+            ->add('cp1.value', OrderBy::DESC)
+            ->add("t1.id", OrderBy::DESC);
     }
 }

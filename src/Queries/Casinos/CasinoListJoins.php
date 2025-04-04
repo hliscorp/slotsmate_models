@@ -1,11 +1,21 @@
 <?php
 namespace Hlis\SlotsMateModels\Queries\Casinos;
 
+use Hlis\GlobalModels\Filters\Filter;
 use Hlis\GlobalModels\Queries\Casinos\JoinsSetter\CasinoListJoins as AbstractCasinoListJoins;
 use Lucinda\Query\Select;
+use Hlis\SlotsMateModels\Enums\CasinoSortCriteria;
 
 class CasinoListJoins extends AbstractCasinoListJoins
 {
+    protected string $orderByAlias;
+
+    public function __construct(Filter $filter, Select $query, string $orderByAlias = "")
+    {
+        $this->orderByAlias = $orderByAlias;
+        parent::__construct($filter, $query);
+    }
+
     protected function getLinkingColumnName(): string
     {
         return "casino_id";
@@ -21,6 +31,7 @@ class CasinoListJoins extends AbstractCasinoListJoins
         $this->setSoftwareNameJoin();
         $this->appendBankingMethodsJoin();
         $this->appendCasinoLicenseJoin();
+        $this->setCasinosGeoPriorityJoin();
     }
 
     protected function setSoftwareNameJoin(): void
@@ -168,5 +179,25 @@ class CasinoListJoins extends AbstractCasinoListJoins
         $this->query->joinInner(
             "((" . $subSelect1->toString() . ") UNION (" . $subSelect2->toString() . "))",
             $alias2)->on(["$alias1.id"=>"$alias2.id"]);
+    }
+
+    protected function setCasinosGeoPriorityJoin(): void
+    {
+        $countryId = $this->filter->getSelectedCountry();
+        if (!in_array($this->orderByAlias, [
+                CasinoSortCriteria::GEO_PRIORITY])
+            || !$countryId) {
+            return;
+        }
+
+        $this->query->joinLeft('casinos__priorities', 'cp')->on([
+            'cp.casino_id'  => 't1.id',
+            'cp.country_id' => $countryId
+        ]);
+
+        $this->query->joinLeft('casinos__priorities', 'cp1')->on([
+            'cp1.casino_id'  => 't1.id',
+            'cp1.country_id' => 0
+        ]);
     }
 }
