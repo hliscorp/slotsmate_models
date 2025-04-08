@@ -25,6 +25,7 @@ class Casino extends \Hlis\GlobalModels\Filters\Casino
     protected ?bool $isBest = null;
     protected ?int $localeCountry = null;
     protected ?int $additionalSoftware = null;
+    protected ?array $depositRange = null;
 
     public function setIsLiveDealer(int $isLiveDealer): void
     {
@@ -189,11 +190,13 @@ class Casino extends \Hlis\GlobalModels\Filters\Casino
         return $this->localeCountry;
     }
 
-    public function setAdditionalSoftware($id) {
+    public function setAdditionalSoftware($id)
+    {
         $this->additionalSoftware = $id;
     }
 
-    public function getAdditionalSoftware() {
+    public function getAdditionalSoftware()
+    {
         return $this->additionalSoftware;
     }
 
@@ -210,5 +213,21 @@ class Casino extends \Hlis\GlobalModels\Filters\Casino
     public function clearGameTypes(): void
     {
         $this->gameTypes = [];
+    }
+
+    public function clearCurrencies(): void
+    {
+        $this->currencies = [];
+    }
+
+    public function setDepositRange(int $min, int $max): self
+    {
+        $this->depositRange = [$min, $max];
+        return $this;
+    }
+
+    public function getDepositRange(): ?array
+    {
+        return $this->depositRange;
     }
 }

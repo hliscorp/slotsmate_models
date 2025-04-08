@@ -12,4 +12,5 @@ class CasinoSortCriteria
     const PRIORITY_NEWEST = 7;
     const AMOUNT_FS_PRIORITY = 8;
     const GEO_PRIORITY = 9;
+    const MINIMUM_DEPOSIT_GEO_PRIORITY = 10;
 }

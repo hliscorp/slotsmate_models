@@ -64,6 +64,14 @@ class CasinoListOrderBy extends AbstractOrderBy
             case CasinoSortCriteria::GEO_PRIORITY:
                 $this->setGeoPriorityOrder();
                 break;
+            case CasinoSortCriteria::MINIMUM_DEPOSIT_GEO_PRIORITY:
+                if($this->filter->getDepositRange() && $this->filter->getCurrencies() && $this->filter->getSelectedCountry()) {
+                    $this->orderBy->add("cmd.value");
+                } else {
+                    $this->orderBy->add("t1.deposit_minimum");
+                }
+                $this->setGeoPriorityOrder();
+                break;
             default:
                 throw new \InvalidArgumentException("Invalid sort criteria: " . $orderByAlias);
         }

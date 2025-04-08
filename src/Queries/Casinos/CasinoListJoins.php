@@ -32,6 +32,7 @@ class CasinoListJoins extends AbstractCasinoListJoins
         $this->appendBankingMethodsJoin();
         $this->appendCasinoLicenseJoin();
         $this->setCasinosGeoPriorityJoin();
+        $this->setMinimumDepositJoin();
     }
 
     protected function setSoftwareNameJoin(): void
@@ -185,7 +186,8 @@ class CasinoListJoins extends AbstractCasinoListJoins
     {
         $countryId = $this->filter->getSelectedCountry();
         if (!in_array($this->orderByAlias, [
-                CasinoSortCriteria::GEO_PRIORITY])
+                CasinoSortCriteria::GEO_PRIORITY,
+                CasinoSortCriteria::MINIMUM_DEPOSIT_GEO_PRIORITY])
             || !$countryId) {
             return;
         }
@@ -199,5 +201,22 @@ class CasinoListJoins extends AbstractCasinoListJoins
             'cp1.casino_id'  => 't1.id',
             'cp1.country_id' => 0
         ]);
+    }
+
+    protected function setMinimumDepositJoin(): void
+    {
+        if ($this->filter->getDepositRange() && $this->filter->getSelectedCountry()) {
+            $join1 = $this->query->joinInner('casinos__minimum_deposit', 'cmd')->on();
+            $join1->set('t1.id', 'cmd.casino_id');
+            if ($this->filter->getCurrencies()) {
+                $join1->setIn('cmd.currency_id', $this->filter->getCurrencies());
+            }
+            $join1->setBetween("cmd.value", ...$this->filter->getDepositRange());
+            $this->groupBy = true;
+
+            $join2 = $this->query->joinLeft('casinos__minimum_deposit__countries', 'cmdc')->on();
+            $join2->set('cmd.id', 'cmdc.record_id');
+            $join2->set('cmdc.country_id', $this->filter->getSelectedCountry());
+        }
     }
 }
