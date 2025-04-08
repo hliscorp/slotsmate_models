@@ -3,9 +3,11 @@
 namespace Hlis\SlotsMateModels\DAOs\Casinos;
 
 use Hlis\SlotsMateModels\Builders\Casino\Bonus\Basic as CasinoBonusBuilder;
+use Hlis\SlotsMateModels\Builders\Casino\DepositMinimumTargeted;
 use Hlis\SlotsMateModels\Builders\Casino\Info\Basic as CasinoBuilder;
 use Hlis\SlotsMateModels\Builders\Casino\Rating as RatingBuilder;
 use Hlis\SlotsMateModels\Builders\Casino\Language as LanguageBuilder;
+use Hlis\SlotsMateModels\Builders\Casino\WithdrawMinimumTargeted;
 use Hlis\SlotsMateModels\Builders\GameManufacturer\Basic as GameManufacturerBuilder;
 use Hlis\SlotsMateModels\Builders\BankingMethod\Basic as BankingMethodBuilder;
 use Hlis\SlotsMateModels\Builders\GameType as GameTypeBuilder;
@@ -47,6 +49,8 @@ class CasinoList extends DefaultCasinoList
         $this->appendWithdrawMethods($ids);
         $this->appendReviewsCount($ids);
         $this->appendLanguages($ids);
+        $this->appendTargetedDepositMinimums($ids);
+        $this->appendTargetedWithdrawMinimums($ids);
     }
 
     protected function appendRatingInfo(array $casinoIDs): void
@@ -160,4 +164,29 @@ class CasinoList extends DefaultCasinoList
         }
     }
 
+    protected function appendTargetedDepositMinimums($ids)
+    {
+        //we will append geo targeted stuff only for the filter with selected countries
+        if (!empty($this->filter->getSelectedCountry())) {
+            $builder = new DepositMinimumTargeted();
+            $query = new \Hlis\SlotsMateModels\Queries\Casinos\CasinoList\TargetedDepositMinimums($ids, $this->filter->getSelectedCountry());
+            $resultSet = \SQL($query->getQuery(), $query->getParameters());
+            while ($row = $resultSet->toRow()) {
+                $this->entities[$row["casino_id"]]->depositMinimumTargeted[] = $builder->build($row);
+            }
+        }
+    }
+
+    protected function appendTargetedWithdrawMinimums($ids)
+    {
+        //we will append geo targeted stuff only for the filter with selected countries
+        if (!empty($this->filter->getSelectedCountry())) {
+            $builder = new WithdrawMinimumTargeted();
+            $query = new \Hlis\SlotsMateModels\Queries\Casinos\CasinoList\TargetedWithdrawMinimums($ids, $this->filter->getSelectedCountry());
+            $resultSet = \SQL($query->getQuery(), $query->getParameters());
+            while ($row = $resultSet->toRow()) {
+                $this->entities[$row["casino_id"]]->withdrawMinimumTargeted[] = $builder->build($row);
+            }
+        }
+    }
 }

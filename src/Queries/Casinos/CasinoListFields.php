@@ -13,15 +13,7 @@ class CasinoListFields extends DefaultCasinoListItemsFields
 
         $fields->add("t1.date_established");
         $fields->add("t1.withdraw_minimum");
-        if($this->filter->getDepositRange() && $this->filter->getSelectedCountry()) {
-            $fields->add("
-                COALESCE(
-                    MIN(CASE WHEN cmdc.record_id IS NOT NULL THEN cmd.value ELSE NULL END), 
-                    cmd.value
-                ) AS deposit_minimum");
-        } else {
-            $fields->add("t1.deposit_minimum");
-        }
+        $fields->add("t1.deposit_minimum");
         $fields->add("(rating_total/rating_votes) AS average_rating");
 
         if ($this->filter->getIsLiveDealer()) {
