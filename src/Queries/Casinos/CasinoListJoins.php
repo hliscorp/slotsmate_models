@@ -3,6 +3,7 @@ namespace Hlis\SlotsMateModels\Queries\Casinos;
 
 use Hlis\GlobalModels\Filters\Filter;
 use Hlis\GlobalModels\Queries\Casinos\JoinsSetter\CasinoListJoins as AbstractCasinoListJoins;
+use Lucinda\Query\Clause\Condition;
 use Lucinda\Query\Select;
 use Hlis\SlotsMateModels\Enums\CasinoSortCriteria;
 
@@ -209,7 +210,10 @@ class CasinoListJoins extends AbstractCasinoListJoins
             $join1 = $this->query->joinInner('casinos__minimum_deposit', 'cmd')->on();
             $join1->set('t1.id', 'cmd.casino_id');
             if ($this->filter->getCurrencies()) {
-                $join1->setIn('cmd.currency_id', $this->filter->getCurrencies());
+                $group = new Condition([], \Lucinda\Query\Operator\Logical::_OR_);
+                $group->setIsNull('cmd.currency_id');
+                $group->setIn('cmd.currency_id', $this->filter->getCurrencies());
+                $join1->setGroup($group);
             }
             $join1->setBetween("cmd.value", ...$this->filter->getDepositRange());
             $this->groupBy = true;
