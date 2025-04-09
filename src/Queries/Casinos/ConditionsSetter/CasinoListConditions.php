@@ -6,6 +6,7 @@ use Hlis\GlobalModels\Queries\Casinos\ConditionsSetter\CasinoListConditions as D
 use Lucinda\Query\Clause\Condition;
 use Lucinda\Query\Operator\Comparison;
 use Lucinda\Query\Vendor\MySQL\Operator\Logical;
+use Lucinda\Query\Vendor\MySQL\Select;
 
 class CasinoListConditions extends DefaultCasinoListConditions
 {
@@ -23,6 +24,7 @@ class CasinoListConditions extends DefaultCasinoListConditions
         $this->setBankingMethodCondition($condition);
         $this->setFreeSpinsAmountCondition($condition);
         $this->setIsNoWageringCondition($condition);
+        $this->setDepositRangeCondition($condition);
     }
 
     protected function setIsLiveCondition(Condition $condition): void
@@ -128,6 +130,23 @@ class CasinoListConditions extends DefaultCasinoListConditions
         $bonusFilter = $this->filter->getBonus();
         if (!empty($bonusFilter) && !empty($bonusFilter->getIsNoWagering())) {
             $condition->set("t22.wagering_amount", 0);
+        }
+    }
+
+    protected function setDepositRangeCondition(Condition $condition): void
+    {
+        if ($range = $this->filter->getDepositRange()) {
+            if ($this->filter->getCurrencies() && $this->filter->getSelectedCountry()) {
+                $group = new Condition([], \Lucinda\Query\Operator\Logical::_OR_);
+                $group->setIsNull("cmdc.record_id", false);
+                $subQuery = new Select("casinos__minimum_deposit__countries", "cmdc2");
+                $subQuery->fields()->add("1");
+                $subQuery->where()->set("cmdc2.record_id", "cmd.id");
+                $group->set("", "(" . $subQuery->toString() . ")", "NOT EXISTS");
+                $condition->setGroup($group);
+            } else {
+                $condition->setBetween("t1.deposit_minimum", $range[0], $range[1]);
+            }
         }
     }
 }

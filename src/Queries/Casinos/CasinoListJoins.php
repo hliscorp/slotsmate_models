@@ -1,11 +1,22 @@
 <?php
 namespace Hlis\SlotsMateModels\Queries\Casinos;
 
+use Hlis\GlobalModels\Filters\Filter;
 use Hlis\GlobalModels\Queries\Casinos\JoinsSetter\CasinoListJoins as AbstractCasinoListJoins;
+use Lucinda\Query\Clause\Condition;
 use Lucinda\Query\Select;
+use Hlis\SlotsMateModels\Enums\CasinoSortCriteria;
 
 class CasinoListJoins extends AbstractCasinoListJoins
 {
+    protected string $orderByAlias;
+
+    public function __construct(Filter $filter, Select $query, string $orderByAlias = "")
+    {
+        $this->orderByAlias = $orderByAlias;
+        parent::__construct($filter, $query);
+    }
+
     protected function getLinkingColumnName(): string
     {
         return "casino_id";
@@ -21,6 +32,8 @@ class CasinoListJoins extends AbstractCasinoListJoins
         $this->setSoftwareNameJoin();
         $this->appendBankingMethodsJoin();
         $this->appendCasinoLicenseJoin();
+        $this->setCasinosGeoPriorityJoin();
+        $this->setMinimumDepositJoin();
     }
 
     protected function setSoftwareNameJoin(): void
@@ -168,5 +181,46 @@ class CasinoListJoins extends AbstractCasinoListJoins
         $this->query->joinInner(
             "((" . $subSelect1->toString() . ") UNION (" . $subSelect2->toString() . "))",
             $alias2)->on(["$alias1.id"=>"$alias2.id"]);
+    }
+
+    protected function setCasinosGeoPriorityJoin(): void
+    {
+        $countryId = $this->filter->getSelectedCountry();
+        if (!in_array($this->orderByAlias, [
+                CasinoSortCriteria::GEO_PRIORITY,
+                CasinoSortCriteria::MINIMUM_DEPOSIT_GEO_PRIORITY])
+            || !$countryId) {
+            return;
+        }
+
+        $this->query->joinLeft('casinos__priorities', 'cp')->on([
+            'cp.casino_id'  => 't1.id',
+            'cp.country_id' => $countryId
+        ]);
+
+        $this->query->joinLeft('casinos__priorities', 'cp1')->on([
+            'cp1.casino_id'  => 't1.id',
+            'cp1.country_id' => 0
+        ]);
+    }
+
+    protected function setMinimumDepositJoin(): void
+    {
+        if ($this->filter->getDepositRange() && $this->filter->getSelectedCountry()) {
+            $join1 = $this->query->joinInner('casinos__minimum_deposit', 'cmd')->on();
+            $join1->set('t1.id', 'cmd.casino_id');
+            if ($this->filter->getCurrencies()) {
+                $group = new Condition([], \Lucinda\Query\Operator\Logical::_OR_);
+                $group->setIsNull('cmd.currency_id');
+                $group->setIn('cmd.currency_id', $this->filter->getCurrencies());
+                $join1->setGroup($group);
+            }
+            $join1->setBetween("cmd.value", ...$this->filter->getDepositRange());
+            $this->groupBy = true;
+
+            $join2 = $this->query->joinLeft('casinos__minimum_deposit__countries', 'cmdc')->on();
+            $join2->set('cmd.id', 'cmdc.record_id');
+            $join2->set('cmdc.country_id', $this->filter->getSelectedCountry());
+        }
     }
 }

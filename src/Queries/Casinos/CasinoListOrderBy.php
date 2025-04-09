@@ -1,7 +1,7 @@
 <?php
-
 namespace Hlis\SlotsMateModels\Queries\Casinos;
 
+use Hlis\SlotsMateModels\Enums\Clients;
 use Hlis\SlotsMateModels\Enums\CasinoSortCriteria;
 use Hlis\GlobalModels\Queries\AbstractOrderBy;
 use Lucinda\Query\Operator\OrderBy;
@@ -18,7 +18,7 @@ class CasinoListOrderBy extends AbstractOrderBy
             case CasinoSortCriteria::FREE_BONUS:
                 // cast free_bonus_amount to int
                 $this->orderBy->add("free_bonus_amount+0", OrderBy::DESC)
-                    ->add("has_first_deposit_bonus ", OrderBy::DESC)
+                    ->add("has_first_deposit_bonus", OrderBy::DESC)
                     ->add("t1.priority", OrderBy::DESC);
                 break;
             case CasinoSortCriteria::TOP_RATED:
@@ -61,8 +61,31 @@ class CasinoListOrderBy extends AbstractOrderBy
                 $this->orderBy->add("t1.priority", OrderBy::DESC)
                     ->add("t1.id", OrderBy::DESC);
                 break;
+            case CasinoSortCriteria::GEO_PRIORITY:
+                $this->setGeoPriorityOrder();
+                break;
+            case CasinoSortCriteria::MINIMUM_DEPOSIT_GEO_PRIORITY:
+                if($this->filter->getDepositRange() && $this->filter->getCurrencies() && $this->filter->getSelectedCountry()) {
+                    $this->orderBy->add("cmd.value");
+                } else {
+                    $this->orderBy->add("t1.deposit_minimum");
+                }
+                $this->setGeoPriorityOrder();
+                break;
             default:
                 throw new \InvalidArgumentException("Invalid sort criteria: " . $orderByAlias);
         }
+    }
+
+    protected function setGeoPriorityOrder()
+    {
+        $this->orderBy
+            ->add('
+                CASE WHEN cp.country_id IS NOT NULL THEN IF(cp.client_id=' . Clients::SLOTSMATE . ',1,2)
+                WHEN cp1.country_id IS NOT NULL THEN IF(cp1.client_id=' . Clients::SLOTSMATE . ',3,4)
+                ELSE 5 END')
+            ->add('cp.value', OrderBy::DESC)
+            ->add('cp1.value', OrderBy::DESC)
+            ->add("t1.id", OrderBy::DESC);
     }
 }
