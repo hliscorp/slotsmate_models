@@ -70,16 +70,6 @@ class Casino extends \Hlis\GlobalModels\Filters\Casino
         return $this->pageType;
     }
 
-    public function getCountReviews()
-    {
-        return $this->countReviews;
-    }
-
-    public function setCountReviews($data)
-    {
-        $this->countReviews = $data;
-    }
-
     public function isTopRated(): bool
     {
         return $this->isTopRated;

@@ -18,7 +18,7 @@ class CasinoListOrderBy extends AbstractOrderBy
             case CasinoSortCriteria::FREE_BONUS:
                 // cast free_bonus_amount to int
                 $this->orderBy->add("free_bonus_amount+0", OrderBy::DESC)
-                    ->add("has_first_deposit_bonus ", OrderBy::DESC)
+                    ->add("has_first_deposit_bonus", OrderBy::DESC)
                     ->add("t1.priority", OrderBy::DESC);
                 break;
             case CasinoSortCriteria::TOP_RATED:
