@@ -47,6 +47,8 @@ class GameInfo extends GlobalDetailedInfo
         $features->minCS = $row["min_cs"];
         $features->maxCS = $row["max_cs"];
         $features->rtp = $this->compileRtp($row);
+        $features->totalMaxWinning = $this->compileTotalMaxWinning($row);
+
         return $features;
     }
 
