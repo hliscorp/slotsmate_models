@@ -206,21 +206,36 @@ class CasinoListJoins extends AbstractCasinoListJoins
 
     protected function setMinimumDepositJoin(): void
     {
-        if ($this->filter->getDepositRange() && $this->filter->getSelectedCountry()) {
-            $join1 = $this->query->joinInner('casinos__minimum_deposit', 'cmd')->on();
-            $join1->set('t1.id', 'cmd.casino_id');
-            if ($this->filter->getCurrencies()) {
-                $group = new Condition([], \Lucinda\Query\Operator\Logical::_OR_);
-                $group->setIsNull('cmd.currency_id');
-                $group->setIn('cmd.currency_id', $this->filter->getCurrencies());
-                $join1->setGroup($group);
-            }
-            $join1->setBetween("cmd.value", ...$this->filter->getDepositRange());
-            $this->groupBy = true;
+        if ($this->filter->getDepositRange() && $this->filter->getSelectedCountry() && $this->filter->getCurrencies()) {
+            $subSelect = new Select("casinos__minimum_deposit", "md1");
+            $subSelect->fields()->add("md1.*");
+            $subSelectJoin = $subSelect->joinLeft("casinos__minimum_deposit", "md2")->on(["md1.casino_id"=>"md2.casino_id"]);
+            $subSelectJoinGroup = new Condition([], \Lucinda\Query\Operator\Logical::_OR_);
+            $subSelectJoinGroupCondition1 = new Condition();
+            $subSelectJoinGroupCondition1->setIsNull("md1.currency_id");
+            $subSelectJoinGroupCondition1->setIn("md2.currency_id", $this->filter->getCurrencies());
+            $subSelectJoinGroupCondition2 = new Condition();
+            $subSelectJoinGroupCondition2->setIn("md1.currency_id", $this->filter->getCurrencies(), false);
+            $subSelectJoinGroupCondition2->setIsNull("md2.currency_id");
+            $subSelectJoinGroup->setGroup($subSelectJoinGroupCondition1);
+            $subSelectJoinGroup->setGroup($subSelectJoinGroupCondition2);
+            $subSelectJoin->setGroup($subSelectJoinGroup);
 
+            $subSelectWhere = $subSelect->where();
+            $subSelectWhere->setIsNull("md2.id");
+            $subSelectWhere->setBetween("md1.value", ...$this->filter->getDepositRange());
+            $subSelectWhereCondition = new Condition([], \Lucinda\Query\Operator\Logical::_OR_);
+            $subSelectWhereCondition->setIsNull("md1.currency_id");
+            $subSelectWhereCondition->setIn("md1.currency_id", $this->filter->getCurrencies());
+            $subSelectWhere->setGroup($subSelectWhereCondition);
+            $this->query->joinInner(
+                "(" . $subSelect->toString() . ")",
+                "cmd"
+            )->on(["t1.id" => "cmd.casino_id"]);
             $join2 = $this->query->joinLeft('casinos__minimum_deposit__countries', 'cmdc')->on();
             $join2->set('cmd.id', 'cmdc.record_id');
             $join2->set('cmdc.country_id', $this->filter->getSelectedCountry());
+            $this->groupBy = true;
         }
     }
 }
