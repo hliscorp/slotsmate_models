@@ -41,19 +41,7 @@ class CasinoListOrderBy extends AbstractOrderBy
                     ->add("t1.id", OrderBy::DESC);
                 break;
             case CasinoSortCriteria::AMOUNT_FS_PRIORITY:
-                $filter = $this->filter->getBonus();
-                if ($filter !== null && $filter->getTargetCountry()) {
-                    //if that is targeted casinos query this order by is way more complicated, we need to take amount_fs for order from the proper casino bonus
-                    $this->orderBy->add(
-                        "COALESCE(
-                            MAX(CASE WHEN cbtargetst23.targeted = 1 THEN t22.amount_fs ELSE null END),
-                            MAX(CASE WHEN t22.client_id = 12 THEN t22.amount_fs ELSE null END),
-                            MAX(CASE WHEN cbtargetst23.targeted = 0 THEN t22.amount_fs ELSE null END)
-                        )"
-                    );
-                } else {
-                    $this->orderBy->add("MAX(t22.amount_fs)");
-                }
+                $this->setBonusFsAmountOrder();
                 $this->orderBy->add("t1.priority", OrderBy::DESC)
                     ->add("t1.id", OrderBy::DESC);
                 break;
@@ -72,12 +60,16 @@ class CasinoListOrderBy extends AbstractOrderBy
                 }
                 $this->setGeoPriorityOrder();
                 break;
+            case CasinoSortCriteria::AMOUNT_FS_GEO_PRIORITY:
+                $this->setBonusFsAmountOrder();
+                $this->setGeoPriorityOrder();
+                break;
             default:
                 throw new \InvalidArgumentException("Invalid sort criteria: " . $orderByAlias);
         }
     }
 
-    protected function setGeoPriorityOrder()
+    protected function setGeoPriorityOrder(): void
     {
         $this->orderBy
             ->add('
@@ -87,5 +79,22 @@ class CasinoListOrderBy extends AbstractOrderBy
             ->add('cp.value', OrderBy::DESC)
             ->add('cp1.value', OrderBy::DESC)
             ->add("t1.id", OrderBy::DESC);
+    }
+
+    protected function setBonusFsAmountOrder(): void
+    {
+        $filter = $this->filter->getBonus();
+        if ($filter !== null && $filter->getTargetCountry()) {
+            $this->orderBy->add(
+                "COALESCE(
+                            MAX(CASE WHEN cbtargetst23.targeted = 1 THEN t22.amount_fs ELSE null END),
+                            MAX(CASE WHEN t22.client_id = 12 THEN t22.amount_fs ELSE null END),
+                            MAX(CASE WHEN cbtargetst23.targeted = 0 THEN t22.amount_fs ELSE null END)
+                        )"
+            );
+        } else {
+            $this->orderBy->add("MAX(t22.amount_fs)");
+        }
+
     }
 }

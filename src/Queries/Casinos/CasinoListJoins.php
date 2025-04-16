@@ -188,7 +188,8 @@ class CasinoListJoins extends AbstractCasinoListJoins
         $countryId = $this->filter->getSelectedCountry();
         if (!in_array($this->orderByAlias, [
                 CasinoSortCriteria::GEO_PRIORITY,
-                CasinoSortCriteria::MINIMUM_DEPOSIT_GEO_PRIORITY])
+                CasinoSortCriteria::MINIMUM_DEPOSIT_GEO_PRIORITY,
+                CasinoSortCriteria::AMOUNT_FS_GEO_PRIORITY])
             || !$countryId) {
             return;
         }
