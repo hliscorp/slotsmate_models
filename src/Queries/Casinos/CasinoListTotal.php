@@ -18,5 +18,6 @@ class CasinoListTotal extends DefaultCasinoListTotal
     {
         $setter = new CasinoListConditions($this->filter);
         $setter->appendConditions($condition);
+        $this->parameters = $setter->getParameters();
     }
 }

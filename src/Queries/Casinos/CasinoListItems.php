@@ -39,6 +39,7 @@ class CasinoListItems extends GlobalCasinoListItems
     {
         $setter = new CasinoListConditions($this->filter);
         $setter->appendConditions($condition);
+        $this->parameters = $setter->getParameters();
     }
 
     protected function setOrderBy(string $orderByAlias): void
