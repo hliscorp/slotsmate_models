@@ -29,4 +29,14 @@ class BonusListJoins extends GlobalBonusListJoins
             new CasinoListJoins($casinoFilter, $this->query);
         }
     }
+
+    protected function setGamesJoins(): void
+    {
+        if ($filter = $this->filter->getGames()) {
+            $this->setBonusesGamesJoin($filter);
+
+            new GameListJoins($filter, $this->query);
+            $this->groupBy = true;
+        }
+    }
 }

@@ -14,6 +14,7 @@ class BonusListConditions extends GlobalBonusListConditions
         $this->setByFreeSpinsAmountCondition($condition);
         $this->setByNoDepositCondition($condition);
         $this->setByNoWageringCondition($condition);
+        $this->setGamesRtpCondition($condition);
     }
 
     protected function setDateExpiredCondition(Condition $condition): void
@@ -74,6 +75,19 @@ class BonusListConditions extends GlobalBonusListConditions
     {
         if ($this->filter->getIsNoWagering()) {
             $condition->set("t1.wagering_amount", 0);
+        }
+    }
+
+    protected function setGamesRtpCondition(Condition $condition): void
+    {
+        $filterGames = $this->filter->getGames();
+        if (!empty($filterGames)) {
+            if (!empty($filterGames->getMinRtp())) {
+                $condition->set("gt1.rtp", $filterGames->getMinRtp(), Comparison::GREATER_EQUALS);
+            }
+            if (!empty($filterGames->getMaxRtp())) {
+                $condition->set("gt1.rtp", $filterGames->getMaxRtp(), Comparison::LESSER_EQUALS);
+            }
         }
     }
 }
