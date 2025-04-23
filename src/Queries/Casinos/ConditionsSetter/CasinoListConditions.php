@@ -63,8 +63,8 @@ class CasinoListConditions extends DefaultCasinoListConditions
     {
         if ($this->filter->getBankingMethods()) {
             $group = new Condition([], Logical::_OR_);
-            $group->set("t13.id", "", Comparison::IS_NOT_NULL);
-            $group->set("t16.id", "", Comparison::IS_NOT_NULL);
+            $group->set("tbm13.id", "", Comparison::IS_NOT_NULL);
+            $group->set("tbm16.id", "", Comparison::IS_NOT_NULL);
             $condition->setGroup($group);
         }
     }

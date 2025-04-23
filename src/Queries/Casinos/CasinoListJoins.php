@@ -93,13 +93,13 @@ class CasinoListJoins extends AbstractCasinoListJoins
             $this->groupBy = true;
             $bankingMethodID = key($bankingMethod->getId());
 
-            $this->query->joinLeft("casinos__deposit_methods", "t13")->on([
-                "t1.id"=>"t13.casino_id",
-                "t13.banking_method_id"=>$bankingMethodID
+            $this->query->joinLeft("casinos__deposit_methods", "tbm13")->on([
+                "t1.id"=>"tbm13.casino_id",
+                "tbm13.banking_method_id"=>$bankingMethodID
             ]);
-            $this->query->joinLeft("casinos__withdraw_methods", "t16")->on([
-                "t1.id"=>"t16.casino_id",
-                "t16.banking_method_id"=>$bankingMethodID
+            $this->query->joinLeft("casinos__withdraw_methods", "tbm16")->on([
+                "t1.id"=>"tbm16.casino_id",
+                "tbm16.banking_method_id"=>$bankingMethodID
             ]);
         }
     }
