@@ -21,6 +21,7 @@ class Game extends GamesFilter
     protected ?int $reels = null;
     protected ?string $min_date = null;
     protected ?int $min_score = null;
+    protected ?int $min_votes = null;
     protected ?float $min_rtp = null;
     protected ?float $max_rtp = null;
     protected ?int $min_min_cpl = null;
@@ -192,6 +193,17 @@ class Game extends GamesFilter
     {
         return $this->min_score;
     }
+
+    public function setMinVotes(?int $min_votes)
+    {
+        $this->min_votes = $min_votes;
+    }
+
+    public function getMinVotes(): ?int
+    {
+        return $this->min_votes;
+    }
+
 
     public function setMinRtp(?float $min_rtp)
     {

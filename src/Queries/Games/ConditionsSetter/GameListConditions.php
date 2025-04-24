@@ -17,6 +17,7 @@ class GameListConditions extends GameListConditionsGlobal
         $this->setIsMobileCondition($condition);
         $this->setMinimumDateLaunchedCondition($condition);
         $this->setMinimumScoreCondition($condition);
+        $this->setMinimumVotesCondition($condition);
         $this->setSectionAndGameTypeCondition($condition);
         $this->setPageEntityCondition($condition);
         $this->setUpcomingCondition($condition);
@@ -86,6 +87,13 @@ class GameListConditions extends GameListConditionsGlobal
     {
         if ($this->filter->getMinScore()) {
             $condition->set("gv.score", $this->filter->getMinScore(), Comparison::GREATER_EQUALS);
+        }
+    }
+
+    protected function setMinimumVotesCondition(Condition $condition): void
+    {
+        if ($this->filter->getMinVotes()) {
+            $condition->set("gv.votes", $this->filter->getMinVotes(), Comparison::GREATER_EQUALS);
         }
     }
 
