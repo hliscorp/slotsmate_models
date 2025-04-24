@@ -210,6 +210,11 @@ class Casino extends \Hlis\GlobalModels\Filters\Casino
         $this->currencies = [];
     }
 
+    public function clearOperatingSystems(): void
+    {
+        $this->operatingSystems = [];
+    }
+
     public function setDepositRange(int $min, int $max): self
     {
         $this->depositRange = [$min, $max];
