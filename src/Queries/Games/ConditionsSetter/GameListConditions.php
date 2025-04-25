@@ -16,6 +16,7 @@ class GameListConditions extends GameListConditionsGlobal
         $this->setVolatilityCondition($condition);
         $this->setIsMobileCondition($condition);
         $this->setMinimumDateLaunchedCondition($condition);
+        $this->setMaximumDateLaunchedCondition($condition);
         $this->setMinimumScoreCondition($condition);
         $this->setMinimumVotesCondition($condition);
         $this->setSectionAndGameTypeCondition($condition);
@@ -80,6 +81,13 @@ class GameListConditions extends GameListConditionsGlobal
     {
         if ($this->filter->getMinDate()) {
             $condition->set("t1.date_launched", "'" . $this->filter->getMinDate() . "'", Comparison::GREATER_EQUALS);
+        }
+    }
+
+    protected function setMaximumDateLaunchedCondition(Condition $condition): void
+    {
+        if ($this->filter->getMaxDate()) {
+            $condition->set("t1.date_launched", "'" . $this->filter->getMaxDate() . "'", Comparison::LESSER_EQUALS);
         }
     }
 

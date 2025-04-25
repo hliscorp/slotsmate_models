@@ -20,6 +20,7 @@ class Game extends GamesFilter
     protected ?array $ratings = null;
     protected ?int $reels = null;
     protected ?string $min_date = null;
+    protected ?string $max_date = null;
     protected ?int $min_score = null;
     protected ?int $min_votes = null;
     protected ?float $min_rtp = null;
@@ -182,6 +183,16 @@ class Game extends GamesFilter
     public function getMinDate(): ?string
     {
         return $this->min_date;
+    }
+
+    public function setMaxDate(?string $max_date)
+    {
+        $this->max_date = $max_date;
+    }
+
+    public function getMaxDate(): ?string
+    {
+        return $this->max_date;
     }
 
     public function setMinScore(?int $min_score)
