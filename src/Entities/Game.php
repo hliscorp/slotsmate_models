@@ -16,4 +16,5 @@ class Game extends GlobalGameEntity
     public ?bool $is_best = null;
     public ?bool $is_hot = null;
     public ?bool $is_mobile = null;
+    public array $faq = [];
 }

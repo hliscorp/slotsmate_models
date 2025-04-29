@@ -1,13 +1,15 @@
 <?php
-
 namespace Hlis\SlotsMateModels\DAOs\Games;
+
+use Hlis\SlotsMateModels\Builders\Game\FAQ;
+use Hlis\SlotsMateModels\Queries\Games\GameInfo\FAQ as FAQQuery;
 
 use Hlis\GlobalModels\Builders\Game\Collection as CollectionBuilder;
 use Hlis\GlobalModels\Builders\Game\FeaturesGallery as FeaturesGalleryBuilder;
 use Hlis\GlobalModels\Builders\Game\HowToPlay as HowToPlayBuilder;
 use Hlis\GlobalModels\DAOs\Games\GameInfo as GlobalGameInfo;
-use Hlis\GlobalModels\Queries\Games\GameInfo\Collection as CollectionQuery;
 use Hlis\GlobalModels\DAOs\Games\GameFeatures;
+use Hlis\GlobalModels\Queries\Games\GameInfo\Collection as CollectionQuery;
 use Hlis\SlotsMateModels\Builders\Game\GameInfo as GameInfoBuilder;
 use Hlis\SlotsMateModels\Builders\Game\Rating;
 use Hlis\SlotsMateModels\DAOs\Games\GamePaytable as GamePaytable;
@@ -15,10 +17,8 @@ use Hlis\SlotsMateModels\Entities\Game as GameEntity;
 use Hlis\SlotsMateModels\Queries\Games\GameInfo as GameInfoQuery;
 use Hlis\SlotsMateModels\Queries\Games\GameInfo\FeaturesGallery as FeaturesGalleryQuery;
 use Hlis\SlotsMateModels\Queries\Games\GameInfo\GameVotes;
-use Hlis\SlotsMateModels\Queries\Games\GameInfo\GameVotesStatistics;
 use Hlis\SlotsMateModels\Queries\Games\GameInfo\HowToPlay as HowToPlayQuery;
 use Hlis\SlotsMateModels\Queries\Games\GameInfo\PaylinesGallery as PaylinesGalleryQuery;
-use Hlis\SlotsMateModels\Queries\Games\GameRating;
 use Hlis\SlotsMateModels\Queries\Games\Rating as RatingQuery;
 
 class GameInfo extends GlobalGameInfo
@@ -36,6 +36,7 @@ class GameInfo extends GlobalGameInfo
 
     protected function appendBranches(): void
     {
+        $this->appendLinkedEntities(new CollectionBuilder, new CollectionQuery($this->filter), "collections");
         $this->setAdvancedFeatures();
         $this->appendThemes();
         $this->appendVideoGallery();
@@ -48,6 +49,8 @@ class GameInfo extends GlobalGameInfo
         $this->appendGameVotes();
         $this->appendGameVotesStatistics();
         $this->appendTimesPlayed();
+
+        $this->appendFAQ();
     }
 
     protected function setAdvancedFeatures(): void
@@ -129,6 +132,19 @@ class GameInfo extends GlobalGameInfo
         $resultSet = \SQL($query->getQuery(), $query->getParameters());
         while ($row = $resultSet->toRow()) {
             $this->entity->timesPlayed = $row["times_played"];
+        }
+    }
+
+    protected function appendFAQ(): void
+    {
+        $faqQuery = new FAQQuery($this->filter);
+        $faqResults = SQL($faqQuery->getQuery(), $faqQuery->getParameters())->toList();
+        if (!empty($faqResults)) {
+            //placeholders will be replaced on the GameInfoConverter level
+            $builder = new FAQ();
+            foreach ($faqResults as $row) {
+                $this->entity->faq[] = $builder->build($row);
+            }
         }
     }
 }
