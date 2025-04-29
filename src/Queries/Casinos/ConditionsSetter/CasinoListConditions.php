@@ -26,6 +26,7 @@ class CasinoListConditions extends DefaultCasinoListConditions
         $this->setIsNoWageringCondition($condition);
         $this->setDepositRangeCondition($condition);
         $this->setStatusCondition($condition);
+        $this->setWithdrawTimeframesCondition($condition);
     }
 
     protected function setStatusCondition(Condition $condition): void
@@ -156,5 +157,11 @@ class CasinoListConditions extends DefaultCasinoListConditions
                 $condition->setBetween("t1.deposit_minimum", $range[0], $range[1]);
             }
         }
+    }
+
+    protected function setWithdrawTimeframesCondition(Condition $condition): void
+    {
+        $conditionsSetter = new CasinoListInstantWithdrawalConditions($this->filter);
+        $conditionsSetter->appendConditions($condition);
     }
 }

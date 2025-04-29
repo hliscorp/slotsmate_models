@@ -11,6 +11,8 @@ use Hlis\SlotsMateModels\Builders\Casino\WithdrawMinimumTargeted;
 use Hlis\SlotsMateModels\Builders\GameManufacturer\Basic as GameManufacturerBuilder;
 use Hlis\SlotsMateModels\Builders\BankingMethod\Basic as BankingMethodBuilder;
 use Hlis\SlotsMateModels\Builders\GameType as GameTypeBuilder;
+use Hlis\GlobalModels\Builders\Casino\WithdrawTimeframe as GlobalWithdrawTimeframeBuilder;
+use Hlis\SlotsMateModels\Queries\Casinos\CasinoInfo\WithdrawTimeframes as WithdrawTimeframesQuery;
 
 use Hlis\SlotsMateModels\Queries\Casinos\CasinoList\GameTypes as GameTypesQuery;
 use Hlis\SlotsMateModels\Queries\Casinos\CasinoList\RatingInfo;
@@ -51,6 +53,7 @@ class CasinoList extends DefaultCasinoList
         $this->appendLanguages($ids);
         $this->appendTargetedDepositMinimums($ids);
         $this->appendTargetedWithdrawMinimums($ids);
+        $this->appendWithdrawTimeframes($ids);
     }
 
     protected function appendRatingInfo(array $casinoIDs): void
@@ -187,6 +190,16 @@ class CasinoList extends DefaultCasinoList
             while ($row = $resultSet->toRow()) {
                 $this->entities[$row["casino_id"]]->withdrawMinimumTargeted[] = $builder->build($row);
             }
+        }
+    }
+
+    protected function appendWithdrawTimeframes(array $casinoIDs): void
+    {
+        $builder = new GlobalWithdrawTimeframeBuilder();
+        $query = new WithdrawTimeframesQuery($casinoIDs);
+        $resultSet = \SQL($query->getQuery(), $query->getParameters());
+        while ($row = $resultSet->toRow()) {
+            $this->entities[$row["casino_id"]]->withdrawTimeframes[] = $builder->build($row);
         }
     }
 }
