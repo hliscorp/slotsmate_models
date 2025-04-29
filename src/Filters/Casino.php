@@ -26,6 +26,18 @@ class Casino extends \Hlis\GlobalModels\Filters\Casino
     protected ?int $localeCountry = null;
     protected ?int $additionalSoftware = null;
     protected ?array $depositRange = null;
+    protected ?bool $statusOpposite = null;
+
+    public function setStatusOpposite(bool $value): self
+    {
+        $this->statusOpposite = $value;
+        return $this;
+    }
+
+    public function getStatusOpposite(): ?bool
+    {
+        return $this->statusOpposite;
+    }
 
     public function setIsLiveDealer(int $isLiveDealer): void
     {

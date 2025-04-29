@@ -25,8 +25,16 @@ class CasinoListConditions extends DefaultCasinoListConditions
         $this->setFreeSpinsAmountCondition($condition);
         $this->setIsNoWageringCondition($condition);
         $this->setDepositRangeCondition($condition);
+        $this->setStatusCondition($condition);
     }
 
+    protected function setStatusCondition(Condition $condition): void
+    {
+        $statuses = $this->filter->getStatus();
+        if ($statuses!==null) {
+            $condition->setIn("t1.status_id", $statuses, !($this->filter->getStatusOpposite()));
+        }
+    }
     protected function setIsLiveCondition(Condition $condition): void
     {
         if ($this->filter->getIsLiveDealer()) {
