@@ -27,6 +27,7 @@ class Casino extends \Hlis\GlobalModels\Filters\Casino
     protected ?int $additionalSoftware = null;
     protected ?array $depositRange = null;
     protected ?bool $statusOpposite = null;
+    protected ?bool $isInstantWithdrawal = null;
 
     public function setStatusOpposite(bool $value): self
     {
@@ -236,5 +237,16 @@ class Casino extends \Hlis\GlobalModels\Filters\Casino
     public function getDepositRange(): ?array
     {
         return $this->depositRange;
+    }
+
+    public function setIsInstantWithdrawal(bool $value): self
+    {
+        $this->isInstantWithdrawal = $value;
+        return $this;
+    }
+
+    public function getIsInstantWithdrawal(): ?bool
+    {
+        return $this->isInstantWithdrawal;
     }
 }

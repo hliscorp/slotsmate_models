@@ -34,6 +34,7 @@ class CasinoListJoins extends AbstractCasinoListJoins
         $this->appendCasinoLicenseJoin();
         $this->setCasinosGeoPriorityJoin();
         $this->setMinimumDepositJoin();
+        $this->setWithdrawTimeframesJoin();
     }
 
     protected function setSoftwareNameJoin(): void
@@ -236,6 +237,14 @@ class CasinoListJoins extends AbstractCasinoListJoins
             $join2 = $this->query->joinLeft('casinos__minimum_deposit__countries', 'cmdc')->on();
             $join2->set('cmd.id', 'cmdc.record_id');
             $join2->set('cmdc.country_id', $this->filter->getSelectedCountry());
+            $this->groupBy = true;
+        }
+    }
+
+    protected function setWithdrawTimeframesJoin(): void
+    {
+        if($this->filter->getIsInstantWithdrawal()) {
+            $this->query->joinInner("casinos__withdraw_timeframes", "cwt")->on(["t1.id"=>"cwt.casino_id"]);
             $this->groupBy = true;
         }
     }
