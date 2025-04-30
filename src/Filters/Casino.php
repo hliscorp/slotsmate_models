@@ -28,6 +28,17 @@ class Casino extends \Hlis\GlobalModels\Filters\Casino
     protected ?array $depositRange = null;
     protected ?bool $statusOpposite = null;
     protected ?bool $isInstantWithdrawal = null;
+    protected ?bool $isBankingWithoutCrypto = null;
+
+    public function getByBankingExcludeCrypto(): ?bool
+    {
+        return $this->isBankingWithoutCrypto;
+    }
+
+    public function setByBankingExcludeCrypto(bool $isBankingWithoutCrypto): void
+    {
+        $this->isBankingWithoutCrypto = $isBankingWithoutCrypto;
+    }
 
     public function setStatusOpposite(bool $value): self
     {
