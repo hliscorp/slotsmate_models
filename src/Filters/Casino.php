@@ -8,6 +8,7 @@ class Casino extends \Hlis\GlobalModels\Filters\Casino
 {
     protected ?bool $hasApp = null;
     protected ?int $isLiveDealer = null;
+    protected ?int $ratingMinimum = null;
     protected ?int $depositMinimum = null;
     protected ?int $withdrawalMinimum = null;
     protected ?bool $countReviews = false;
@@ -61,6 +62,15 @@ class Casino extends \Hlis\GlobalModels\Filters\Casino
         return $this->isLiveDealer;
     }
 
+    public function setRatingMinimum(int $ratingMinimum): void
+    {
+        $this->ratingMinimum = $ratingMinimum;
+    }
+
+    public function getRatingMinimum(): ?int
+    {
+        return $this->ratingMinimum;
+    }
 
     public function setDepositMinimum(int $depositMinimum): void
     {

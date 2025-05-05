@@ -16,6 +16,7 @@ class CasinoListConditions extends DefaultCasinoListConditions
         $this->setIsLiveCondition($condition);
         $this->setHasAppCondition($condition);
         $this->setLabelCondition($condition);
+        $this->setRatingMinimumCondition($condition);
         $this->setPromotedCondition($condition);
         $this->setGameTypeCondition($condition);
         $this->setIsNewCondition($condition);
@@ -47,6 +48,14 @@ class CasinoListConditions extends DefaultCasinoListConditions
     {
         if ($this->filter->getOperatingSystems() && $this->filter->getHasApp()) {
             $condition->set("t10.is_app", 1);
+        }
+    }
+
+    protected function setRatingMinimumCondition(Condition $condition): void
+    {
+        $ratingMinimum = $this->filter->getRatingMinimum();
+        if (!empty($ratingMinimum)) {
+            $condition->set("t1.rating_total/t1.rating_votes", $ratingMinimum, Comparison::GREATER_EQUALS);
         }
     }
 
