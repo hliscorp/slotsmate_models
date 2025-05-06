@@ -19,7 +19,7 @@ class ListJoinsSetter extends BankingMethodListJoins
 
     protected function setLocaleJoin(): void
     {
-        if (empty($this->filter->getLocale())) {
+        if (is_null($this->filter->getLocale())) {
             return;
         }
         $this->query->joinInner("locale__banking", "lb")
