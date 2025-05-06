@@ -9,12 +9,21 @@ class ListJoinsSetter extends BankingMethodListJoins
     protected function appendJoins(): void
     {
         parent::appendJoins();
-        $this->query->joinInner("locale__banking", "lb")->on(["lb.banking_id"=>"t1.id"]);
+        $this->setLocaleJoin();
         if ($this->filter->getHasOpenCasinos() || $this->filter->getHasLatestDateUpdated()) {
             $this->setCasinosJoin();
             $this->setCasinoCountryAllowedJoin();
             $this->groupBy = true;
         }
+    }
+
+    protected function setLocaleJoin(): void
+    {
+        if (empty($this->filter->getLocale())) {
+            return;
+        }
+        $this->query->joinInner("locale__banking", "lb")
+            ->on(["t1.id"=>"lb.banking_id", "locFbm.locale_id"=> $this->filter->getLocale()]);
     }
 
     protected function setCasinosJoin(): void

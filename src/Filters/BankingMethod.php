@@ -9,6 +9,7 @@ class BankingMethod extends DefaultBankingMethod
     private ?bool $hasOpenCasinos = null;
     private ?bool $hasLatestDateUpdated = null;
     private ?string $name = null;
+    protected ?int $locale = null;
 
     public function getName(): ?string
     {
@@ -48,5 +49,16 @@ class BankingMethod extends DefaultBankingMethod
     public function setHasLatestDateUpdated(?bool $hasLatestDateUpdated): void
     {
         $this->hasLatestDateUpdated = $hasLatestDateUpdated;
+    }
+
+    public function getLocale(): ?int
+    {
+        return $this->locale;
+    }
+
+    public function setLocale(int $locale): self
+    {
+        $this->locale = $locale;
+        return $this;
     }
 }
