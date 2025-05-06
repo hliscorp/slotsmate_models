@@ -14,5 +14,5 @@ class CasinoSortCriteria
     const GEO_PRIORITY = 9;
     const MINIMUM_DEPOSIT_GEO_PRIORITY = 10;
     const AMOUNT_FS_GEO_PRIORITY = 11;
-    const WITHDRAW_TIME_COUNTRY_ACCEPTED_PRIORITY = 12;
+    const WITHDRAW_TIME_GEO_PRIORITY = 12;
 }

@@ -204,7 +204,7 @@ class CasinoListJoins extends AbstractCasinoListJoins
                 CasinoSortCriteria::GEO_PRIORITY,
                 CasinoSortCriteria::MINIMUM_DEPOSIT_GEO_PRIORITY,
                 CasinoSortCriteria::AMOUNT_FS_GEO_PRIORITY,
-                CasinoSortCriteria::WITHDRAW_TIME_COUNTRY_ACCEPTED_PRIORITY])
+                CasinoSortCriteria::WITHDRAW_TIME_GEO_PRIORITY])
             || !$countryId) {
             return;
         }
