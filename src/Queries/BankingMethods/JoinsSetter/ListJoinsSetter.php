@@ -23,7 +23,7 @@ class ListJoinsSetter extends BankingMethodListJoins
             return;
         }
         $this->query->joinInner("locale__banking", "lb")
-            ->on(["t1.id"=>"lb.banking_id", "locFbm.locale_id"=> $this->filter->getLocale()]);
+            ->on(["t1.id"=>"lb.banking_id", "lb.locale_id"=> $this->filter->getLocale()]);
     }
 
     protected function setCasinosJoin(): void
