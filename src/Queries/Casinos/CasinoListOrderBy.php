@@ -64,6 +64,12 @@ class CasinoListOrderBy extends AbstractOrderBy
                 $this->setBonusFsAmountOrder();
                 $this->setGeoPriorityOrder();
                 break;
+            case CasinoSortCriteria::WITHDRAW_TIME_COUNTRY_ACCEPTED_PRIORITY:
+                $this->orderBy->add("MIN(cwt.end * IF(cwt.unit = 'hour', 3600, 86400))");
+                $this->orderBy->add("country_accepted", OrderBy::DESC);
+                $this->orderBy->add("t1.priority", OrderBy::DESC);
+                $this->setGeoPriorityOrder();
+                break;
             default:
                 throw new \InvalidArgumentException("Invalid sort criteria: " . $orderByAlias);
         }

@@ -206,7 +206,8 @@ class CasinoListJoins extends AbstractCasinoListJoins
         if (!in_array($this->orderByAlias, [
                 CasinoSortCriteria::GEO_PRIORITY,
                 CasinoSortCriteria::MINIMUM_DEPOSIT_GEO_PRIORITY,
-                CasinoSortCriteria::AMOUNT_FS_GEO_PRIORITY])
+                CasinoSortCriteria::AMOUNT_FS_GEO_PRIORITY,
+                CasinoSortCriteria::WITHDRAW_TIME_COUNTRY_ACCEPTED_PRIORITY])
             || !$countryId) {
             return;
         }
