@@ -10,10 +10,12 @@ use Lucinda\Query\Select;
 class WithdrawTimeframes extends Query
 {
     protected array $casinoIDs;
+    protected array $allowedBankingMethodsTypes;
 
-    public function __construct (array $casinoIDs)
+    public function __construct (array $casinoIDs, array $allowedBankingMethodsTypes = [])
     {
         $this->casinoIDs = $casinoIDs;
+        $this->allowedBankingMethodsTypes = $allowedBankingMethodsTypes;
         $this->query = new Select("casinos__withdraw_timeframes", "t1");
         $this->setFields($this->query->fields());
         $this->setJoins();
@@ -38,5 +40,8 @@ class WithdrawTimeframes extends Query
     protected function setWhere(Condition $condition): void
     {
         $condition->setIn("t1.casino_id", $this->casinoIDs);
+        if (!empty($this->allowedBankingMethodsTypes)) {
+            $condition->setIn("t1.banking_method_type_id", $this->allowedBankingMethodsTypes);
+        }
     }
 }

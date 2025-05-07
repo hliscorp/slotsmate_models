@@ -197,7 +197,11 @@ class CasinoList extends DefaultCasinoList
     {
         if (!empty($this->filter->getIsInstantWithdrawal())) {
             $builder = new GlobalWithdrawTimeframeBuilder();
-            $query = new WithdrawTimeframesQuery($casinoIDs);
+            $allowedBankingMethodTypes = [];
+            if (!empty($this->filter->getWithdrawalTimeframeBankingMethodTypes())) {
+                $allowedBankingMethodTypes = $this->filter->getWithdrawalTimeframeBankingMethodTypes();
+            }
+            $query = new WithdrawTimeframesQuery($casinoIDs, $allowedBankingMethodTypes);
             $resultSet = \SQL($query->getQuery(), $query->getParameters());
             while ($row = $resultSet->toRow()) {
                 $this->entities[$row["casino_id"]]->withdrawTimeframes[] = $builder->build($row);
