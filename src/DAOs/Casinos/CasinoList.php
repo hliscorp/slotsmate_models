@@ -195,11 +195,13 @@ class CasinoList extends DefaultCasinoList
 
     protected function appendWithdrawTimeframes(array $casinoIDs): void
     {
-        $builder = new GlobalWithdrawTimeframeBuilder();
-        $query = new WithdrawTimeframesQuery($casinoIDs);
-        $resultSet = \SQL($query->getQuery(), $query->getParameters());
-        while ($row = $resultSet->toRow()) {
-            $this->entities[$row["casino_id"]]->withdrawTimeframes[] = $builder->build($row);
+        if (!empty($this->filter->getIsInstantWithdrawal())) {
+            $builder = new GlobalWithdrawTimeframeBuilder();
+            $query = new WithdrawTimeframesQuery($casinoIDs);
+            $resultSet = \SQL($query->getQuery(), $query->getParameters());
+            while ($row = $resultSet->toRow()) {
+                $this->entities[$row["casino_id"]]->withdrawTimeframes[] = $builder->build($row);
+            }
         }
     }
 }

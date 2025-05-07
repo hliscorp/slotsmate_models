@@ -35,7 +35,7 @@ class CasinoListJoins extends AbstractCasinoListJoins
         $this->setCasinosGeoPriorityJoin();
         $this->setMinimumDepositJoin();
         $this->setWithdrawTimeframesJoin();
-        $this->appendCryptoBankingMethodsJoin();
+        $this->appendNoCryptoBankingMethodsJoin();
     }
 
     protected function setSoftwareNameJoin(): void
@@ -106,15 +106,15 @@ class CasinoListJoins extends AbstractCasinoListJoins
         }
     }
 
-    protected function appendCryptoBankingMethodsJoin(): void
+    protected function appendNoCryptoBankingMethodsJoin(): void
     {
         if ($this->filter->getByBankingExcludeCrypto()) {
             $this->groupBy = true;
             $bankingMethodID = [1, 2, 3, 4];
 
-            $this->query->joinLeft("casinos__withdraw_methods", "tbm16")->on()
-                ->set("t1.id","tbm16.casino_id")
-                ->setIn("tbm16.banking_method_id", $bankingMethodID);
+            $this->query->joinInner("casinos__withdraw_timeframes", "cwt1")->on()
+                ->set("t1.id","cwt1.casino_id")
+                ->setIn("cwt1.banking_method_type_id", $bankingMethodID);
         }
     }
 
