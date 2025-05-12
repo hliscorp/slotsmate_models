@@ -26,7 +26,7 @@ class DepositMethods extends \Hlis\GlobalModels\Queries\Query
     protected function setJoins(): void
     {
         $this->query->joinInner("banking_methods", "t2")->on(["t1.banking_method_id"=>"t2.id"]);
-        $this->query->joinInner("locale__banking", "lb")->on(["lb.banking_id"=>"t2.id", "lb.locale_id"=>0]);
+        $this->query->joinLeft("locale__banking", "lb")->on(["lb.banking_id"=>"t2.id", "lb.locale_id"=>0]);
     }
 
     protected function setWhere(\Lucinda\Query\Clause\Condition $condition, array $casinoIDs): void
