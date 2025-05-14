@@ -48,4 +48,15 @@ class CasinoBonus extends GlobalCasinoBonus
     {
         return $this->targetCountry;
     }
+
+    public function setTargetBonuses(int $value): self
+    {
+        $this->forceTargetBonuses = $value;
+        return $this;
+    }
+
+    public function getTargetBonuses(): ?int
+    {
+        return $this->forceTargetBonuses;
+    }
 }
