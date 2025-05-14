@@ -12,7 +12,7 @@ class CasinoTotalTotal extends DefaultCasinoTotal
     {
         return new CasinoListQuery($this->filter);
     }
-
+    
     protected function setTotal(): void
     {
         $querier = $this->getQuery();
