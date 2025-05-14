@@ -35,6 +35,15 @@ class CasinoListJoins extends AbstractCasinoListJoins
         $this->setCasinosGeoPriorityJoin();
         $this->setMinimumDepositJoin();
         $this->setWithdrawTimeframesJoin();
+        $this->setCustomCategoryJoin();
+    }
+
+    protected function setCustomCategoryJoin(): void
+    {
+        if ($this->filter->getCustomCasinoCategory()) {
+            $this->query->joinInner("casinos__custom_lists_items", "casinos_cus_cat")->on(["t1.id" => "casinos_cus_cat.casino_id"])
+                ->set("casinos_cus_cat.category_id", $this->filter->getCustomCasinoCategory());
+        }
     }
 
     protected function setSoftwareNameJoin(): void
