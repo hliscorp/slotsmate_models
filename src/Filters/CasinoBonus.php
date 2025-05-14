@@ -8,6 +8,7 @@ class CasinoBonus extends GlobalCasinoBonus
     protected ?array $freeSpinsAmount = null;
     protected ?bool $noWagering = null;
     protected ?int $targetCountry = null;
+    protected ?int $forceTargetBonuses = null;
 
     /**
      * @return array|null

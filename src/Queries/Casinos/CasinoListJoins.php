@@ -168,21 +168,42 @@ class CasinoListJoins extends AbstractCasinoListJoins
 
     protected function addCasinoBonusTargetCountryJoin(int $country, string $alias1, string $alias2): void
     {
-        $subSelect1 = new Select("casinos__bonuses", "cb1");
-        $subSelect1->fields()->add("cb1.id")->add(0, "targeted");
-        $subSelect1->joinLeft("casinos__bonuses_targets", "cbc1")->on(["cb1.id"=>"cbc1.casino_bonus_id"]);
-        $subSelectWhere1 = $subSelect1->where();
-        $subSelectWhere1->setIsNull("cbc1.casino_bonus_id");
-
-        $subSelect2 = new Select("casinos__bonuses", "cb2");
-        $subSelect2->fields()->add("cb2.id")->add(1, "targeted");
-        $subSelect2->joinInner("casinos__bonuses_targets", "cbc2")
-            ->on(["cb2.id"=>"cbc2.casino_bonus_id", "cbc2.country_id"=>$country]);
-
-        $this->query->joinInner(
-            "((" . $subSelect1->toString() . ") UNION (" . $subSelect2->toString() . "))",
-            $alias2)->on(["$alias1.id"=>"$alias2.id"]);
+        $forceTargetBonuses = $this->filter->getBonus() ? $this->filter->getBonus()->getTargetBonuses() : null;
+    
+        if ($forceTargetBonuses) {
+            $subSelect = new Select("casinos__bonuses", "cb");
+            $subSelect->fields()->add("cb.id")->add(1, "targeted");
+            $subSelect->joinInner("casinos__bonuses_targets", "cbt")
+                ->on([
+                    "cb.id" => "cbt.casino_bonus_id",
+                    "cbt.country_id" => $country
+                ]);
+    
+            $this->query->joinInner(
+                "(" . $subSelect->toString() . ")",
+                $alias2
+            )->on(["$alias1.id" => "$alias2.id"]);
+    
+        } else {
+            $subSelect1 = new Select("casinos__bonuses", "cb1");
+            $subSelect1->fields()->add("cb1.id")->add(0, "targeted");
+            $subSelect1->joinLeft("casinos__bonuses_targets", "cbc1")->on(["cb1.id" => "cbc1.casino_bonus_id"]);
+            $subSelect1->where()->setIsNull("cbc1.casino_bonus_id");
+            $subSelectWhere1 = $subSelect1->where();
+            $subSelectWhere1->setIsNull("cbc1.casino_bonus_id");    
+            $subSelect2 = new Select("casinos__bonuses", "cb2");
+            $subSelect2->fields()->add("cb2.id")->add(1, "targeted");
+            $subSelect2->joinInner("casinos__bonuses_targets", "cbc2")
+                ->on(["cb2.id" => "cbc2.casino_bonus_id", "cbc2.country_id" => $country]);
+    
+            $this->query->joinInner(
+                "((" . $subSelect1->toString() . ") UNION (" . $subSelect2->toString() . "))",
+                $alias2
+            )->on(["$alias1.id" => "$alias2.id"]);
+        }
     }
+    
+
 
     protected function setCasinosGeoPriorityJoin(): void
     {
