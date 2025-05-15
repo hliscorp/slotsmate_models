@@ -52,16 +52,6 @@ class BlogBonus extends GlobalFilter
         $this->freeSpinsAmount = [$minFreeSpinsAmount, $maxFreeSpinsAmount];
     }
 
-    public function setBlogBonusAmount(int $minAmount = 0, int $maxAmount = 0, array $bonusTypes = []): void
-    {
-        $this->blogBonusAmount = [[$minAmount, $maxAmount], $bonusTypes];
-    }
-
-    public function getBlogBonusAmount(): ?array
-    {
-        return $this->blogBonusAmount;
-    }
-
     public function setNoDeposit(bool $value): self
     {
         $this->noDeposit = $value;
