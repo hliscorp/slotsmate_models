@@ -37,6 +37,7 @@ class CasinoListConditions extends DefaultCasinoListConditions
         $affiliatesQuery->fields(['affiliate_program_id']);
         $affiliatesQuery->groupBy(['affiliate_program_id']);
         $affiliatesQuery->having(['COUNT(*)' => 1]);
+        
         if ($this->filter->getHasAffiliateSister()) {
             $condition->setIn('t1.affiliate_program_id', $affiliatesQuery);
         }
