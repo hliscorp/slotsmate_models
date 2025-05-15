@@ -8,7 +8,7 @@ class CasinoBonus extends GlobalCasinoBonus
     protected ?array $freeSpinsAmount = null;
     protected ?bool $noWagering = null;
     protected ?int $targetCountry = null;
-    protected ?int $forceTargetBonuses = null;
+    protected ?int $forceTargetedBonuses = null;
 
     /**
      * @return array|null
@@ -50,14 +50,14 @@ class CasinoBonus extends GlobalCasinoBonus
         return $this->targetCountry;
     }
 
-    public function setTargetBonuses(int $value): self
+    public function setForceTargetedBonuses(int $value): self
     {
-        $this->forceTargetBonuses = $value;
+        $this->forceTargetedBonuses = $value;
         return $this;
     }
 
-    public function getTargetBonuses(): ?int
+    public function getForceTargetedBonuses(): ?int
     {
-        return $this->forceTargetBonuses;
+        return $this->forceTargetedBonuses;
     }
 }
