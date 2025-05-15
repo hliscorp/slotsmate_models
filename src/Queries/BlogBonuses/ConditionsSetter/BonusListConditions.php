@@ -50,17 +50,25 @@ class BonusListConditions extends GlobalBonusListConditions
     protected function setByFreeSpinsAmountCondition(Condition $condition): void
     {
         if (!empty($this->filter->getFreeSpinsAmount())) {
-            $freeSpinsAmount = $this->filter->getFreeSpinsAmount();
-            $minFreeSpinsAmount = $freeSpinsAmount[0];
-            $maxFreeSpinsAmount = $freeSpinsAmount[1];
+            $freeSpinsAmountFilter = $this->filter->getFreeSpinsAmount();
 
+            $minFreeSpinsAmount = $freeSpinsAmountFilter->getAmount()[0];
+            $maxFreeSpinsAmount = $freeSpinsAmountFilter->getAmount()[1];
+
+            $group = new \Lucinda\Query\Clause\Condition([], \Lucinda\Query\Operator\Logical::_OR_);
             if ($minFreeSpinsAmount && $maxFreeSpinsAmount) {
-                $condition->setBetween("t1.amount_fs", $minFreeSpinsAmount, $maxFreeSpinsAmount);
+                $group->setBetween("t1.amount_fs", $minFreeSpinsAmount, $maxFreeSpinsAmount);
             } elseif ($minFreeSpinsAmount) {
-                $condition->set("t1.amount_fs", $minFreeSpinsAmount, Comparison::GREATER_EQUALS);
+                $group->set("t1.amount_fs", $minFreeSpinsAmount, Comparison::GREATER_EQUALS);
             } elseif ($maxFreeSpinsAmount) {
-                $condition->set("t1.amount_fs", $maxFreeSpinsAmount, Comparison::LESSER_EQUALS);
+                $group->set("t1.amount_fs", $maxFreeSpinsAmount, Comparison::LESSER_EQUALS);
             }
+
+            if (!empty($freeSpinsAmountFilter->getBonusTypes())) {
+                $group->setIn("t1.bonus_type", $freeSpinsAmountFilter->getBonusTypes(), false);
+            }
+
+            $condition->setGroup($group);
         }
     }
 
