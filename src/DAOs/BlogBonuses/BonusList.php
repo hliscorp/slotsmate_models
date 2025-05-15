@@ -17,10 +17,6 @@ class BonusList extends GlobalBonusList
     {
         $builder = new BonusBuilder();
         $querier = new BonusListQuery($this->filter, $this->orderByAlias, $this->limit, $this->offset);
-        echo "<pre>";
-        print_r($querier->getQuery());
-        echo "</pre>";
-        die();
         $resultSet = \SQL($querier->getQuery(), $querier->getParameters());
         while ($row = $resultSet->toRow()) {
             $this->entities[$row["id"]] = $builder->build($row);
