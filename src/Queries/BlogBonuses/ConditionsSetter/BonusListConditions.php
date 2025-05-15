@@ -65,7 +65,7 @@ class BonusListConditions extends GlobalBonusListConditions
             }
 
             if (!empty($freeSpinsAmountFilter->getBonusTypes())) {
-                $group->setIn("t1.bonus_type", $freeSpinsAmountFilter->getBonusTypes(), false);
+                $group->setIn("t1.bonus_type_id", $freeSpinsAmountFilter->getBonusTypes(), false);
             }
 
             $condition->setGroup($group);
