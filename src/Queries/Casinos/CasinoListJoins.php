@@ -38,6 +38,14 @@ class CasinoListJoins extends AbstractCasinoListJoins
         $this->setCustomCategoryJoin();
     }
 
+    protected function setCustomCategoryJoin(): void
+    {
+        if ($this->filter->getCustomCasinoCategory()) {
+            $this->query->joinInner("casinos__custom_lists_items", "casinos_cus_cat")->on(["t1.id" => "casinos_cus_cat.casino_id"])
+                ->set("casinos_cus_cat.category_id", $this->filter->getCustomCasinoCategory());
+        }
+    }
+
     protected function setSoftwareNameJoin(): void
     {
         if ($this->filter->getAdditionalSoftware()) {
@@ -203,6 +211,7 @@ class CasinoListJoins extends AbstractCasinoListJoins
                 CasinoSortCriteria::MINIMUM_DEPOSIT_GEO_PRIORITY,
                 CasinoSortCriteria::AMOUNT_FS_GEO_PRIORITY,
                 CasinoSortCriteria::WITHDRAW_TIME_GEO_PRIORITY,
+                CasinoSortCriteria::HAS_APP_GEO_PRIORITY,
             ])
             || !$countryId) {
             return;

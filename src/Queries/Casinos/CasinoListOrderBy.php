@@ -68,6 +68,17 @@ class CasinoListOrderBy extends AbstractOrderBy
                 $this->orderBy->add("MIN(cwt.end * IF(cwt.unit = 'hour', 3600, 86400))");
                 $this->setGeoPriorityOrder();
                 break;
+            case CasinoSortCriteria::HAS_APP_GEO_PRIORITY:
+                $this->orderBy->add("
+                    (
+                      SELECT 1
+                      FROM casinos__operating_systems
+                      WHERE casino_id = t1.id AND is_app = 1
+                      LIMIT 1
+                   ) IS NULL"
+                );
+                $this->setGeoPriorityOrder();
+                break;
             default:
                 throw new \InvalidArgumentException("Invalid sort criteria: " . $orderByAlias);
         }

@@ -28,8 +28,20 @@ class CasinoListConditions extends DefaultCasinoListConditions
         $this->setDepositRangeCondition($condition);
         $this->setStatusCondition($condition);
         $this->setWithdrawTimeframesCondition($condition);
+        $this->setNoAffiliateSisterCondition($condition);
     }
 
+    protected function setNoAffiliateSisterCondition(Condition $condition): void
+    {
+        $affiliatesQuery = new Select('casinos');
+        $affiliatesQuery->fields(['affiliate_program_id']);
+        $affiliatesQuery->groupBy(['affiliate_program_id']);
+        $affiliatesQuery->having(['COUNT(*)' => 1]);
+        
+        if ($this->filter->getHasAffiliateSister()) {
+            $condition->setIn('t1.affiliate_program_id', $affiliatesQuery);
+        }
+    }
     protected function setStatusCondition(Condition $condition): void
     {
         $statuses = $this->filter->getStatus();
