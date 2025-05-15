@@ -36,18 +36,8 @@ class CasinoListJoins extends AbstractCasinoListJoins
         $this->setMinimumDepositJoin();
         $this->setWithdrawTimeframesJoin();
         $this->setCustomCategoryJoin();
-        $this->setNoAffiliateSisterJoin();
     }
 
-    protected function setNoAffiliateSisterJoin(): void
-    {
-        if ($this->filter->getHasAffiliateSister()) {
-            $this->query->joinLeft('casinos', 'tt1')->on(['tt1.affiliate_program_id' => 't1.affiliate_program_id']);
-            $this->query->groupBy(['t1.id']);
-            $this->query->having(['count(tt1.id)' => 1]);
-        }
-    }
-    
     protected function setCustomCategoryJoin(): void
     {
         if ($this->filter->getCustomCasinoCategory()) {
