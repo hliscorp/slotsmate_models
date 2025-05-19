@@ -13,13 +13,15 @@ class CasinoListOrderBy extends AbstractOrderBy
         switch ($orderByAlias) {
             case CasinoSortCriteria::NEWEST:
                 $this->orderBy->add("t1.date_established", OrderBy::DESC)
-                    ->add("t1.priority", OrderBy::DESC);
+                    ->add("t1.priority", OrderBy::DESC)
+                    ->add("t1.id", OrderBy::DESC);
                 break;
             case CasinoSortCriteria::FREE_BONUS:
                 // cast free_bonus_amount to int
                 $this->orderBy->add("free_bonus_amount+0", OrderBy::DESC)
                     ->add("has_first_deposit_bonus", OrderBy::DESC)
-                    ->add("t1.priority", OrderBy::DESC);
+                    ->add("t1.priority", OrderBy::DESC)
+                    ->add("t1.id", OrderBy::DESC);
                 break;
             case CasinoSortCriteria::TOP_RATED:
                 $this->orderBy->add("(t1.rating_total/t1.rating_votes)", OrderBy::DESC)
