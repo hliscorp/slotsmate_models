@@ -44,7 +44,6 @@ class CasinoList extends DefaultCasinoList
         parent::appendBranches($ids);
 
         $this->appendRatingInfo($ids);
-        $this->appendBonuses($ids);
         $this->appendGameTypes($ids);
         $this->appendSoftwares($ids);
         $this->appendDepositMethods($ids);

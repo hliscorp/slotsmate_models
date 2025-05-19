@@ -46,6 +46,21 @@ class CasinoInfo extends GlobalCasinoInfo
         $this->appendRatingInfo();
     }
 
+    protected function appendBonuses(): void
+    {
+        parent::appendBonuses();
+
+        //adding also targets to the casino bonuses
+        if (!empty($this->entity->bonuses)) {
+            $builder  =  new \Hlis\GlobalModels\Builders\Country();
+            $query = new \Hlis\SlotsMateModels\Queries\Casinos\CasinoList\Bonuses\Targets(\array_keys($this->entity->bonuses));
+            $resultSet = \SQL($query->getQuery(), $query->getParameters());
+            while ($row = $resultSet->toRow()) {
+                $this->entity->bonuses[$row['casino_bonus_id']]->targets[] = $builder->build($row);
+            }
+        }
+    }
+
     protected function appendOperatingSystems(): void
     {
         // do nothing
