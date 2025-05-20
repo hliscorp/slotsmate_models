@@ -288,7 +288,7 @@ class CasinoListJoins extends AbstractCasinoListJoins
             $subQuery->groupBy(["t2.casino_id"]);
             $subQuery->orderBy()->add("t2.client_id", \Lucinda\Query\Operator\OrderBy::DESC);
 
-            $this->query->joinInner(
+            $this->query->joinLeft(
                 "(" . $subQuery->toString() . ")",
                 "cbt"
             )->on(["t1.id" => "cbt.casino_id"]);
