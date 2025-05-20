@@ -81,6 +81,11 @@ class CasinoListOrderBy extends AbstractOrderBy
                 );
                 $this->setGeoPriorityOrder();
                 break;
+            case CasinoSortCriteria::HAS_TARGETED_BONUS_GEO_PRIORITY:
+                $this->orderBy->add("cbt.client_id IS NULL");
+                $this->orderBy->add("cbt.client_id", OrderBy::DESC);
+                $this->setGeoPriorityOrder();
+                break;
             default:
                 throw new \InvalidArgumentException("Invalid sort criteria: " . $orderByAlias);
         }

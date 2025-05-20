@@ -16,4 +16,5 @@ class CasinoSortCriteria
     const AMOUNT_FS_GEO_PRIORITY = 11;
     const WITHDRAW_TIME_GEO_PRIORITY = 12;
     const HAS_APP_GEO_PRIORITY = 13;
+    const HAS_TARGETED_BONUS_GEO_PRIORITY = 14;
 }
