@@ -1,14 +1,14 @@
 <?php
-
 namespace Hlis\SlotsMateModels\Filters;
 
 use Hlis\GlobalModels\Filters\BlogBonus as GlobalFilter;
+use Hlis\SlotsMateModels\Filters\BlogBonus\BlogBonusAmountFsFilter;
 
 class BlogBonus extends GlobalFilter
 {
     protected ?bool $isActive = null; // getActive
     protected ?bool $isExpired = null; // getExpired
-    protected ?array $freeSpinsAmount = null;
+    protected ?BlogBonusAmountFsFilter $freeSpinsAmount = null;
     protected ?bool $noDeposit = null;
     protected ?bool $noWagering = null;
 
@@ -37,29 +37,14 @@ class BlogBonus extends GlobalFilter
     /**
      * @return array|null
      */
-    public function getFreeSpinsAmount(): ?array
+    public function getFreeSpinsAmount(): ?BlogBonusAmountFsFilter
     {
         return $this->freeSpinsAmount;
     }
 
-    /**
-     * @param int $minFreeSpinsAmount
-     * @param int $maxFreeSpinsAmount
-     */
-
-    public function setFreeSpinsAmount(int $minFreeSpinsAmount = 0, int $maxFreeSpinsAmount = 0): void
+    public function setFreeSpinsAmount(BlogBonusAmountFsFilter $amountFsFilter): void
     {
-        $this->freeSpinsAmount = [$minFreeSpinsAmount, $maxFreeSpinsAmount];
-    }
-
-    public function setBlogBonusAmount(int $minAmount = 0, int $maxAmount = 0, array $bonusTypes = []): void
-    {
-        $this->blogBonusAmount = [[$minAmount, $maxAmount], $bonusTypes];
-    }
-
-    public function getBlogBonusAmount(): ?array
-    {
-        return $this->blogBonusAmount;
+        $this->freeSpinsAmount = $amountFsFilter;
     }
 
     public function setNoDeposit(bool $value): self

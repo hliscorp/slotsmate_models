@@ -35,6 +35,16 @@ class CasinoListJoins extends AbstractCasinoListJoins
         $this->setCasinosGeoPriorityJoin();
         $this->setMinimumDepositJoin();
         $this->setWithdrawTimeframesJoin();
+        $this->setCustomCategoryJoin();
+        $this->setHasTargetedBonusesJoin();
+    }
+
+    protected function setCustomCategoryJoin(): void
+    {
+        if ($this->filter->getCustomCasinoCategory()) {
+            $this->query->joinInner("casinos__custom_lists_items", "casinos_cus_cat")->on(["t1.id" => "casinos_cus_cat.casino_id"])
+                ->set("casinos_cus_cat.category_id", $this->filter->getCustomCasinoCategory());
+        }
     }
 
     protected function setSoftwareNameJoin(): void
@@ -168,42 +178,31 @@ class CasinoListJoins extends AbstractCasinoListJoins
 
     protected function addCasinoBonusTargetCountryJoin(int $country, string $alias1, string $alias2): void
     {
-        $forceTargetBonuses = $this->filter->getBonus() ? $this->filter->getBonus()->getTargetBonuses() : null;
-    
-        if ($forceTargetBonuses) {
-            $subSelect = new Select("casinos__bonuses", "cb");
-            $subSelect->fields()->add("cb.id")->add(1, "targeted");
-            $subSelect->joinInner("casinos__bonuses_targets", "cbt")
-                ->on([
-                    "cb.id" => "cbt.casino_bonus_id",
-                    "cbt.country_id" => $country
-                ]);
-    
+        $forceTargetedBonuses = $this->filter->getBonus() ? $this->filter->getBonus()->getForceTargetedBonuses() : null;
+
+        $subSelect2 = new Select("casinos__bonuses", "cb2");
+        $subSelect2->fields()->add("cb2.id")->add(1, "targeted");
+        $subSelect2->joinInner("casinos__bonuses_targets", "cbc2")
+            ->on(["cb2.id" => "cbc2.casino_bonus_id", "cbc2.country_id" => $country]);
+
+        if ($forceTargetedBonuses) {
             $this->query->joinInner(
-                "(" . $subSelect->toString() . ")",
+                "(" . $subSelect2->toString() . ")",
                 $alias2
             )->on(["$alias1.id" => "$alias2.id"]);
-    
         } else {
             $subSelect1 = new Select("casinos__bonuses", "cb1");
             $subSelect1->fields()->add("cb1.id")->add(0, "targeted");
-            $subSelect1->joinLeft("casinos__bonuses_targets", "cbc1")->on(["cb1.id" => "cbc1.casino_bonus_id"]);
+            $subSelect1->joinLeft("casinos__bonuses_targets", "cbc1")
+                ->on(["cb1.id" => "cbc1.casino_bonus_id"]);
             $subSelect1->where()->setIsNull("cbc1.casino_bonus_id");
-            $subSelectWhere1 = $subSelect1->where();
-            $subSelectWhere1->setIsNull("cbc1.casino_bonus_id");    
-            $subSelect2 = new Select("casinos__bonuses", "cb2");
-            $subSelect2->fields()->add("cb2.id")->add(1, "targeted");
-            $subSelect2->joinInner("casinos__bonuses_targets", "cbc2")
-                ->on(["cb2.id" => "cbc2.casino_bonus_id", "cbc2.country_id" => $country]);
-    
+
             $this->query->joinInner(
                 "((" . $subSelect1->toString() . ") UNION (" . $subSelect2->toString() . "))",
                 $alias2
             )->on(["$alias1.id" => "$alias2.id"]);
         }
     }
-    
-
 
     protected function setCasinosGeoPriorityJoin(): void
     {
@@ -280,6 +279,24 @@ class CasinoListJoins extends AbstractCasinoListJoins
                 $join->setIn("cwt.banking_method_type_id", $this->filter->getWithdrawalTimeframeBankingMethodTypes());
             }
             $this->groupBy = true;
+        }
+    }
+
+    protected function setHasTargetedBonusesJoin(): void
+    {
+        if (!empty($this->filter->getSelectedCountry()) && $this->orderByAlias == CasinoSortCriteria::HAS_TARGETED_BONUS_GEO_PRIORITY)
+        {
+            $subQuery = new Select("casinos__bonuses_targets", "t1");
+            $subQuery->fields()->add("t2.client_id")->add("t2.casino_id");
+            $subQuery->joinInner("casinos__bonuses", "t2")->on(["t1.casino_bonus_id" => "t2.id"]);
+            $subQuery->where()->set("t1.country_id", $this->filter->getSelectedCountry());
+            $subQuery->groupBy(["t2.casino_id"]);
+            $subQuery->orderBy()->add("t2.client_id", \Lucinda\Query\Operator\OrderBy::DESC);
+
+            $this->query->joinLeft(
+                "(" . $subQuery->toString() . ")",
+                "cbt"
+            )->on(["t1.id" => "cbt.casino_id"]);
         }
     }
 }

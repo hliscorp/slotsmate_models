@@ -18,5 +18,4 @@ class CasinoSortCriteria
     const HAS_APP_GEO_PRIORITY = 13;
     const HAS_TARGETED_BONUS_GEO_PRIORITY = 14;
     const USER_COUNTRY_GEO_PRIORITY = 15;
-    
 }

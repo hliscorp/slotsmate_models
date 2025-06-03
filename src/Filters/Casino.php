@@ -30,6 +30,19 @@ class Casino extends \Hlis\GlobalModels\Filters\Casino
     protected ?bool $statusOpposite = null;
     protected ?bool $isInstantWithdrawal = null;
     protected array $withdrawalTimeframeBankingMethodTypes = [];
+    protected ?int $customCasinoCategory = null;
+    protected ?bool $hasAffiliateSister = false;
+
+    public function setHasAffiliateSister(bool $value): self
+    {
+        $this->hasAffiliateSister = $value;
+        return $this;
+    }
+
+    public function getHasAffiliateSister(): ?bool
+    {
+        return $this->hasAffiliateSister;
+    }
 
     public function getWithdrawalTimeframeBankingMethodTypes(): array
     {
@@ -269,5 +282,16 @@ class Casino extends \Hlis\GlobalModels\Filters\Casino
     public function getIsInstantWithdrawal(): ?bool
     {
         return $this->isInstantWithdrawal;
+    }
+
+    public function setCustomCasinoCategory(int $customCasinoCategory): self
+    {
+        $this->customCasinoCategory = $customCasinoCategory;
+        return $this;
+    }
+
+    public function getCustomCasinoCategory(): ?int
+    {
+        return $this->customCasinoCategory;
     }
 }
