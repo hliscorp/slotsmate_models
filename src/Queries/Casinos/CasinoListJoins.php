@@ -207,6 +207,10 @@ class CasinoListJoins extends AbstractCasinoListJoins
     protected function setCasinosGeoPriorityJoin(): void
     {
         $countryId = $this->filter->getSelectedCountry();
+        if(in_array($this->orderByAlias, [CasinoSortCriteria::USER_COUNTRY_GEO_PRIORITY])) 
+            {
+                $countryId = $this->filter->getUserCountry();
+            } 
         if (!in_array($this->orderByAlias, [
                 CasinoSortCriteria::GEO_PRIORITY,
                 CasinoSortCriteria::MINIMUM_DEPOSIT_GEO_PRIORITY,
@@ -214,6 +218,7 @@ class CasinoListJoins extends AbstractCasinoListJoins
                 CasinoSortCriteria::WITHDRAW_TIME_GEO_PRIORITY,
                 CasinoSortCriteria::HAS_APP_GEO_PRIORITY,
                 CasinoSortCriteria::HAS_TARGETED_BONUS_GEO_PRIORITY,
+                CasinoSortCriteria::USER_COUNTRY_GEO_PRIORITY
             ])
             || !$countryId) {
             return;
