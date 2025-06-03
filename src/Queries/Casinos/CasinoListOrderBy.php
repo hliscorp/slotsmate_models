@@ -51,8 +51,8 @@ class CasinoListOrderBy extends AbstractOrderBy
                 $this->orderBy->add("t1.priority", OrderBy::DESC)
                     ->add("t1.id", OrderBy::DESC);
                 break;
-            case CasinoSortCriteria:GEO_PRIORITY:
-            case CasinoSortCriteria:USER_COUNTRY_GEO_PRIORITY:
+            case CasinoSortCriteria::GEO_PRIORITY:
+            case CasinoSortCriteria::USER_COUNTRY_GEO_PRIORITY:
                 $this->setGeoPriorityOrder();
                 break;
             case CasinoSortCriteria::MINIMUM_DEPOSIT_GEO_PRIORITY:
